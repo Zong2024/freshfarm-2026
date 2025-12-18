@@ -36,6 +36,11 @@
 
     }
 }
+.offcanvas-logo{
+    width: 64px;
+    height: 53px;
+    object-fit: cover;
+}
 .dropdown-shadow{
     @include large{
         box-shadow: 0 0.5rem 1rem rgba(73, 73, 73, 0.15);

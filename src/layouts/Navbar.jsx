@@ -24,18 +24,13 @@ const Navbar = () => {
 							</button>
 							<div
 								className="offcanvas offcanvas-end bg-white"
-								// tabindex="-1"
+								tabIndex="-1"
 								id="offcanvasNavbar"
 								aria-labelledby="offcanvasNavbarLabel"
 							>
 								<div className="offcanvas-header px-3 py-2 p-lg-0">
 									<div className="offcanvas-title" id="offcanvasNavbarLabel">
-										<img
-											src={logo}
-											alt="logo"
-											className="object-fit-cover"
-											style={{ width: '64px', height: '53px' }}
-										/>
+										<img src={logo} alt="logo" className="offcanvas-logo" />
 									</div>
 									<button
 										type="button"
