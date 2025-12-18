@@ -8,12 +8,7 @@ const Navbar = () => {
 					<div id="nav" className="py-2 py-lg-4 px-3 px-lg-7 navbar-rounded mt-lg-8 bg-white">
 						<nav className="navbar navbar-expand-lg header-nav">
 							<div className="container p-0">
-								<Link
-									className="navbar-brand py-0"
-									to="/"
-									// tabindex="-1"
-									aria-disabled="true"
-								>
+								<Link className="navbar-brand py-0" to="/" tabIndex="-1" aria-disabled="true">
 									<img src={logo} alt="logo" className="nav-logo object-fit-cover" />
 								</Link>
 								<button
@@ -21,6 +16,7 @@ const Navbar = () => {
 									type="button"
 									data-bs-toggle="offcanvas"
 									data-bs-target="#offcanvasNavbar"
+									aria-label="開啟選單"
 								>
 									<span className="navbar-toggler-icon"></span>
 								</button>
@@ -43,7 +39,7 @@ const Navbar = () => {
 											type="button"
 											className="btn-close me-0 bg-gray-100"
 											data-bs-dismiss="offcanvas"
-											aria-label="Close"
+											aria-label="關閉選單"
 										></button>
 									</div>
 									<div className="offcanvas-body px-6 py-6 p-lg-0">
@@ -73,12 +69,7 @@ const Navbar = () => {
                                                         <p className="text-gray-300">Sign in</p>
                                                     </a> --> */}
 												{/* <!-- 已登入 --> */}
-												<div
-													className="nav-link dropdown-toggle p-0 d-flex align-items-center"
-													style={{ cursor: 'pointer' }}
-													data-bs-toggle="dropdown"
-													aria-expanded="false"
-												>
+												<div data-bs-toggle="dropdown" aria-expanded="false">
 													<div>
 														<span className="fs-lg-4 fs-5 fw-bold">用戶名稱</span>
 														<p className="text-gray-300 text-lg-center">Account</p>
@@ -93,7 +84,7 @@ const Navbar = () => {
 													</h6>
 													<li>
 														<Link className="dropdown-item  me-2 mb-3 mb-lg-1" to="/">
-															<span className="material-icons align-bottom me-2">
+															<span className="material-icons align-bottom me-2" aria-hidden="true">
 																account_circle
 															</span>
 															我的帳戶
@@ -101,13 +92,15 @@ const Navbar = () => {
 													</li>
 													<li>
 														<Link className="dropdown-item  me-2 mb-3 mb-lg-1" to="/">
-															<span className="material-icons align-bottom me-2">description</span>
+															<span className="material-icons align-bottom me-2" aria-hidden="true">
+																description
+															</span>
 															訂單管理
 														</Link>
 													</li>
 													<li>
 														<Link className="dropdown-item  me-2 mb-3 mb-lg-1" to="/">
-															<span className="material-icons align-bottom me-2">
+															<span className="material-icons align-bottom me-2" aria-hidden="true">
 																favorite_border
 															</span>
 															收藏清單
@@ -115,7 +108,9 @@ const Navbar = () => {
 													</li>
 													<li>
 														<Link className="dropdown-item " to="/">
-															<span className="material-icons align-bottom me-2">settings</span>
+															<span className="material-icons align-bottom me-2" aria-hidden="true">
+																settings
+															</span>
 															個人資料設定
 														</Link>
 													</li>
