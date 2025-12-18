@@ -43,9 +43,7 @@ const Navbar = () => {
 									<ul className="navbar-nav ms-auto">
 										<li className="nav-item pe-lg-8 pb-5 pb-lg-0  nav-bottom-line">
 											<NavLink
-												className={({ isActive }) =>
-													`nav-link text-lg-center p-0 ${isActive ? 'active' : ''}`
-												}
+												className="nav-link text-lg-center p-0"
 												to="/"
 												end
 												aria-current="page"
@@ -55,23 +53,13 @@ const Navbar = () => {
 											</NavLink>
 										</li>
 										<li className="nav-item py-5 py-lg-0 nav-bottom-line pe-lg-8 ">
-											<NavLink
-												className={({ isActive }) =>
-													`nav-link text-lg-center p-0 ${isActive ? 'active' : ''}`
-												}
-												to="/products"
-											>
+											<NavLink className="nav-link text-lg-center p-0" to="/products">
 												<span className="fs-lg-4 fs-5 fw-bold">產地直送</span>
 												<p className="text-gray-300">Delivery</p>
 											</NavLink>
 										</li>
 										<li className="nav-item py-5 py-lg-0 nav-bottom-line pe-lg-8">
-											<NavLink
-												className={({ isActive }) =>
-													`nav-link text-lg-center p-0 ${isActive ? 'active' : ''}`
-												}
-												to="/checkout"
-											>
+											<NavLink className="nav-link text-lg-center p-0" to="/checkout">
 												<span className="fs-lg-4 fs-5 fw-bold">購物車</span>
 												<p className="text-gray-300">Cart</p>
 											</NavLink>
