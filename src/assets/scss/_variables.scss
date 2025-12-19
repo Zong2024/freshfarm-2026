@@ -1347,7 +1347,8 @@ $navbar-light-color: $primary-400 !default;
 // $navbar-light-hover-color:          rgba(var(--#{$prefix}emphasis-color-rgb), .8) !default;
 $navbar-light-hover-color: $primary-300;
 // $navbar-light-active-color:         rgba(var(--#{$prefix}emphasis-color-rgb), 1) !default;
-$navbar-light-active-color: $primary-400 !default;
+$navbar-light-active-color: $primary-300 !default;
+// $navbar-light-active-color: $primary-400 !default;
 
 $navbar-light-disabled-color: rgba(var(--#{$prefix}emphasis-color-rgb), 0.3) !default;
 $navbar-light-icon-color: rgba($body-color, 0.75) !default;
