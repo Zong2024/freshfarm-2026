@@ -3,6 +3,15 @@
         @content;
     }
 }
+.navbar-container{
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    z-index: 100;
+}
 .nav-box{
     background-color: $white;
     @include large{
