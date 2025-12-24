@@ -8,5 +8,9 @@
 
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+@import './mixin';
+
 @import './layouts/navbar';
 @import './layouts/footer';
+
+@import './pages/home.scss';
