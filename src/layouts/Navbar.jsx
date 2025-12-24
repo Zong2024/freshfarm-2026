@@ -7,7 +7,7 @@ const Navbar = () => {
 	return (
 		<div className="nav-box">
 			<div className="container navbar-container">
-				<div id="nav" className="py-2 py-lg-4 px-3 px-lg-7 navbar-rounded mt-lg-8 bg-white">
+				<div id="nav" className="py-lg-2 px-lg-7 navbar-rounded bg-white">
 					<nav className="navbar navbar-expand-lg header-nav">
 						<div className="container p-0">
 							<NavLink className="navbar-brand py-0" to="/">
