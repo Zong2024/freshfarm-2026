@@ -8,5 +8,10 @@
 
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+@import './components/card';
 @import './layouts/navbar';
 @import './layouts/footer';
+@import './layouts/compare';
+
+
+@import './pages/product-list';
