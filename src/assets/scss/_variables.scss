@@ -575,6 +575,7 @@ $container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1320px,
+
 ) !default;
 // scss-docs-end container-max-widths
 
@@ -604,6 +605,7 @@ $border-widths: (
   3: 3px,
   4: 4px,
   5: 5px,
+  6: 6px,
 ) !default;
 $border-style: solid !default;
 $border-color: $gray-300 !default;
@@ -1898,5 +1900,7 @@ $kbd-bg: var(--#{$prefix}body-color) !default;
 $nested-kbd-font-weight: null !default; // Deprecated in v5.2.0, removing in v6
 
 $pre-color: null !default;
+
+
 
 @import 'variables-dark'; // TODO: can be removed safely in v6, only here to avoid breaking changes in v5.3
