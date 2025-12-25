@@ -63,7 +63,10 @@ export default [
 		settings: {
 			react: { version: 'detect' },
 			'import/resolver': {
-				node: { extensions: ['.js', '.jsx'] },
+				typescript: {
+					alwaysTryTypes: true,
+				},
+				node: true, // 保持 node 作為 fallback
 			},
 		},
 	},
