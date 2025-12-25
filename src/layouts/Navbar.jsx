@@ -6,11 +6,11 @@ const Navbar = () => {
 	const [isSignIn, setIsSignIn] = useState(false) //還未新增邏輯
 	return (
 		<div className="nav-box">
-			<div className="container navbar-container">
+			<div className="container">
 				<div id="nav" className="py-2 py-lg-4 px-3 px-lg-7 navbar-rounded mt-lg-8 bg-white">
 					<nav className="navbar navbar-expand-lg header-nav">
 						<div className="container p-0">
-							<NavLink className="navbar-brand py-0" to="/">
+							<NavLink className="navbar-brand py-0" to="/" tabindex="-1" aria-disabled="true">
 								<img src={logo} alt="首頁" className="nav-logo object-fit-cover" />
 							</NavLink>
 							<button
