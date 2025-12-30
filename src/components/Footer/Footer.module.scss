@@ -1,19 +1,21 @@
+@import '../../assets/scss/config';
+
 .footer {
     .logo {
         width: 136px;
     }
 }
 
-.footer-nav {
-    .nav-link {
+.footerNav {
+    .navLink {
         color:$white;
         &:hover {
             color: $primary-300;
         }
     }
-    @media (min-width: 992px) {
-        .nav-item:not(:last-child) {
-            .nav-link {
+    @include large{
+        .navItem:not(:last-child) {
+            .navLink {
                 border-right: 1px solid $gray-400;
             }
         }
