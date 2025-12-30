@@ -2,10 +2,11 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
 
-import ProductCard from '../components/card/ProductCard'
-import CategoryHighlightCard from '../components/Home/CategoryCard/CategoryCard'
+import ProductCard from '../../components/card/ProductCard'
+import CategoryHighlightCard from './components/CategoryCard/CategoryCard'
 
-import { HOME_IMAGES } from '../constants/images'
+import { HOME_IMAGES } from '../../constants/images'
+import SectionHeader from './components/SectionHeader/SectionHeader'
 const banners = [
 	{
 		id: 1,
@@ -119,14 +120,12 @@ const Home = () => {
 			</section>
 			<section className="container py-8 py-lg-11">
 				<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
-					<div className="section-title-decorated">
-						<div className="ps-4 mb-6 mb-lg-0">
-							<span className="badge rounded-pill bg-primary-300 px-2 py-1">時令直送</span>
-							<h4 className="my-2 fs-lg-1">當季限定 強力推薦</h4>
-							<p className="fs-lg-5 text-gray-400">支持在地，享受最新鮮的台灣味</p>
-						</div>
-					</div>
-					<div className="d-flex align-items-end">
+					<SectionHeader
+						badge="時令直送"
+						title="當季限定  強力推薦"
+						subtitle="支持在地，享受最新鮮的台灣味"
+					/>
+					<div className="d-flex align-items-end mt-6">
 						<button
 							type="button"
 							className="custom-prev-btn btn me-6 bg-gray-100 p-2"
@@ -175,14 +174,12 @@ const Home = () => {
 			</section>
 			<section className="category-section">
 				<div className="container py-8 py-lg-11">
-					<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
-						<div className="section-title-decorated">
-							<div className="ps-4 mb-6 mb-lg-0">
-								<span className="badge rounded-pill bg-primary-300 px-2 py-1">商品分類</span>
-								<h4 className="my-2 fs-lg-1">當季限定 強力推薦</h4>
-								<p className="fs-lg-5 text-gray-400">支持在地，享受最新鮮的台灣味</p>
-							</div>
-						</div>
+					<div className="mb-lg-9 mb-7">
+						<SectionHeader
+							badge="商品分類"
+							title="您的餐桌 是小農最好的舞台"
+							subtitle="最簡單的選擇，最純粹的美味"
+						/>
 					</div>
 					<CategoryHighlightCard />
 				</div>

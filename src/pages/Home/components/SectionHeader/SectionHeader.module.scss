@@ -1,0 +1,17 @@
+@import '../../../../assets/scss/config';
+
+
+.titleDecorated{
+  position: relative;
+  &::before{
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background-color: $primary-400;
+    border-radius: 100px;
+    @include large{
+      width: 10px;
+    }
+  }
+}
