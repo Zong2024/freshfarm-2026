@@ -1,13 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
+
 import ProductCard from '../components/card/ProductCard'
-import banner1 from '../assets/images/Home/hero-banner-1.jpg'
-import banner2 from '../assets/images/Home/hero-banner-2.jpg'
-import banner3 from '../assets/images/Home/hero-banner-3.jpg'
-import bannerSm1 from '../assets/images/Home/hero-banner-sm-1.jpg'
-import bannerSm2 from '../assets/images/Home/hero-banner-sm-2.jpg'
-import bannerSm3 from '../assets/images/Home/hero-banner-sm-3.jpg'
+import CategoryHighlightCard from '../components/Home/CategoryCard/CategoryCard'
+
+import { HOME_IMAGES } from '../constants/images'
 const banners = [
 	{
 		id: 1,
@@ -15,8 +13,8 @@ const banners = [
 		title: '從產地到餐桌的直線距離',
 		subtitle: '把產地的鮮活，直送你家',
 		images: {
-			desktop: banner1,
-			mobile: bannerSm1,
+			desktop: HOME_IMAGES.HERO1,
+			mobile: HOME_IMAGES.HERO_SM1,
 		},
 	},
 	{
@@ -25,8 +23,8 @@ const banners = [
 		title: '與在地同行，品嚐土地的真味',
 		subtitle: '讓每一口，都有個好故事',
 		images: {
-			desktop: banner2,
-			mobile: bannerSm2,
+			desktop: HOME_IMAGES.HERO2,
+			mobile: HOME_IMAGES.HERO_SM2,
 		},
 	},
 	{
@@ -35,8 +33,8 @@ const banners = [
 		title: '今日採收，明日餐桌',
 		subtitle: '看得見的產地，吃得到的安心',
 		images: {
-			desktop: banner3,
-			mobile: bannerSm3,
+			desktop: HOME_IMAGES.HERO3,
+			mobile: HOME_IMAGES.HERO_SM3,
 		},
 	},
 ]
@@ -77,45 +75,49 @@ const products = [
 const Home = () => {
 	return (
 		<>
-			<Swiper
-				modules={[Autoplay, Pagination]}
-				autoplay={{ delay: 5000, disableOnInteraction: false }}
-				spaceBetween={0}
-				loop={true}
-				className="hero-swiper-container"
-			>
-				{banners.map(banner => (
-					<SwiperSlide key={banner.id}>
-						<div className="hero-slide-wrapper">
-							<picture className="blackScreen">
-								<source media="(min-width:992px)" srcSet={banner.images.desktop} />
-								<img src={banner.images.mobile} alt="" className="hero-banner-img" />
-							</picture>
-						</div>
-						<div className="container hero-content-overlay d-flex flex-column justify-content-end">
-							<div className="d-lg-flex">
-								{banner.brand && <h4 className="fs-lg-1 m-1 text-primary-100  ">{banner.brand}</h4>}
-								<h4 className="fs-lg-1 text-white mb-3  mb-lg-4">{banner.title}</h4>
+			<section>
+				<Swiper
+					modules={[Autoplay, Pagination]}
+					// autoplay={{ delay: 10000, disableOnInteraction: false }}
+					spaceBetween={0}
+					// loop={true}
+					className="decorated"
+				>
+					{banners.map(banner => (
+						<SwiperSlide key={banner.id}>
+							<div className="hero-slide-wrapper">
+								<picture className="blackScreen">
+									<source media="(min-width:992px)" srcSet={banner.images.desktop} />
+									<img src={banner.images.mobile} alt="" className="hero-banner-img" />
+								</picture>
 							</div>
-							<h5 className="fs-lg-2 text-white mb-6 mb-lg-8">{banner.subtitle}</h5>
-							<div className="search-box">
-								<div className="input-group">
-									<input
-										type="text"
-										className="form-control search-input "
-										placeholder="請輸入商品名稱…"
-									/>
-									<button type="button" className="input-group-text bg-white search-icon">
-										<span className="material-icons fs-4 ">search</span>
-									</button>
+							<div className="container hero-content-overlay d-flex flex-column justify-content-end">
+								<div className="d-lg-flex">
+									{banner.brand && (
+										<h4 className="fs-lg-1 m-1 text-primary-100  ">{banner.brand}</h4>
+									)}
+									<h4 className="fs-lg-1 text-white mb-3  mb-lg-4">{banner.title}</h4>
+								</div>
+								<h5 className="fs-lg-2 text-white mb-6 mb-lg-8">{banner.subtitle}</h5>
+								<div className="search-box">
+									<div className="input-group">
+										<input
+											type="text"
+											className="form-control search-input "
+											placeholder="請輸入商品名稱…"
+										/>
+										<button type="button" className="input-group-text bg-white search-icon">
+											<span className="material-icons fs-4 ">search</span>
+										</button>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div className="wave"></div>
-					</SwiperSlide>
-				))}
-			</Swiper>
-			<section className="py-8 py-lg-11 container">
+							<div className="wave"></div>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</section>
+			<section className="container py-8 py-lg-11">
 				<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
 					<div className="section-title-decorated">
 						<div className="ps-4 mb-6 mb-lg-0">
@@ -170,6 +172,20 @@ const Home = () => {
 						</SwiperSlide>
 					))}
 				</Swiper>
+			</section>
+			<section className="category-section">
+				<div className="container py-8 py-lg-11">
+					<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
+						<div className="section-title-decorated">
+							<div className="ps-4 mb-6 mb-lg-0">
+								<span className="badge rounded-pill bg-primary-300 px-2 py-1">商品分類</span>
+								<h4 className="my-2 fs-lg-1">當季限定 強力推薦</h4>
+								<p className="fs-lg-5 text-gray-400">支持在地，享受最新鮮的台灣味</p>
+							</div>
+						</div>
+					</div>
+					<CategoryHighlightCard />
+				</div>
 			</section>
 		</>
 	)

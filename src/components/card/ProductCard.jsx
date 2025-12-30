@@ -20,7 +20,7 @@ const ProductCard = ({ name, description, price, img, weight }) => {
 					<span className=" material-icons align-middle">favorite_border</span>
 				</button>
 			</div>
-			<div class="card-body bg-white">
+			<div className="card-body bg-white">
 				<h5 className="fs-lg-4 mb-2">{name}</h5>
 				<p className="fs-lg-5 mb-3 text-truncate-container">{description}</p>
 				<p className="fs-5 fw-bold mb-3 text-secondary-300">
