@@ -1,0 +1,28 @@
+@import 'bootstrap/scss/functions';
+@import './variables';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+@import './mixin';
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-size":
+      map-merge(
+        map-get($utilities, "font-size"),
+        ( responsive: true )
+      ),
+    "border-radius":
+      map-merge(
+        map-get($utilities, "rounded"),
+        ( responsive: true )
+      ),
+    "border":
+      map-merge(
+        map-get($utilities, "border"),
+      ( responsive: true )
+    ),
+  )
+);
