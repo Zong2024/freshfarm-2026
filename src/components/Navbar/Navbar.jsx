@@ -1,17 +1,19 @@
 import { NavLink } from 'react-router-dom'
-import logo from '../assets/images/logo.png'
 import { useState } from 'react'
+import styles from './Navbar.module.scss'
+import logo from '../../assets/images/logo.png'
+import clsx from 'clsx'
 const Navbar = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [isSignIn, setIsSignIn] = useState(false) //還未新增邏輯
 	return (
-		<div className="nav-box">
-			<div className="container navbar-container">
-				<div id="nav" className="py-lg-2 px-lg-7 navbar-rounded bg-white">
+		<div className={clsx(styles.navBg)}>
+			<div className={clsx('container', styles.navbarContainer)}>
+				<div id="nav" className="py-lg-2 px-lg-7 bg-white rounded-0 rounded-lg-4">
 					<nav className="navbar navbar-expand-lg header-nav">
 						<div className="container p-0">
 							<NavLink className="navbar-brand py-0" to="/">
-								<img src={logo} alt="首頁" className="nav-logo object-fit-cover" />
+								<img src={logo} alt="首頁" className={clsx(styles.logo)} />
 							</NavLink>
 							<button
 								className="navbar-toggler border-0 bg-gray-100 p-2"
@@ -30,7 +32,7 @@ const Navbar = () => {
 							>
 								<div className="offcanvas-header px-3 py-2 p-lg-0">
 									<div className="offcanvas-title" id="offcanvasNavbarLabel">
-										<img src={logo} alt="logo" className="offcanvas-logo" />
+										<img src={logo} alt="logo" className={clsx(styles.offcanvasLogo)} />
 									</div>
 									<button
 										type="button"
@@ -41,7 +43,7 @@ const Navbar = () => {
 								</div>
 								<div className="offcanvas-body px-6 py-6 p-lg-0">
 									<ul className="navbar-nav ms-auto">
-										<li className="nav-item pe-lg-8 pb-5 pb-lg-0  nav-bottom-line">
+										<li className="nav-item pe-lg-8 pb-5 pb-lg-0 border-bottom border-black border-opacity-25 border-lg-0 ">
 											<NavLink
 												className="nav-link text-lg-center p-0"
 												to="/"
@@ -52,19 +54,19 @@ const Navbar = () => {
 												<p className="text-gray-300 ">Home</p>
 											</NavLink>
 										</li>
-										<li className="nav-item py-5 py-lg-0 nav-bottom-line pe-lg-8 ">
+										<li className="nav-item py-5 py-lg-0 border-bottom border-black border-opacity-25 border-lg-0 pe-lg-8 ">
 											<NavLink className="nav-link text-lg-center p-0" to="/products">
 												<span className="fs-lg-4 fs-5 fw-bold">產地直送</span>
 												<p className="text-gray-300">Delivery</p>
 											</NavLink>
 										</li>
-										<li className="nav-item py-5 py-lg-0 nav-bottom-line pe-lg-8">
+										<li className="nav-item py-5 py-lg-0 border-bottom border-black border-opacity-25 border-lg-0 pe-lg-8">
 											<NavLink className="nav-link text-lg-center p-0" to="/checkout">
 												<span className="fs-lg-4 fs-5 fw-bold">購物車</span>
 												<p className="text-gray-300">Cart</p>
 											</NavLink>
 										</li>
-										<li className="nav-item py-5 py-lg-0">
+										<li className="nav-item py-5 py-lg-0 dropdown">
 											{isSignIn ? (
 												<NavLink className="nav-link text-lg-center  p-0" to="/sign_in">
 													<span className="fs-lg-4 fs-5 fw-bold">登入/註冊</span>
@@ -75,6 +77,7 @@ const Navbar = () => {
 													className="nav-link dropdown-toggle p-0 w-100 d-flex"
 													type="button"
 													data-bs-toggle="dropdown"
+													data-bs-display="static"
 													aria-expanded="false"
 												>
 													<div className="text-start text-lg-center">
@@ -87,13 +90,20 @@ const Navbar = () => {
 												</button>
 											)}
 
-											<ul className="dropdown-menu dropdown-menu-end border-0 rounded-3 dropdown-shadow mt-lg-6 p-4 ">
-												<h6 className="text-primary-400 mb-3 dropdown-top-line pt-4 pt-lg-0">
+											<ul
+												className={clsx(
+													'dropdown-menu border-0 mb-lg-2 rounded-3 p-4',
+													styles.dropdownShadow,
+													styles.customDropdown
+												)}
+												data-bs-display="static"
+											>
+												<h6 className="text-primary-400 mb-3 border-top border-black border-opacity-25 border-lg-0 pt-4 pt-lg-0">
 													會員中心
 												</h6>
 												<li>
 													<NavLink
-														className="dropdown-item  me-2 mb-3 mb-lg-1"
+														className="dropdown-item  me-2 mb-3 mb-lg-2"
 														to="/user"
 														aria-hidden="true"
 													>
@@ -103,7 +113,7 @@ const Navbar = () => {
 												</li>
 												<li>
 													<NavLink
-														className="dropdown-item  me-2 mb-3 mb-lg-1"
+														className="dropdown-item  me-2 mb-3 mb-lg-2"
 														to="/orders"
 														aria-hidden="true"
 													>
@@ -113,7 +123,7 @@ const Navbar = () => {
 												</li>
 												<li>
 													<NavLink
-														className="dropdown-item  me-2 mb-3 mb-lg-1"
+														className="dropdown-item  me-2 mb-3 mb-lg-2"
 														to="/wishlist"
 														aria-hidden="true"
 													>
