@@ -1,12 +1,8 @@
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
-
-import ProductCard from '../../components/card/ProductCard'
-import CategoryHighlightCard from './components/CategoryCard/CategoryCard'
-
+import CategorySection from './components/CategorySection/CategorySection'
+import HeroSwiper from './components/HeroSwiper/HeroSwiper'
+import ProductSection from './components/ProductSection/ProductSection'
 import { HOME_IMAGES } from '../../constants/images'
-import SectionHeader from './components/SectionHeader/SectionHeader'
 const banners = [
 	{
 		id: 1,
@@ -76,114 +72,9 @@ const products = [
 const Home = () => {
 	return (
 		<>
-			<section>
-				<Swiper
-					modules={[Autoplay, Pagination]}
-					// autoplay={{ delay: 10000, disableOnInteraction: false }}
-					spaceBetween={0}
-					// loop={true}
-					className="decorated"
-				>
-					{banners.map(banner => (
-						<SwiperSlide key={banner.id}>
-							<div className="hero-slide-wrapper">
-								<picture className="blackScreen">
-									<source media="(min-width:992px)" srcSet={banner.images.desktop} />
-									<img src={banner.images.mobile} alt="" className="hero-banner-img" />
-								</picture>
-							</div>
-							<div className="container hero-content-overlay d-flex flex-column justify-content-end">
-								<div className="d-lg-flex">
-									{banner.brand && (
-										<h4 className="fs-lg-1 m-1 text-primary-100  ">{banner.brand}</h4>
-									)}
-									<h4 className="fs-lg-1 text-white mb-3  mb-lg-4">{banner.title}</h4>
-								</div>
-								<h5 className="fs-lg-2 text-white mb-6 mb-lg-8">{banner.subtitle}</h5>
-								<div className="search-box">
-									<div className="input-group">
-										<input
-											type="text"
-											className="form-control search-input "
-											placeholder="請輸入商品名稱…"
-										/>
-										<button type="button" className="input-group-text bg-white search-icon">
-											<span className="material-icons fs-4 ">search</span>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div className="wave"></div>
-						</SwiperSlide>
-					))}
-				</Swiper>
-			</section>
-			<section className="container py-8 py-lg-11">
-				<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
-					<SectionHeader
-						badge="時令直送"
-						title="當季限定  強力推薦"
-						subtitle="支持在地，享受最新鮮的台灣味"
-					/>
-					<div className="d-flex align-items-end mt-6">
-						<button
-							type="button"
-							className="custom-prev-btn btn me-6 bg-gray-100 p-2"
-							aria-label="上一個"
-						>
-							<span className="material-icons align-middle">arrow_back</span>
-						</button>
-						<button
-							type="button"
-							className="custom-next-btn btn bg-gray-100 p-2"
-							aria-label="下一個"
-						>
-							<span className="material-icons align-middle">arrow_forward</span>
-						</button>
-					</div>
-				</div>
-				<Swiper
-					modules={[Navigation]}
-					spaceBetween={24}
-					slidesPerView={1.2}
-					navigation={{
-						prevEl: '.custom-prev-btn',
-						nextEl: '.custom-next-btn',
-					}}
-					breakpoints={{
-						576: {
-							slidesPerView: 1.2,
-						},
-						996: {
-							slidesPerView: 3,
-						},
-					}}
-				>
-					{products.map(product => (
-						<SwiperSlide>
-							<ProductCard
-								name={product.name}
-								description={product.description}
-								price={product.price}
-								weight={product.weight}
-								img={product.img}
-							/>
-						</SwiperSlide>
-					))}
-				</Swiper>
-			</section>
-			<section className="category-section">
-				<div className="container py-8 py-lg-11">
-					<div className="mb-lg-9 mb-7">
-						<SectionHeader
-							badge="商品分類"
-							title="您的餐桌 是小農最好的舞台"
-							subtitle="最簡單的選擇，最純粹的美味"
-						/>
-					</div>
-					<CategoryHighlightCard />
-				</div>
-			</section>
+			<HeroSwiper banners={banners} />
+			<ProductSection products={products} />
+			<CategorySection />
 		</>
 	)
 }
