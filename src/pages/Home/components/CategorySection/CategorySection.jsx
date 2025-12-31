@@ -1,3 +1,5 @@
+import SectionHeader from '../SectionHeader/SectionHeader'
+
 import productCategory1 from './assets/product-category-1.jpg'
 import productCategory2 from './assets/product-category-2.jpg'
 import productCategory3 from './assets/product-category-3.jpg'
@@ -10,7 +12,11 @@ import productIcon1 from './assets/product-category-icon-1.png'
 import productIcon2 from './assets/product-category-icon-2.png'
 import productIcon3 from './assets/product-category-icon-3.png'
 import productIcon4 from './assets/product-category-icon-4.png'
-const CategoryHighlightCard = () => {
+
+import clsx from 'clsx'
+import styles from './CategorySection.module.scss'
+
+const CategorySection = () => {
 	const productCategoryInfo = [
 		{
 			id: 1,
@@ -63,39 +69,61 @@ const CategoryHighlightCard = () => {
 	]
 	return (
 		<>
-			{productCategoryInfo.map((product, index) => {
-				const borderRadiusClass = index % 2 === 0 ? 'img-rounded-odd' : 'img-rounded-even'
-				return (
-					<div className="card product-category-card border-0 mb-6" key={product.id}>
-						<picture>
-							<source srcSet={product.images.desktop} media="(min-width: 992px)" />
-							<img
-								src={product.images.mobile}
-								alt=""
-								className={`card-img-top product-category-img ${borderRadiusClass}`}
-							/>
-						</picture>
-
-						<div className="card-body product-category-content position-relative d-flex flex-column justify-content-center align-items-center">
-							<img
-								src={product.icon}
-								alt=""
-								className="product-category-icon position-absolute top-0 end-0 d-none d-lg-block"
-							/>
-							<div className="d-flex justify-content-between align-items-center w-100 mb-lg-6 mb-3">
-								<div>
-									<h4 className="fs-lg-2 text-primary-400 mb-1">{product.title}</h4>
-									<h6 className="fs-lg-5 text-gray-300">{product.subtitle}</h6>
-								</div>
-								<img src={product.icon} alt="" className="product-category-icon d-lg-none" />
-							</div>
-							<p className="fs-5">{product.description}</p>
-						</div>
+			<section className={styles.categorySection}>
+				<div className="container py-8 py-lg-11">
+					<div className="mb-lg-9 mb-7">
+						<SectionHeader
+							badge="商品分類"
+							title="您的餐桌 是小農最好的舞台"
+							subtitle="最簡單的選擇，最純粹的美味"
+						/>
 					</div>
-				)
-			})}
+					{productCategoryInfo.map(product => {
+						return (
+							<div className={clsx('border-0 mb-6 mb-lg-14', styles.productCard)} key={product.id}>
+								<picture>
+									<source srcSet={product.images.desktop} media="(min-width: 992px)" />
+									<img
+										src={product.images.mobile}
+										alt=""
+										className={clsx('card-img-top', styles.productImg)}
+									/>
+								</picture>
+
+								<div
+									className={clsx(
+										'card-body position-relative d-flex flex-column justify-content-center align-items-center p-2',
+										styles.productContent
+									)}
+								>
+									<img
+										src={product.icon}
+										alt=""
+										className={clsx(
+											'position-absolute top-0 end-0 d-none d-lg-block',
+											styles.productIcon
+										)}
+									/>
+									<div className="d-flex justify-content-between align-items-center w-100 mb-3 mb-lg-6">
+										<div>
+											<h4 className="fs-lg-2 text-primary-400 mb-1">{product.title}</h4>
+											<h6 className="fs-lg-5 text-gray-300">{product.subtitle}</h6>
+										</div>
+										<img
+											src={product.icon}
+											alt=""
+											className={clsx('d-lg-none', styles.productIcon)}
+										/>
+									</div>
+									<p className="fs-5">{product.description}</p>
+								</div>
+							</div>
+						)
+					})}
+				</div>
+			</section>
 		</>
 	)
 }
 
-export default CategoryHighlightCard
+export default CategorySection

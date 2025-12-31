@@ -1,8 +1,15 @@
+import clsx from 'clsx'
+import styles from './ProductCard.module.scss'
 const ProductCard = ({ name, description, price, img, weight }) => {
 	return (
 		<div className="card h-100 overflow-hidden border-0">
 			<div className="position-relative">
-				<img className="card-img-top" src={img} alt="" style={{ height: '257px' }} />
+				<img
+					className="card-img-top object-fit-cover"
+					src={img}
+					alt=""
+					style={{ height: '257px' }}
+				/>
 				<div className="position-absolute top-0 start-0">
 					<span className="badge rounded-pill text-primary-400 bg-primary-100 pt-1 px-2 m-4  d-flex justify-content-center align-items-center">
 						<img
@@ -22,7 +29,7 @@ const ProductCard = ({ name, description, price, img, weight }) => {
 			</div>
 			<div className="card-body bg-white">
 				<h5 className="fs-lg-4 mb-2">{name}</h5>
-				<p className="fs-lg-5 mb-3 text-truncate-container">{description}</p>
+				<p className={clsx('fs-lg-5 mb-3', styles.textTruncate)}>{description}</p>
 				<p className="fs-5 fw-bold mb-3 text-secondary-300">
 					NT$ {price} / {weight} g
 				</p>
