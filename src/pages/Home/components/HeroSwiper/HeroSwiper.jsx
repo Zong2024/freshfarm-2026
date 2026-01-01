@@ -9,7 +9,7 @@ const HeroSwiper = ({ banners }) => {
 			modules={[Autoplay, Pagination]}
 			// autoplay={{ delay: 10000, disableOnInteraction: false }}
 			spaceBetween={0}
-			// loop={true}
+			loop={true}
 			className="decorated"
 		>
 			{banners.map(banner => (

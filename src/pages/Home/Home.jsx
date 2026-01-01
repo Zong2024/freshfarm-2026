@@ -3,6 +3,7 @@ import CategorySection from './components/CategorySection/CategorySection'
 import HeroSwiper from './components/HeroSwiper/HeroSwiper'
 import ProductSection from './components/ProductSection/ProductSection'
 import { HOME_IMAGES } from '../../constants/images'
+import StorySection from './components/StorySection/StorySection'
 const banners = [
 	{
 		id: 1,
@@ -71,11 +72,12 @@ const products = [
 ]
 const Home = () => {
 	return (
-		<>
+		<main>
 			<HeroSwiper banners={banners} />
 			<ProductSection products={products} />
 			<CategorySection />
-		</>
+			<StorySection />
+		</main>
 	)
 }
 

@@ -1,0 +1,32 @@
+@import '../../../../assets/scss/config';
+
+.bg{
+  background-image: url(./assets/storyBg.jpg);
+}
+.introContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 36px;
+    @include large{
+    flex-direction: row;
+    align-items: self-start;
+    gap: 134px;
+    margin-top: 60px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    }
+
+    .introImg{
+      @include large{
+        flex: 0 0 416px;
+      }
+    }
+    .textContent{
+      padding: 16px;
+        @include large{
+        flex: 0 0 746px;
+        padding-top: 0;
+        }
+    }
+}
