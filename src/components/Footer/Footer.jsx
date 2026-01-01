@@ -8,8 +8,8 @@ const Footer = () => {
 			className={clsx('text-center py-lg-9 py-8 bg-accent', styles.footer)}
 			data-aos="fade-zoom-in"
 		>
-			<div className="container">
-				<div className="mb-6">
+			<div className="container ">
+				<div className="mb-6 d-flex justify-content-center">
 					<Link to="/">
 						<img src={logo_2} alt="logo" className="logo" />
 					</Link>
