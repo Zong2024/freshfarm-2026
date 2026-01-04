@@ -4,6 +4,7 @@ import HeroSwiper from './components/HeroSwiper/HeroSwiper'
 import ProductSection from './components/ProductSection/ProductSection'
 import { HOME_IMAGES } from '../../constants/images'
 import StorySection from './components/StorySection/StorySection'
+import BrandFeaturesSection from './components/BrandFeaturesSection/BrandFeaturesSection'
 const banners = [
 	{
 		id: 1,
@@ -77,6 +78,7 @@ const Home = () => {
 			<ProductSection products={products} />
 			<CategorySection />
 			<StorySection />
+			<BrandFeaturesSection />
 		</main>
 	)
 }
