@@ -13,7 +13,7 @@ import productIcon2 from './assets/product-category-icon-2.png'
 import productIcon3 from './assets/product-category-icon-3.png'
 import productIcon4 from './assets/product-category-icon-4.png'
 
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import styles from './CategorySection.module.scss'
 
 const CategorySection = () => {

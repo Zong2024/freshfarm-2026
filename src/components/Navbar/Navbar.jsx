@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import styles from './Navbar.module.scss'
 import logo from '../../assets/images/logo.png'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 const Navbar = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [isSignIn, setIsSignIn] = useState(false) //還未新增邏輯

@@ -1,4 +1,4 @@
-import FeatureCard from '../../../../components/card/FeatureCard/FeatureCard'
+import FeatureCard from '@/components/card/FeatureCard/FeatureCard'
 import SectionHeader from '../SectionHeader/SectionHeader'
 import styles from './BrandFeaturesSection.module.scss'
 

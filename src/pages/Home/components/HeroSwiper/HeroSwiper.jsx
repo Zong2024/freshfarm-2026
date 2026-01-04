@@ -1,8 +1,9 @@
 import { SwiperSlide, Swiper } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import styles from './HeroSwiper.module.scss'
-import SearchBar from '../../../../components/input/SearchBar/SearchBar'
+
+import SearchBar from '@/components/input/SearchBar/SearchBar'
 const HeroSwiper = ({ banners }) => {
 	return (
 		<Swiper

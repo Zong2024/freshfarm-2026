@@ -1,7 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import SectionHeader from '../SectionHeader/SectionHeader'
-import ProductCard from '../../../../components/card/ProductCard/ProductCard'
+
+import ProductCard from '@/components/card/ProductCard/ProductCard'
 
 const ProductSection = ({ products }) => {
 	return (

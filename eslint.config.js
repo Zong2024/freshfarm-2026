@@ -12,15 +12,13 @@ export default [
 	// 忽略編譯輸出
 	{ ignores: ['dist/**', 'node_modules/**'] },
 
-	// JS 基本規則
 	js.configs.recommended,
-
-	// React JSX runtime 規則（flat 版本）
 	reactPlugin.configs.flat['jsx-runtime'],
 
 	// 主要專案規則
 	{
 		files: ['**/*.{js,jsx}'],
+		ignores: ['vite.config.js'],
 		languageOptions: {
 			ecmaVersion: 2022,
 			sourceType: 'module',
@@ -63,24 +61,34 @@ export default [
 		settings: {
 			react: { version: 'detect' },
 			'import/resolver': {
-				typescript: {
-					alwaysTryTypes: true,
+				node: true,
+				alias: {
+					map: [['@', './src']],
+					extensions: ['.js', '.jsx', '.json'],
 				},
-				node: true, // 保持 node 作為 fallback
 			},
 		},
 	},
-	// 專門給 vite.config.js，用 Node 環境並關掉 import/no-unresolved
 	{
 		files: ['vite.config.*'],
 		languageOptions: {
 			sourceType: 'module',
 			ecmaVersion: 2022,
+			globals: globals.node, // Vite config 執行於 Node 環境
+		},
+
+		plugins: {
+			import: importPlugin,
 		},
 		rules: {
+			// 只關閉有問題的，其餘保持安靜
 			'import/no-unresolved': 'off',
+			'import/default': 'off',
+			'import/no-named-as-default': 'off',
+			'import/no-named-as-default-member': 'off',
 		},
 	},
+
 	// 放在最後：關掉和 Prettier 衝突的規則
 	eslintConfigPrettier,
 ]

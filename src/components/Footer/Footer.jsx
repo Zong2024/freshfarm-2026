@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import styles from './Footer.module.scss'
 import logo_2 from '../../assets/images/logo-footer.png'
 const Footer = () => {

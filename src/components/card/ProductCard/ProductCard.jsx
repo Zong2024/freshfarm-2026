@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import styles from './ProductCard.module.scss'
 const ProductCard = ({ name, description, price, img, weight }) => {
 	return (
