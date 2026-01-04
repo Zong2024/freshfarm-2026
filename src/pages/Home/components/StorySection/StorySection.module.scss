@@ -37,7 +37,7 @@
     @include large{
     flex-direction: row;
     align-items: self-start;
-    gap: 134px;
+    gap: clamp(20px, 10.3%, 134px);
     margin-top: 60px;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -45,13 +45,15 @@
 
     .introImg{
       @include large{
-        flex: 0 0 416px;
+        flex: 0 1 416px;
+        min-width: 0;
       }
     }
     .textContent{
       padding: 16px;
         @include large{
-        flex: 0 0 746px;
+        flex: 0 1 746px;
+        min-width: 0;
         padding-top: 0;
         }
     }
