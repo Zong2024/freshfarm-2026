@@ -8,7 +8,7 @@ const FeatureCard = ({ img, title, content }) => {
 			</div>
 			<div className="text-center">
 				<h5 className="title text-primary-400 mb-4">{title}</h5>
-				<div className="">{content}</div>
+				<p className="text-gray-400">{content}</p>
 			</div>
 		</div>
 	)
