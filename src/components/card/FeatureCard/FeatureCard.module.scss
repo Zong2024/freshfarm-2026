@@ -1,0 +1,17 @@
+@import '@/assets/scss/helpers';
+.featureCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 24px;
+
+  background-color: $white;
+  border-radius: 24px;
+
+  .featureCardImg{
+    width: 150px;
+    height: 150px;
+  }
+}

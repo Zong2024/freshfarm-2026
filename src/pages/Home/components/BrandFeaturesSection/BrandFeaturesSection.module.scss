@@ -1,0 +1,49 @@
+@import '@/assets/scss/helpers';
+
+.bg{
+
+  background:
+      linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+      url('./assets/featureBg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: url(../../../../assets/images/mobile-wave.png);
+    background-repeat: repeat-x;
+    transform: scaleY(-1);
+      @include large{
+        height: 60px;
+        background-image: url(../../../../assets/images/wave.png);
+      }
+  }
+    &::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: url(../../../../assets/images/mobile-wave.png);
+    background-repeat: repeat-x;
+      @include large{
+        height: 60px;
+        background-image: url(../../../../assets/images/wave.png);
+    }
+  }
+}
+.cardContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  @include large{
+    flex-direction: row;
+  }
+}
