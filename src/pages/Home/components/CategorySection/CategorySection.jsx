@@ -115,7 +115,7 @@ const CategorySection = () => {
 											className={clsx('d-lg-none', styles.productIcon)}
 										/>
 									</div>
-									<p className="fs-5">{product.description}</p>
+									<p className="fs-lg-5">{product.description}</p>
 								</div>
 							</div>
 						)
