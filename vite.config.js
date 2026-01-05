@@ -11,4 +11,14 @@ export default defineConfig({
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
 		},
 	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				// 使用現代編譯器 API
+				api: 'modern-compiler',
+				quietDeps: true,
+				silenceDeprecations: ['import'],
+			},
+		},
+	},
 })
