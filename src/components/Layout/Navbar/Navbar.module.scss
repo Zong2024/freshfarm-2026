@@ -13,8 +13,14 @@
         left: 50%;
         transform: translateX(-50%);
         width: 90%;
-        max-width: 1320px;
+        max-width: 1296px;
         z-index: 100;
+
+    }
+}
+.navbarShadow{
+    @include large{
+        box-shadow: 1px 1px 50px 0px rgba($primary-300, 0.12);
     }
 }
 .logo{

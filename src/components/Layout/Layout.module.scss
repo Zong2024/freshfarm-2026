@@ -1,0 +1,6 @@
+@import '@/assets/scss/_config.scss';
+.paddingForNavbar{
+ @include large {
+  padding-top: 208px;
+ }
+}
