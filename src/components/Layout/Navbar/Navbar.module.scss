@@ -1,0 +1,62 @@
+@import '@/assets/scss/helpers';
+
+.navBg{
+    background-color: $white;
+    @include large{
+        background-color: transparent;
+    }
+}
+.navbarContainer{
+    @include large{
+        position: absolute;
+        top: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 1296px;
+        z-index: 100;
+
+    }
+}
+.navbarShadow{
+    @include large{
+        box-shadow: 1px 1px 50px 0px rgba($primary-300, 0.12);
+    }
+}
+.logo{
+    width: 64px;
+    height: 53px;
+    object-fit: cover;
+    @include large{
+        width: 136px;
+        height: 80px;
+    }
+}
+.offcanvasLogo{
+    width: 64px;
+    height: 53px;
+    object-fit: cover;
+}
+.dropdownShadow{
+    @include large{
+        box-shadow: 0 0.5rem 1rem rgba(73, 73, 73, 0.15);
+    }
+}
+:global(.dropdown-toggle) {
+    &::after {
+        display: none !important;
+    }
+}
+.customDropdown {
+    background-color: rgba($white, 0.8) !important;
+        @include large{
+            position: absolute !important;
+            right: -32px !important;
+            left: auto !important;
+            margin-top: 35.5px !important;
+            width: 204px !important;
+        }
+}
+
+
+

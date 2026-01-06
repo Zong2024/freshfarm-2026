@@ -1,0 +1,23 @@
+@import '@/assets/scss/helpers';
+
+.footer {
+    .logo {
+        width: 136px;
+    }
+}
+
+.footerNav {
+    .navLink {
+        color:$white;
+        &:hover {
+            color: $primary-300;
+        }
+    }
+    @include large{
+        .navItem:not(:last-child) {
+            .navLink {
+                border-right: 1px solid $gray-400;
+            }
+        }
+    }
+}
