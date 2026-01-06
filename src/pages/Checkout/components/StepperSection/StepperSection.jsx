@@ -3,7 +3,7 @@ import styles from './StepperSection.module.scss'
 
 const StepperSection = () => {
 	return (
-		<div className="d-flex align-items-center justify-content-center">
+		<div className={styles.step}>
 			<div className={styles.stepItem}>
 				<div className={clsx(styles.stepCircle, styles.active)}>1</div>
 				<p className={styles.stepText}>確認訂單明細</p>
