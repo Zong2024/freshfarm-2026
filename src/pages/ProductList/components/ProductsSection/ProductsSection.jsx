@@ -2,6 +2,118 @@ import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
 import ProductListCard from '@/components/card/ProductListCard/ProductListCard'
 import styles from './ProductsSection.module.scss'
+const products = [
+	{
+		id: 1,
+		name: '嚴選大樹老欉玉荷包',
+		origin: '古樂農場',
+		description:
+			'玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等',
+		price: 729,
+		discountPrice: 683,
+		weight: 600,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E8%8D%94%E6%9E%9D.jpg?raw=tru',
+	},
+	{
+		id: 2,
+		name: '有機綠竹筍(特級)4台',
+		origin: '農芒',
+		description:
+			'夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美',
+		price: 790,
+		discountPrice: null,
+		weight: 500,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E7%B6%A0%E7%AB%B9%E7%AD%8D.jpg?raw=true',
+	},
+	{
+		id: 3,
+		name: '拉拉山洪家水蜜桃',
+		origin: '無花果農場',
+		description: '主要產於高山，果肉細緻柔嫩，香氣十足，入口即化',
+		price: 760,
+		discountPrice: 710,
+		weight: 800,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E6%B0%B4%E8%9C%9C%E6%A1%83.jpg?raw=true',
+	},
+	{
+		id: 4,
+		name: '無毒青花菜',
+		origin: '紅奇有機農場',
+		description: '清脆鮮甜，適合快炒或川燙，富含膳食纖維',
+		price: 79,
+		discountPrice: null,
+		weight: 300,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E9%9D%92%E8%8A%B1%E8%8F%9C.jpg?raw=true',
+	},
+	{
+		id: 5,
+		name: '黑豬梅花火鍋片',
+		origin: '竹塘鄉農會',
+		description: '油花均勻、口感滑嫩，火鍋與炒菜皆適宜',
+		price: 500,
+		discountPrice: 468,
+		weight: 300,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E8%B1%AC%E8%82%89%E7%89%87.jpg?raw=true',
+	},
+	{
+		id: 6,
+		name: '屏東香米',
+		origin: '古樂農場',
+		description: '口感Q彈、米香濃，是每日主食的安心選擇',
+		price: 760,
+		discountPrice: 600,
+		weight: 1500,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E9%A6%99%E7%B1%B3.jpg?raw=true',
+	},
+	{
+		id: 7,
+		name: '放牧土雞蛋',
+		origin: '以拉西代',
+		description: '蛋黃濃郁自然橘紅，無抗生素殘留',
+		price: 130,
+		discountPrice: 110,
+		weight: 10,
+		unit: '顆',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E6%94%BE%E7%89%A7%E5%9C%9F%E9%9B%9E%E8%9B%8B.jpg?raw=true',
+	},
+	{
+		id: 8,
+		name: '牛番茄（大果）',
+		origin: 'AphineBro高山兄弟',
+		description: '多汁微酸，適合涼拌、燉煮',
+		price: 142,
+		discountPrice: null,
+		weight: 500,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E7%89%9B%E7%95%AA%E8%8C%84.jpg?raw=true',
+	},
+	{
+		id: 9,
+		name: '小農高麗菜',
+		origin: '保證責任雲林縣永光果菜生產合作社',
+		description: '脆甜飽滿，適合清炒、煮湯、滷煮',
+		price: 79,
+		discountPrice: null,
+		weight: 1000,
+		unit: 'g',
+		imgUrl:
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E9%AB%98%E9%BA%97%E8%8F%9C.jpg?raw=true',
+	},
+]
 const ProductsSection = () => {
 	return (
 		<div className="col-lg-9">
@@ -23,146 +135,22 @@ const ProductsSection = () => {
 			</div>
 			{/*商品list*/}
 			<div className="row row-cols-1 row-cols-sm-2 row-cols-xxl-3 mb-8">
-				<div className="col mb-6 mb-xxl-7 d-flex justify-content-center">
-					<ProductListCard
-						farm="麻豆柚香園"
-						img="product/product-image-麻豆柚子"
-						title="麻豆大白柚"
-						size="5"
-						content="來自台南麻豆的優質大白柚，果肉飽滿、汁多清甜、微酸爽口，天然無毒栽培，皮薄肉厚，每一口都吃得到自然的好味道。中秋送禮、自用兩相宜，讓您品嚐最純粹的台灣在地風味。"
-						price="NT$ 950"
-						discount="NT$ 1060"
-						slash="/"
-						grams="6公斤裝"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-7 d-flex justify-content-center">
-					<ProductListCard
-						farm="古樂農場"
-						img="product/product-image-荔枝"
-						title="嚴選大樹老欉玉荷包"
-						size="5"
-						content="玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等"
-						price="NT$ 683"
-						discount="NT$ 729"
-						slash="/"
-						grams="600g"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-7 d-flex justify-content-center">
-					<ProductListCard
-						farm="農芒"
-						img="product/product-image-綠竹筍"
-						title="有機綠竹筍(特級)4台"
-						size="5"
-						content="夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美"
-						price="NT$ 790"
-						discount=""
-						slash="/"
-						grams="500g"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-7 d-flex justify-content-center">
-					<ProductListCard
-						farm="無花果農場"
-						img="product/product-image-水蜜桃"
-						title="拉拉山洪家水蜜桃"
-						size="5"
-						content="水蜜桃主要產於高山地區，因為氣候涼爽、日夜溫差大，使得果實能慢慢成熟，累積出豐富的甜度與香氣。其果肉細緻柔嫩，色澤粉嫩誘人，咬下一口時多汁滑順，帶有獨特的清甜芳香。"
-						price="NT$ 710"
-						discount="NT$ 760"
-						slash="/"
-						grams="800g"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-7 d-flex justify-content-center d-none">
-					<ProductListCard
-						farm="紅奇有機農場"
-						img="product/product-image-青花菜"
-						title="無毒青花菜"
-						size="5"
-						content="清脆鮮甜，適合快炒或川燙，富含膳食纖維"
-						price="NT$ 79"
-						discount=""
-						slash="/"
-						grams="300g"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-7 d-flex justify-content-center">
-					<ProductListCard
-						farm="竹塘鄉農會"
-						img="product/product-image-豬肉片"
-						title="黑豬梅花火鍋片"
-						size="5"
-						content="油花均勻、口感滑嫩，火鍋與炒菜皆適宜"
-						price="NT$ 468"
-						discount=""
-						slash="/"
-						grams="300g"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-7 d-flex justify-content-center">
-					<ProductListCard
-						farm="古樂農場"
-						img="product/product-image-香米"
-						title="屏東香米"
-						size="5"
-						content="口感Q彈、米香濃，是每日主食的安心選擇"
-						price="NT$ 103"
-						discount="NT$ 115"
-						slash="/"
-						grams="1500g"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-0 d-flex justify-content-center">
-					<ProductListCard
-						farm="以拉西代"
-						img="product/product-image-放牧土雞蛋"
-						title="放牧土雞蛋"
-						size="5"
-						content="蛋黃濃郁自然橘紅，無抗生素殘留"
-						price="NT$ 115"
-						discount="NT$ 130"
-						slash="/"
-						grams="10顆"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-0 d-flex justify-content-center">
-					<ProductListCard
-						farm="AphineBro高山兄弟"
-						img="product/product-image-牛番茄"
-						title="牛番茄（大果）"
-						size="5"
-						content="多汁微酸，適合涼拌、燉煮"
-						price="NT$ 142"
-						discount=""
-						slash="/"
-						grams="500g"
-						showCompareButton={true}
-					/>
-				</div>
-				<div className="col mb-6 mb-xxl-0 d-flex justify-content-center">
-					<ProductListCard
-						farm="保證責任雲林縣永光果菜生產合作社"
-						img="product/product-image-高麗菜"
-						title="小農高麗菜"
-						size="5"
-						content="脆甜飽滿，適合清炒、煮湯、滷煮"
-						price="NT$ 79"
-						discount=""
-						slash="/"
-						grams="1,000g"
-						showCompareButton={true}
-					/>
-				</div>
+				{products.map(item => (
+					<div className="col mb-6 mb-xxl-7 d-flex justify-content-center" key={item.id}>
+						<ProductListCard
+							farm={item.origin}
+							img={item.imgUrl}
+							title={item.name}
+							size="5"
+							content={item.description}
+							price={`NT$ ${item.price}`}
+							discount={item.discountPrice != null ? `NT${item.discountPrice}` : ''}
+							slash="/"
+							grams={`${item.weight}${item.unit}`}
+							showCompareButton={true}
+						/>
+					</div>
+				))}
 			</div>
 			{/*分頁*/}
 			<div>

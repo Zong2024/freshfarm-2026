@@ -1,5 +1,11 @@
 import { clsx } from 'clsx'
 import styles from './Compare.module.scss'
+import freeRangeEgg from '@/assets/images/compare/product-comparison-Image-放牧雞蛋.jpg'
+import nativeEgg from '@/assets/images/compare/product-comparison-Image-土雞蛋.jpg'
+import barnEgg from '@/assets/images/compare/product-comparison-Image-禽舍蛋.jpg'
+import mobileFreeRangeEgg from '@/assets/images/compare/product-comparison-mobile-Image-放牧雞蛋.jpg'
+import mobileNativeEgg from '@/assets/images/compare/product-comparison-mobile-Image-土雞蛋.jpg'
+import mobileBarnEgg from '@/assets/images/compare/product-comparison-mobile-Image-禽舍蛋.jpg'
 const Compare = ({ nonCompare, showCompareArea }) => {
 	return (
 		<section className={clsx('bg-primary-50 py-8 py-lg-9', styles.compareBg)}>
@@ -68,25 +74,13 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 											商品圖片
 										</th>
 										<td className="py-6">
-											<img
-												className="rounded-3 w-100"
-												src="/public/assets/images/product/product-comparison-Image-放牧雞蛋.jpg"
-												alt="放牧雞蛋圖片"
-											/>
+											<img className="rounded-3 w-100" src={freeRangeEgg} alt="放牧雞蛋圖片" />
 										</td>
 										<td className="py-6">
-											<img
-												className="rounded-3 w-100"
-												src="/public/assets/images/product/product-comparison-Image-土雞蛋.jpg"
-												alt="土雞蛋圖片"
-											/>
+											<img className="rounded-3 w-100" src={nativeEgg} alt="土雞蛋圖片" />
 										</td>
 										<td className="py-6">
-											<img
-												className="rounded-3 w-100"
-												src="/public/assets/images/product/product-comparison-Image-禽舍蛋.jpg"
-												alt="禽舍蛋圖片"
-											/>
+											<img className="rounded-3 w-100" src={barnEgg} alt="禽舍蛋圖片" />
 										</td>
 									</tr>
 									<tr>
@@ -175,7 +169,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 								<div className="d-flex align-items-center mb-2">
 									<img
 										className={clsx('rounded-3 me-2', styles.compareMobileImg)}
-										src="/public/assets/images/product/product-comparison-mobile-Image-放牧雞蛋.jpg"
+										src={mobileFreeRangeEgg}
 										alt="放牧雞蛋圖片"
 									/>
 									<div>
@@ -220,7 +214,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 								<div className="d-flex align-items-center mb-2">
 									<img
 										className={clsx('rounded-3 me-2', styles.compareMobileImg)}
-										src="/public/assets/images/product/product-comparison-mobile-Image-土雞蛋.jpg"
+										src={mobileNativeEgg}
 										alt="土雞蛋圖片"
 									/>
 									<div>
@@ -265,7 +259,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 								<div className="d-flex align-items-center mb-2">
 									<img
 										className={clsx('rounded-3 me-2', styles.compareMobileImg)}
-										src="/public/assets/images/product/product-comparison-mobile-Image-禽舍蛋.jpg"
+										src={mobileBarnEgg}
 										alt="禽舍蛋圖片"
 									/>
 									<div>

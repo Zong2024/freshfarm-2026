@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
 import styles from './ProductListCard.module.scss'
+import leafIcon from '@/assets/images/leaf-icon.png'
 const ProductListCard = ({
 	farm,
 	img,
@@ -27,10 +28,10 @@ const ProductListCard = ({
 						styles.certifyLink
 					)}
 				>
-					<img className="me-1" src="/public/assets/images/leaf-icon.png" alt="安心認證icon圖示" />
+					<img className="me-1" src={leafIcon} alt="安心認證icon圖示" />
 					安心認證
 				</Link>
-				<img src={`/public/assets/images/${img}.jpg`} className="card-img-top" alt="商品圖片" />
+				<img src={img} className="card-img-top" alt="商品圖片" />
 				<button
 					type="button"
 					className="position-absolute bottom-0 end-0 border-0 rounded-circle bg-white p-3 m-4"
