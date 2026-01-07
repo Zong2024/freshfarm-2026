@@ -1,13 +1,28 @@
 @import '@/assets/scss/config';
 
-.quantityContainer{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: $white;
-  border: 1.6px solid $gray-200;
-  border-radius: 8px;
-    &:hover {
-      border-color: $primary-400;
-    }
+.quantityContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: $white;
+	border: 1.6px solid $gray-200;
+	border-radius: 8px;
+	&:hover {
+		border-color: $primary-400;
+	}
+}
+
+// 隱藏 number 的 spinner
+/* Chrome, Edge, Safari */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+	-moz-appearance: textfield;
+	appearance: textfield;
 }
