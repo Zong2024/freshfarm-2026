@@ -54,7 +54,7 @@ const ProductListCard = ({
 				</Link>
 				<div className="mb-3 mt-auto">
 					<span className=" fs-5 fw-bold text-secondary-300 ">{price}</span>
-					<del className="text-gray-300  ms-2">{discount}</del>
+					<del className={`text-gray-300  ${discount == '' ? '' : 'ms-2'}`}>{discount}</del>
 					<span className="mx-1 text-gray-300 ">{slash}</span>
 					<span className="text-gray-300 ">{grams}</span>
 				</div>
