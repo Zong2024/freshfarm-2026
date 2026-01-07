@@ -4,10 +4,12 @@ const QuantitySelector = ({ value = 1, max = 15, onChange }) => {
 	const isMinusDisabled = value <= 1
 	const isPlusDisabled = value >= max
 
-	const handleInputChange = e => {
-		const val = e.target.value
-		return val
-	}
+	//預留輸入編輯事件
+	// const handleInputChange = e => {
+	// 	const val = e.target.value
+	// 	return val
+	// }
+
 	const handleUpdate = newValue => {
 		let safeValue = Math.max(1, newValue)
 		if (max) safeValue = Math.min(safeValue, max)
@@ -37,7 +39,7 @@ const QuantitySelector = ({ value = 1, max = 15, onChange }) => {
 			<input
 				type="number"
 				value={value}
-				onChange={handleInputChange}
+				// onChange={handleInputChange}
 				className="form-control text-center border-0 p-0 mx-2"
 				readOnly
 			/>
