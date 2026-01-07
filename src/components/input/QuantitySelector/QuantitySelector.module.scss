@@ -1,0 +1,12 @@
+@import '@/assets/scss/config';
+
+.quantityContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1.6px solid $gray-200;
+  border-radius: 8px;
+    &:hover {
+      border-color: $primary-400;
+    }
+}
