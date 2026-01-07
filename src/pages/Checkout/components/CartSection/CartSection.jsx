@@ -4,6 +4,8 @@ import checkoutImg2 from './assets/checkout-Image-2.jpg'
 import checkoutImg3 from './assets/checkout-Image-3.jpg'
 import { clsx } from 'clsx'
 import styles from './CartSection.module.scss'
+import { useState } from 'react'
+import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelector'
 
 const cartItems = [
 	{
@@ -37,6 +39,12 @@ const cartItems = [
 ]
 
 const CartSection = () => {
+	const [items, setItems] = useState(cartItems)
+
+	const handleQuantityChange = (id, newQuantity) => {
+		setItems(prev => prev.map(item => (item.id === id ? { ...item, quantity: newQuantity } : item)))
+	}
+
 	return (
 		<div className="py-8 py-lg-9">
 			{/* 電腦樣式 */}
@@ -62,7 +70,7 @@ const CartSection = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{cartItems.map(item => (
+						{items.map(item => (
 							<tr key={item.id}>
 								<th scope="row" className="d-flex align-items-center">
 									<img
@@ -75,25 +83,16 @@ const CartSection = () => {
 								</th>
 
 								<td>
-									<div className="position-relative d-inline-block">
-										<input
-											type="number"
-											className="form-control text-center"
-											value={item.quantity}
-											readOnly
-										/>
-										<span className="material-icons position-absolute top-50 start-0 translate-middle-y ms-3">
-											remove
-										</span>
-										<span className="material-icons position-absolute top-50 end-0 translate-middle-y me-3">
-											add
-										</span>
-									</div>
+									<QuantitySelector
+										value={item.quantity}
+										max={15}
+										onChange={newValue => handleQuantityChange(item.id, newValue)}
+									/>
 								</td>
 
-								<td>NT$ {item.price}</td>
+								<td>NT$ {item.price.toLocaleString()}</td>
 
-								<td className="fw-bold">NT$ {item.price * item.quantity}</td>
+								<td className="fw-bold">NT$ {(item.price * item.quantity).toLocaleString()}</td>
 
 								<td>
 									<div className={styles.delete}>
@@ -108,7 +107,7 @@ const CartSection = () => {
 
 			{/* 手機樣式 */}
 			<div className="d-lg-none">
-				{cartItems.map(item => (
+				{items.map(item => (
 					<div className={clsx('mb-6', styles.bg)} key={item.id}>
 						<div className="d-flex align-items-top mb-3">
 							<img
@@ -123,37 +122,24 @@ const CartSection = () => {
 
 								<div className="d-flex align-items-center mb-2">
 									<small className="text-gray-400 pe-4">單價</small>
-									<span>NT$ {item.price}</span>
+									<span>NT$ {item.price.toLocaleString()}</span>
 								</div>
 
 								<div className="d-flex align-items-center">
 									<small className="text-gray-400 pe-4">小計</small>
-									<span className="fw-bold">NT$ {item.price * item.quantity}</span>
+									<span className="fw-bold">
+										NT$ {(item.price * item.quantity).toLocaleString()}
+									</span>
 								</div>
 							</div>
 
 							<span className="material-icons text-danger">delete</span>
 						</div>
-						<div className="position-relative d-inline-block w-100">
-							<input
-								type="number"
-								className="form-control text-center"
-								value={item.quantity}
-								readOnly
-							/>{' '}
-							<span
-								className="material-icons position-absolute top-50 start-0 translate-middle-y ms-3 text-gray-200"
-								style={{ cursor: 'pointer' }}
-							>
-								remove
-							</span>
-							<span
-								className="material-icons position-absolute top-50 end-0 translate-middle-y me-3 text-primary-400"
-								style={{ cursor: 'pointer' }}
-							>
-								add
-							</span>
-						</div>
+						<QuantitySelector
+							value={item.quantity}
+							max={15}
+							onChange={newValue => handleQuantityChange(item.id, newValue)}
+						/>
 					</div>
 				))}
 			</div>
