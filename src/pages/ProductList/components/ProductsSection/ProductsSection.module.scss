@@ -1,0 +1,35 @@
+@import '@/assets/scss/helpers';
+//搜尋欄
+input:focus::placeholder {
+    color: $black;
+  }
+.productSearchBar{
+    top: 16px;
+    right: 12px;
+}
+.formControl{
+    &:focus{
+        border-color: $primary;
+        color: $black;
+    }
+}
+//分頁
+.pagination{
+    .paginationPage {
+        width: 32px;
+    }
+    .active .pageLink {
+        color: $white;
+    }
+    .pageLink{
+        color: $black;
+        &:hover {
+            background-color: $primary-100;
+            color: $primary;
+        }
+        &:active, &:focus {
+            background-color: $primary-300;
+            color: $white;
+        }
+    }
+}

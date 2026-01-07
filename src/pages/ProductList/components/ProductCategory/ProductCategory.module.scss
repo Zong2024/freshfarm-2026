@@ -1,0 +1,44 @@
+@import '@/assets/scss/helpers';
+//分類欄
+:global(#accordionExample){
+  .accordionButton {
+      &::after {
+          display: none;
+      }
+      &:not(:global(.collapsed)) {  //移除accordition拉下背景色
+          background-color: transparent;
+          box-shadow: none;
+          font-size: $h6-font-size;
+          color: $black;
+          font-weight: $font-weight-bold;
+          .arrowDown {
+            transform: rotate(180deg);
+          }
+          @include large {
+            font-size: $h5-font-size;
+            color: $primary;           
+          }
+      }
+  }
+}
+
+.classify {
+    color: $black;
+    &:active, &:focus {
+      font-weight: $font-weight-bold;
+    }      
+    @include large {
+      color: $primary-300;
+      &:active, &:focus {
+          color: $primary;
+      }        
+    }
+}
+.classifySubitem {
+    &:active, &:focus {
+        font-weight: $font-weight-bold;
+    }     
+}
+.dropdownToggle::after {
+  display: none;  //隱藏原本的 dropdown-toggle 樣式
+}

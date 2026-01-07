@@ -1,6 +1,8 @@
+import { clsx } from 'clsx'
+import styles from './Compare.module.scss'
 const Compare = ({ nonCompare, showCompareArea }) => {
 	return (
-		<section className="bg-primary-50 py-8 py-lg-9 compare-bg">
+		<section className={clsx('bg-primary-50 py-8 py-lg-9', styles.compareBg)}>
 			<div className="container">
 				<div className="d-flex justify-content-center align-items-center gap-2 mb-7 mb-lg-8">
 					<h2 className="fs-4 fs-lg-2">商品比較</h2>
@@ -17,7 +19,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 
 			{showCompareArea && (
 				<>
-					<div className="container bg-white table-shadow">
+					<div className={clsx('container bg-white', styles.tableShadow)}>
 						<div className="p-5 d-none d-md-block">
 							<div className="d-flex flex-row-reverse mb-6">
 								<button
@@ -33,7 +35,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 								style={{ tableLayout: 'fixed' }}
 							>
 								<thead>
-									<tr className="table-secondar-50">
+									<tr className={styles.tableSecondar50}>
 										<th scope="col" className="text-gray-400 align-middle">
 											項目
 										</th>
@@ -163,7 +165,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 					<div className="container">
 						{/*手機樣式*/}
 						<div className="d-block d-md-none">
-							<div className="card border-0 p-3 card-shadow mb-6">
+							<div className="card border-0 p-3 cardShadow mb-6">
 								<div className="d-flex justify-content-between mb-2">
 									<h5 className="fs-6 text-primary">放牧雞蛋（有機）</h5>
 									<span className="material-icons text-danger align-bottom ms-2">
@@ -172,7 +174,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 								</div>
 								<div className="d-flex align-items-center mb-2">
 									<img
-										className="compare-mobile-img rounded-3 me-2"
+										className={clsx('rounded-3 me-2', styles.compareMobileImg)}
 										src="/public/assets/images/product/product-comparison-mobile-Image-放牧雞蛋.jpg"
 										alt="放牧雞蛋圖片"
 									/>
@@ -208,7 +210,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 									</button>
 								</div>
 							</div>
-							<div className="card border-0 p-3 card-shadow mb-6">
+							<div className="card border-0 p-3 cardShadow mb-6">
 								<div className="d-flex justify-content-between mb-2">
 									<h5 className="fs-6 text-primary">土雞蛋（推薦）</h5>
 									<span className="material-icons text-danger align-bottom ms-2">
@@ -217,7 +219,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 								</div>
 								<div className="d-flex align-items-center mb-2">
 									<img
-										className="compare-mobile-img rounded-3 me-2"
+										className={clsx('rounded-3 me-2', styles.compareMobileImg)}
 										src="/public/assets/images/product/product-comparison-mobile-Image-土雞蛋.jpg"
 										alt="土雞蛋圖片"
 									/>
@@ -253,7 +255,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 									</button>
 								</div>
 							</div>
-							<div className="card border-0 p-3 card-shadow mb-6">
+							<div className="card border-0 p-3 cardShadow mb-6">
 								<div className="d-flex justify-content-between mb-2">
 									<h5 className="fs-6 text-primary">禽舍蛋（平飼 )</h5>
 									<span className="material-icons text-danger align-bottom ms-2">
@@ -262,7 +264,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 								</div>
 								<div className="d-flex align-items-center mb-2">
 									<img
-										className="compare-mobile-img rounded-3 me-2"
+										className={clsx('rounded-3 me-2', styles.compareMobileImg)}
 										src="/public/assets/images/product/product-comparison-mobile-Image-禽舍蛋.jpg"
 										alt="禽舍蛋圖片"
 									/>

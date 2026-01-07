@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
-const Card = ({
+import { clsx } from 'clsx'
+import styles from './ProductListCard.module.scss'
+const ProductListCard = ({
 	farm,
 	img,
 	title,
@@ -13,15 +15,17 @@ const Card = ({
 }) => {
 	return (
 		<div
-			className="card product-card border-0 h-100 w-100 position-relative"
+			className={clsx('card border-0 h-100 w-100 position-relative', styles.productCard)}
 			style={{ maxWidth: '416px' }}
 		>
 			<div className="position-relative">
 				<Link
 					to="/"
 					type="button"
-					className="certify-link fw-medium position-absolute top-0  badge rounded-pill bg-primary-100
-						text-primary fs-6 m-4 px-2 py-1 d-flex justify-content-center align-items-center"
+					className={clsx(
+						'fw-medium position-absolute top-0  badge rounded-pill bg-primary-100 text-primary fs-6 m-4 px-2 py-1 d-flex justify-content-center align-items-center',
+						styles.certifyLink
+					)}
 				>
 					<img className="me-1" src="/public/assets/images/leaf-icon.png" alt="安心認證icon圖示" />
 					安心認證
@@ -43,7 +47,7 @@ const Card = ({
 				<h5 className={`card-title fs-lg-${size} text-truncate`}>{title}</h5>
 				<Link
 					to="/products"
-					className="card-text text-gray-300 multi-line-truncate mb-3 stretched-link"
+					className={clsx('card-text text-gray-300 mb-3 stretched-link', styles.multiLineTruncate)}
 				>
 					{content}
 				</Link>
@@ -73,4 +77,4 @@ const Card = ({
 	)
 }
 
-export default Card
+export default ProductListCard
