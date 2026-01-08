@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
 import ProductListCard from '@/components/card/ProductListCard/ProductListCard'
+import SearchBar from '@/components/input/SearchBar/SearchBar'
 import styles from './ProductsSection.module.scss'
 const products = [
 	{
@@ -119,6 +120,7 @@ const ProductsSection = () => {
 		<div className="col-lg-9">
 			{/*商品搜尋欄*/}
 			<div className="position-relative mb-7 mb-lg-8">
+				<SearchBar />
 				<input
 					type="text"
 					className={clsx('form-control shadow-none', styles.formControl)}

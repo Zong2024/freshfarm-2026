@@ -1,5 +1,6 @@
 import { clsx } from 'clsx'
 import styles from './Compare.module.scss'
+import CartButton from '@/components/button/CartButton'
 import freeRangeEgg from '@/assets/images/compare/product-comparison-Image-放牧雞蛋.jpg'
 import nativeEgg from '@/assets/images/compare/product-comparison-Image-土雞蛋.jpg'
 import barnEgg from '@/assets/images/compare/product-comparison-Image-禽舍蛋.jpg'
@@ -128,28 +129,13 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 											操作
 										</th>
 										<td className="py-6">
-											<button
-												type="button"
-												className="btn btn-primary-300 fw-bold text-white w-100"
-											>
-												加入購物車
-											</button>
+											<CartButton />
 										</td>
 										<td className="py-6">
-											<button
-												type="button"
-												className="btn btn-primary-300 fw-bold text-white w-100"
-											>
-												加入購物車
-											</button>
+											<CartButton />
 										</td>
 										<td className="py-6">
-											<button
-												type="button"
-												className="btn btn-primary-300 fw-bold text-white w-100"
-											>
-												加入購物車
-											</button>
+											<CartButton />
 										</td>
 									</tr>
 								</tbody>
@@ -199,9 +185,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 											<span>水煮、生食、拌飯</span>
 										</li>
 									</ul>
-									<button type="button" className="btn btn-primary-300 fw-bold text-white w-100">
-										加入購物車
-									</button>
+									<CartButton />
 								</div>
 							</div>
 							<div className="card border-0 p-3 cardShadow mb-6">
@@ -244,9 +228,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 											<span>煎蛋、日式玉子燒</span>
 										</li>
 									</ul>
-									<button type="button" className="btn btn-primary-300 fw-bold text-white w-100">
-										加入購物車
-									</button>
+									<CartButton />
 								</div>
 							</div>
 							<div className="card border-0 p-3 cardShadow mb-6">
@@ -289,9 +271,7 @@ const Compare = ({ nonCompare, showCompareArea }) => {
 											<span>炒蛋、烘焙用</span>
 										</li>
 									</ul>
-									<button type="button" className="btn btn-primary-300 fw-bold text-white w-100">
-										加入購物車
-									</button>
+									<CartButton />
 								</div>
 							</div>
 							<button

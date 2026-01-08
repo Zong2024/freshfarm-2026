@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
+import CartButton from '@/components/button/CartButton'
+import CompareButton from '@/components/button/CompareButton'
 import styles from './ProductListCard.module.scss'
 import leafIcon from '@/assets/images/leaf-icon.png'
 const ProductListCard = ({
@@ -21,12 +23,9 @@ const ProductListCard = ({
 		>
 			<div className="position-relative">
 				<Link
-					to="/"
+					to="/products"
 					type="button"
-					className={clsx(
-						'fw-medium position-absolute top-0  badge rounded-pill bg-primary-100 text-primary fs-6 m-4 px-2 py-1 d-flex justify-content-center align-items-center',
-						styles.certifyLink
-					)}
+					className="fw-medium position-absolute top-0  badge rounded-pill bg-primary-100 text-primary fs-6 m-4 px-2 py-1 d-flex justify-content-center align-items-center z-2"
 				>
 					<img className="me-1" src={leafIcon} alt="安心認證icon圖示" />
 					安心認證
@@ -34,8 +33,7 @@ const ProductListCard = ({
 				<img src={img} className="card-img-top" alt="商品圖片" />
 				<button
 					type="button"
-					className="position-absolute bottom-0 end-0 border-0 rounded-circle bg-white p-3 m-4"
-					onclick="toggleFavorite(this)"
+					className="position-absolute bottom-0 end-0 border-0 rounded-circle bg-white p-3 m-4 z-2"
 				>
 					<span className="material-icons fs-2 d-block favorite-icon text-gray-400">
 						favorite_border
@@ -59,19 +57,10 @@ const ProductListCard = ({
 					<span className="text-gray-300 ">{grams}</span>
 				</div>
 
-				<div className="d-flex gap-3">
-					{showCompareButton && (
-						<button
-							type="button"
-							className="btn btn-gray-100 border border-gray-200 text-black fw-bold  px-6"
-						>
-							加入比較
-						</button>
-					)}
+				<div className="d-flex gap-3 position-relative z-2">
+					{showCompareButton && <CompareButton />}
 
-					<button type="button" className="btn btn-primary-300 text-white fw-bold flex-grow-1">
-						加入購物車
-					</button>
+					<CartButton />
 				</div>
 			</div>
 		</div>
