@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 import styles from './ProductCard.module.scss'
-const ProductCard = ({ name, description, price, img, weight }) => {
+const ProductCard = ({ name, description, price, img, weight, action }) => {
 	return (
 		<div className={clsx('card h-100 overflow-hidden border-0', styles.cardShadow)}>
 			<div className="position-relative">
@@ -33,9 +33,7 @@ const ProductCard = ({ name, description, price, img, weight }) => {
 				<p className="fs-5 fw-bold mb-3 text-secondary-300">
 					NT$ {price} / {weight} g
 				</p>
-				<button type="button" className="btn btn-primary-300 text-white w-100 fw-bold fs-5">
-					加入購物車
-				</button>
+				<>{action}</>
 			</div>
 		</div>
 	)
