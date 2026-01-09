@@ -12,6 +12,7 @@ const TwoButtonCard = ({ ...productInfo }) => {
 					<CartButton />
 				</div>
 			}
+			page="productList"
 		/>
 	)
 }

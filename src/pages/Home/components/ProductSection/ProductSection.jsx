@@ -43,9 +43,11 @@ const ProductSection = ({ products }) => {
 					<SwiperSlide>
 						<SingleButtonCard
 							name={product.name}
+							origin={product.origin}
 							description={product.description}
-							price={product.price}
-							weight={product.weight}
+							price={product.discountPrice !== null ? product.discountPrice : product.price}
+							originPrice={product.discountPrice !== null ? product.price : ''}
+							quantifier={`${product.weight}${product.unit}`}
 							img={product.img}
 						/>
 					</SwiperSlide>

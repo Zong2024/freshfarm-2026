@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
-import ProductListCard from '@/components/card/ProductListCard/ProductListCard'
 import SearchBar from '@/components/input/SearchBar/SearchBar'
+import TwoButtonCard from '@/components/card/ProductCard/TwoButtonCard'
 import styles from './ProductsSection.module.scss'
 const products = [
 	{
@@ -15,7 +15,7 @@ const products = [
 		weight: 600,
 		unit: 'g',
 		imgUrl:
-			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E8%8D%94%E6%9E%9D.jpg?raw=tru',
+			'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E8%8D%94%E6%9E%9D.jpg?raw=true',
 	},
 	{
 		id: 2,
@@ -139,17 +139,14 @@ const ProductsSection = () => {
 			<div className="row row-cols-1 row-cols-sm-2 row-cols-xxl-3 mb-8">
 				{products.map(item => (
 					<div className="col mb-6 mb-xxl-7 d-flex justify-content-center" key={item.id}>
-						<ProductListCard
-							farm={item.origin}
+						<TwoButtonCard
+							origin={item.origin}
 							img={item.imgUrl}
-							title={item.name}
-							size="5"
-							content={item.description}
-							price={`NT$ ${item.price}`}
-							discount={item.discountPrice != null ? `NT${item.discountPrice}` : ''}
-							slash="/"
-							grams={`${item.weight}${item.unit}`}
-							showCompareButton={true}
+							name={item.name}
+							description={item.description}
+							price={item.discountPrice !== null ? item.discountPrice : item.price}
+							originPrice={item.discountPrice !== null ? item.price : ''}
+							quantifier={`${item.weight}${item.unit}`}
 						/>
 					</div>
 				))}
