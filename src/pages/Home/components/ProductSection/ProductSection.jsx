@@ -42,6 +42,7 @@ const ProductSection = ({ products }) => {
 				{products.map(product => (
 					<SwiperSlide>
 						<SingleButtonCard
+							//props有點太過長有三元判斷可以拉到上面先做判斷jsx就負責傳值
 							name={product.name}
 							origin={product.origin}
 							description={product.description}
@@ -49,6 +50,8 @@ const ProductSection = ({ products }) => {
 							originPrice={product.discountPrice !== null ? product.price : ''}
 							quantifier={`${product.weight}${product.unit}`}
 							img={product.img}
+							size="large"
+							showOrigin={false}
 						/>
 					</SwiperSlide>
 				))}
