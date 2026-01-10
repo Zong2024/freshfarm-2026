@@ -10,8 +10,13 @@ const ProductCard = ({
 	img,
 	quantifier,
 	action,
-	page,
+	size = 'normal',
+	showOrigin = true,
 }) => {
+	const titleSizeMap = {
+		large: 'fs-lg-4',
+		normal: 'fs-lg-5',
+	}
 	return (
 		<div className={clsx('card h-100 w-100 overflow-hidden border-0', styles.cardShadow)}>
 			<div className="position-relative">
@@ -39,8 +44,8 @@ const ProductCard = ({
 				</button>
 			</div>
 			<div className="card-body bg-white d-flex flex-column">
-				{page === 'productList' && <h6 className="text-primary-400 mb-1">{origin}</h6>}
-				<h5 className={clsx(' mb-2', page === 'home' ? 'fs-lg-4' : 'fs-lg-5')}>{name}</h5>
+				{showOrigin && origin && <h6 className="text-primary-400 mb-1">{origin}</h6>}
+				<h5 className={clsx(' mb-2', titleSizeMap[size] || titleSizeMap.normal)}>{name}</h5>
 				<Link
 					to="/"
 					className={clsx('fs-lg-5 mb-3 text-gray-300 stretched-link', styles.textTruncate)}
@@ -49,6 +54,7 @@ const ProductCard = ({
 				</Link>
 				<div className="mb-3">
 					<span className="fs-5 fw-bold text-secondary-300">NT$ {price}</span>
+					//應該使用===但這段我api會修改可以先暫時不改
 					<del className={`text-gray-300  ${originPrice == '' ? '' : 'ms-2'}`}>{originPrice}</del>
 					<span className="mx-1 text-gray-300 ">/</span>
 					<span className="text-gray-300 ">{quantifier}</span>
