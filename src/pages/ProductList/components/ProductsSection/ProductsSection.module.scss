@@ -1,8 +1,5 @@
 @import '@/assets/scss/helpers';
 //搜尋欄
-input:focus::placeholder {
-    color: $black;
-  }
 .productSearchBar{
     top: 16px;
     right: 12px;
