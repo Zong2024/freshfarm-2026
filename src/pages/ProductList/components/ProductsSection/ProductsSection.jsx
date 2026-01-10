@@ -158,7 +158,7 @@ const ProductsSection = () => {
 						<li className="page-item me-3">
 							<Link
 								className={clsx(
-									'page-link hadow-none border-0 d-flex justify-content-center',
+									'page-link shadow-none border-0 d-flex justify-content-center',
 									styles.paginationPage,
 									styles.pageLink
 								)}
