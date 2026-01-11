@@ -116,6 +116,12 @@ const products = [
 	},
 ]
 const ProductsSection = () => {
+	const transformProducts = products.map(({ price, discountPrice, weight, unit, ...other }) => ({
+		...other,
+		price: discountPrice !== null ? discountPrice : price,
+		originPrice: discountPrice !== null ? price : null,
+		quantifier: `${weight}${unit}`,
+	}))
 	return (
 		<div className="col-lg-9">
 			{/*商品搜尋欄*/}
@@ -137,16 +143,16 @@ const ProductsSection = () => {
 			</div>
 			{/*商品list*/}
 			<div className="row row-cols-1 row-cols-sm-2 row-cols-xxl-3 mb-8">
-				{products.map(item => (
+				{transformProducts.map(item => (
 					<div className="col mb-6 mb-xxl-7 d-flex justify-content-center" key={item.id}>
 						<TwoButtonCard
 							origin={item.origin}
 							img={item.imgUrl}
 							name={item.name}
 							description={item.description}
-							price={item.discountPrice !== null ? item.discountPrice : item.price}
-							originPrice={item.discountPrice !== null ? item.price : ''}
-							quantifier={`${item.weight}${item.unit}`}
+							price={item.price}
+							originPrice={item.originPrice}
+							quantifier={item.quantifier}
 						/>
 					</div>
 				))}

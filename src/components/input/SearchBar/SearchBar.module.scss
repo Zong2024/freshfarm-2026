@@ -25,6 +25,9 @@
       font-size: 20px;
       line-height: 32px;
 
+      &:focus::placeholder{
+        color: $black;;
+      }
       &::placeholder{
         color: $gray-300;
       }

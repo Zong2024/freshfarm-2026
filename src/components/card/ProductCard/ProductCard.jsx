@@ -54,8 +54,8 @@ const ProductCard = ({
 				</Link>
 				<div className="mb-3">
 					<span className="fs-5 fw-bold text-secondary-300">NT$ {price}</span>
-					//應該使用===但這段我api會修改可以先暫時不改
-					<del className={`text-gray-300  ${originPrice == '' ? '' : 'ms-2'}`}>{originPrice}</del>
+					{/*應該使用===但這段我api會修改可以先暫時不改*/}
+					<del className={`text-gray-300  ${originPrice === '' ? '' : 'ms-2'}`}>{originPrice}</del>
 					<span className="mx-1 text-gray-300 ">/</span>
 					<span className="text-gray-300 ">{quantifier}</span>
 				</div>
