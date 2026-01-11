@@ -10,7 +10,7 @@ const ProductSection = ({ products }) => {
 		price: discountPrice !== null ? discountPrice : price,
 		originPrice: discountPrice !== null ? price : null,
 		quantifier: `${weight}${unit}`,
-	}))	
+	}))
 	return (
 		<section className="container py-8 py-lg-11">
 			<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
