@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "mock": "json-server jsonserver/db.json --port 5000",
-    "lint": "eslint . --ext .js,.jsx",
+    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --check ."
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -44,6 +43,7 @@
     "globals": "^16.5.0",
     "husky": "^8.0.0",
     "json-server": "^1.0.0-beta.3",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "sass": "^1.96.0",
     "vite": "^7.2.4"

@@ -6,6 +6,20 @@
   overflow: hidden;
   line-height: 30px
 }
+.buttonContainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+    :first-child{
+      flex: 0 0 114px
+    }
+    :last-child{
+      flex: 1
+    }
+}
+
 
 // .cardShadow{
 //   box-shadow: 0px 4px 80px 0px rgba(178, 178, 178, 0.20);

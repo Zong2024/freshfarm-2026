@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import SectionHeader from '../SectionHeader/SectionHeader'
 
-import ProductCard from '@/components/card/ProductCard/ProductCard'
+import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
 
 const ProductSection = ({ products }) => {
 	return (
@@ -41,7 +41,7 @@ const ProductSection = ({ products }) => {
 			>
 				{products.map(product => (
 					<SwiperSlide>
-						<ProductCard
+						<SingleButtonCard
 							name={product.name}
 							description={product.description}
 							price={product.price}
