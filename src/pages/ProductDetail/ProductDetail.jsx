@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { clsx } from 'clsx'
 import styles from './ProductDetail.module.scss'
@@ -8,9 +9,22 @@ import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelect
 import tap from './assets/tap.png'
 import organic from './assets/taiwan_organic.jpg'
 import farmer from './assets/farmer.png'
+import { getProduct } from '@/services/productService'
 
 const ProductDetail = () => {
 	const [buyCount, setBuyCount] = useState(1)
+
+	const { id } = useParams()
+	const [product, setProduct] = useState({})
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			const data = await getProduct(id)
+			setProduct(data.product)
+		}
+		fetchProduct()
+	}, [id])
+
 	return (
 		<>
 			<div className="container">
@@ -54,9 +68,9 @@ const ProductDetail = () => {
 					<div className="col-12 col-lg-7 ">
 						<div className={styles.productInfo}>
 							<div>
-								<h2 className="fs-lg-1 mb-4">麻豆大白柚</h2>
+								<h2 className="fs-lg-1 mb-4">{product.title}</h2>
 								<div className={styles.textContent}>
-									<p>產地：台南麻豆</p>
+									<p>產地：{product.origin}</p>
 									<p>規格：6公斤裝 [4-6顆]</p>
 									<div className={styles.verifiedInfo}>
 										<p>檢驗報告：</p>
@@ -65,9 +79,9 @@ const ProductDetail = () => {
 									</div>
 								</div>
 								<div className="d-flex">
-									<h3 className="fs-lg-2 me-2 text-secondary-300">NT$ 950</h3>
+									<h3 className="fs-lg-2 me-2 text-secondary-300">NT${product.origin_price}</h3>
 									<span className="fs-lg-5 text-gray-300 text-decoration-line-through align-self-end">
-										NT$ 760
+										NT${product.price}
 									</span>
 								</div>
 							</div>
