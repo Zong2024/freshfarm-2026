@@ -21,7 +21,7 @@ const ProductCard = ({
 		<div className={clsx('card h-100 w-100 overflow-hidden border-0', styles.cardShadow)}>
 			<div className="position-relative">
 				<img
-					className="card-img-top object-fit-cover"
+					className={clsx('card-img-top object-fit-cover', styles.imgRatio)}
 					src={img}
 					alt=""
 					/* style={{ height: '257px' }} */

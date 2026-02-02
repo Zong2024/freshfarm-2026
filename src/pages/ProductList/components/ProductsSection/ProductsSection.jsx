@@ -36,19 +36,6 @@ const ProductsSection = () => {
 			{/*商品搜尋欄*/}
 			<div className="position-relative mb-7 mb-lg-8">
 				<SearchBar />
-				<input
-					type="text"
-					className={clsx('form-control shadow-none', styles.formControl)}
-					placeholder="搜尋商品名稱"
-				/>
-				<span
-					className={clsx(
-						'material-icons position-absolute text-primary align-bottom',
-						styles.productSearchBar
-					)}
-				>
-					search
-				</span>
 			</div>
 			{/*商品list*/}
 			<div className="row row-cols-1 row-cols-sm-2 row-cols-xxl-3 mb-8">

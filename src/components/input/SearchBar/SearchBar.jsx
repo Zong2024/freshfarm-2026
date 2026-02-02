@@ -1,8 +1,8 @@
 import { clsx } from 'clsx'
 import styles from './SearchBar.module.scss'
-const SearchBar = () => {
+const SearchBar = ({ isHome = false }) => {
 	return (
-		<div className={clsx(styles.searchBox)}>
+		<div className={clsx(styles.searchBox, isHome && styles.home)}>
 			<div className={clsx(styles.customSearchBar)}>
 				<input type="text" className={clsx(styles.searchInput)} placeholder="請輸入商品名稱…" />
 				<button type="button" className={clsx(styles.searchBtn)}>
