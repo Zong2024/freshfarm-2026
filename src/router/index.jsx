@@ -18,6 +18,10 @@ const router = createHashRouter([
 				element: <ProductList />,
 			},
 			{
+				path: 'product/:id',
+				// element: <product />,
+			},
+			{
 				path: 'checkout',
 				element: <Checkout />,
 			},
