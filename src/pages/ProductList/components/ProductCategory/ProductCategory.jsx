@@ -178,8 +178,9 @@ const ProductCategory = () => {
 			<div className="dropdown d-lg-none d-block" data-bs-auto-close="outside">
 				<NavLink
 					className={clsx(
-						'btn w-100 border-gray-200 border-2 text-gray-300 dropdown-toggle mb-4 d-flex justify-content-between align-items-clearInterval',
-						styles.dropdownToggle
+						'btn w-100 border-gray-200 text-gray-300 dropdown-toggle mb-4 d-flex justify-content-between align-items-clearInterval',
+						styles.dropdownToggle,
+						styles.navBorder
 					)}
 					to="/products"
 					role="button"
