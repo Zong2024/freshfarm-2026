@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vite.dev/config/
 export default defineConfig({
+	base: '/freshfarm-2026/',
 	plugins: [react()],
 	resolve: {
 		alias: {
