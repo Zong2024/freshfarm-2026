@@ -4,25 +4,22 @@ import SearchBar from '@/components/input/SearchBar/SearchBar'
 import TwoButtonCard from '@/components/card/ProductCard/TwoButtonCard'
 import styles from './ProductsSection.module.scss'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { getProducts } from '@/services/product.api'
 
-const API_BASE = import.meta.env.VITE_APP_API_URL
-const API_PATH = import.meta.env.VITE_APP_API_PATH
-console.log(API_BASE, API_PATH)
 const ProductsSection = () => {
 	const [products, setProducts] = useState([])
 
 	useEffect(() => {
-		const getProducts = async () => {
-			try {
-				const response = await axios.get(`${API_BASE}/api/${API_PATH}/products`)
-				console.log(response.data.products)
-				setProducts(response.data.products)
-			} catch (error) {
-				alert(error.response.data.message)
+		const getProductsApi = async () => {
+			const result = await getProducts()
+			console.log('api', result)
+			if (!result.success) {
+				alert(result.error)
+				return
 			}
+			setProducts(result.products)
 		}
-		getProducts()
+		getProductsApi()
 	}, [])
 
 	const transformProducts = products.map(({ price, origin_price, weight, unit, ...other }) => ({
