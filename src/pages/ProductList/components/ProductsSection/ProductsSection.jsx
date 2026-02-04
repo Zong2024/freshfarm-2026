@@ -1,26 +1,41 @@
-import { Link } from 'react-router-dom'
-import { clsx } from 'clsx'
 import SearchBar from '@/components/input/SearchBar/SearchBar'
 import TwoButtonCard from '@/components/card/ProductCard/TwoButtonCard'
-import styles from './ProductsSection.module.scss'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getProducts } from '@/services/product.api'
+import Pagination from '../Pagination/Pagination'
+import { postCart } from '@/services/cart.api'
 
 const ProductsSection = () => {
 	const [products, setProducts] = useState([])
+	const [pagination, setPagination] = useState({})
 
-	useEffect(() => {
-		const getProductsApi = async () => {
-			const result = await getProducts()
-			console.log('api', result)
-			if (!result.success) {
-				alert(result.error)
-				return
-			}
-			setProducts(result.products)
+	const getProductsApi = useCallback(async (page = 1) => {
+		const result = await getProducts(page)
+		//console.log(result)
+		if (!result.success) {
+			alert(result.error)
+			return
 		}
-		getProductsApi()
+		setProducts(result.products)
+		setPagination(result.pagination)
 	}, [])
+	useEffect(() => {
+		;(async () => {
+			getProductsApi()
+		})()
+	}, [])
+	const handleAddCart = async productId => {
+		const result = await postCart({
+			product_id: productId,
+			qty: 1,
+		})
+
+		if (!result.success) {
+			alert(result.error)
+			return
+		}
+		alert('已加入購物車')
+	}
 
 	const transformProducts = products.map(({ price, origin_price, weight, unit, ...other }) => ({
 		...other,
@@ -28,6 +43,7 @@ const ProductsSection = () => {
 		originPrice: Number(origin_price) !== Number(price) ? Number(origin_price) : null,
 		quantifier: `${weight}${unit}`,
 	}))
+
 	return (
 		<div className="col-lg-9">
 			{/*商品搜尋欄*/}
@@ -46,79 +62,12 @@ const ProductsSection = () => {
 							price={item.price}
 							originPrice={item.originPrice}
 							quantifier={item.quantifier}
+							onAddCart={() => handleAddCart(item.id)}
 						/>
 					</div>
 				))}
 			</div>
-			{/*分頁*/}
-			<div>
-				<nav aria-label="Page navigation example">
-					<ul className={clsx('pagination justify-content-center', styles.pagination)}>
-						<li className="page-item me-3">
-							<Link
-								className={clsx(
-									'page-link shadow-none border-0 d-flex justify-content-center',
-									styles.paginationPage,
-									styles.pageLink
-								)}
-								href="#"
-								aria-label="Previous"
-							>
-								<span className="material-icons">keyboard_arrow_left</span>
-							</Link>
-						</li>
-						<li className="page-item active me-2" aria-current="page">
-							<Link
-								className={clsx(
-									'page-link shadow-none agination rounded-circle border-0 py-1 px-2 text-center',
-									styles.paginationPage,
-									styles.pageLink
-								)}
-								href="#"
-							>
-								1
-							</Link>
-						</li>
-						<li className="page-item me-2">
-							<Link
-								className={clsx(
-									'page-link shadow-none agination rounded-circle border-0 py-1 px-2 text-center',
-									styles.paginationPage,
-									styles.pageLink
-								)}
-								href="#"
-							>
-								2
-							</Link>
-						</li>
-						<li className="page-item me-3">
-							<Link
-								className={clsx(
-									'page-link shadow-none agination rounded-circle border-0 py-1 px-2 text-center',
-									styles.paginationPage,
-									styles.pageLink
-								)}
-								href="#"
-							>
-								3
-							</Link>
-						</li>
-						<li className="page-item">
-							<Link
-								className={clsx(
-									'page-link shadow-none border-0 d-flex justify-content-center',
-									styles.paginationPage,
-									styles.pageLink
-								)}
-								href="#"
-								aria-label="Next"
-							>
-								<span className="material-icons">keyboard_arrow_right</span>
-							</Link>
-						</li>
-					</ul>
-				</nav>
-			</div>
+			<Pagination pagination={pagination} chagePage={getProductsApi} />
 		</div>
 	)
 }
