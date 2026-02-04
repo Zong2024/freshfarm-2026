@@ -65,11 +65,3 @@ thead tr th:last-child {
 	align-items: center;
 	margin: 0 auto;
 }
-
-input.form-control[type='number'] {
-	&::-webkit-outer-spin-button,
-	&::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-}
