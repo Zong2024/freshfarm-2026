@@ -90,7 +90,7 @@ const CartSection = () => {
 									<td>
 										<button
 											type="button"
-											className={`material-icons border-0 ${styles.delete}`}
+											className={`material-icons border-0 ${styles.deleteBtn}`}
 											onClick={() => handleDelete(cartItem.id)}
 										>
 											delete
