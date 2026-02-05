@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { clsx } from 'clsx'
@@ -48,24 +48,46 @@ const products = [
 	},
 ]
 
+const CAROUSEL_BREAKPOINTS = {
+	576: { slidesPerView: 2 },
+	996: { slidesPerView: 3 },
+}
+
 const ProductDetail = () => {
 	const [buyCount, setBuyCount] = useState(1)
 
 	const { id } = useParams()
 	const [product, setProduct] = useState({})
+	const [selectedImage, setSelectedImage] = useState('')
 
 	useEffect(() => {
 		;(async () => {
 			const result = await getProduct(id)
 			setProduct(result.product)
+			// 預設選中第一張圖 (主圖)
+			if (result.product?.imageUrl) {
+				setSelectedImage(result.product.imageUrl)
+			}
 		})()
 	}, [id])
+
+	// 整合所有圖片：主圖 + 附圖陣列
+	const galleryImages = useMemo(() => {
+		const imgs = []
+		if (product.imageUrl) imgs.push(product.imageUrl)
+		if (product.imagesUrl && Array.isArray(product.imagesUrl)) {
+			imgs.push(...product.imagesUrl)
+		}
+		// 過濾掉空值並去重 (選擇性)
+		return [...new Set(imgs.filter(Boolean))].slice(0, 4)
+	}, [product])
 
 	const sectionHeader = (
 		<div className="ps-4 ps-lg-6 mb-4">
 			<h3 className="my-2 fs-lg-2">商家其他商品</h3>
 		</div>
 	)
+
 	const renderProductCard = product => (
 		<SingleButtonCard
 			name={product.name}
@@ -83,37 +105,29 @@ const ProductDetail = () => {
 					<div className="col-12 col-lg-5 mb-4 mb-lg-0">
 						<div className={styles.productGallery}>
 							<div className={styles.mainImage}>
-								<img
-									src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=526&h526&auto=format"
-									alt="麻豆大白柚"
-								/>
+								<img src={selectedImage || product.imageUrl} alt={product.title} />
 							</div>
-							<div className={styles.thumbnailList}>
-								<div className={styles.thumbnail}>
-									<img
-										src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=120&h100&auto=format"
-										alt=""
-									/>
+							{/* 只有當有多張圖片時才顯示縮圖列表，或者您希望只有一張也顯示也可以 */}
+							{galleryImages.length > 0 && (
+								<div className={styles.thumbnailList}>
+									{galleryImages.map((img, index) => (
+										<div
+											key={index}
+											className={clsx(styles.thumbnail, {
+												[styles.active]: selectedImage === img,
+											})}
+											onClick={() => setSelectedImage(img)}
+											role="button"
+											tabIndex={0}
+											onKeyDown={e => {
+												if (e.key === 'Enter' || e.key === ' ') setSelectedImage(img)
+											}}
+										>
+											<img src={img} alt={`${product.title}-${index + 1}`} />
+										</div>
+									))}
 								</div>
-								<div className={styles.thumbnail}>
-									<img
-										src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=120&h100&auto=format"
-										alt=""
-									/>
-								</div>
-								<div className={styles.thumbnail}>
-									<img
-										src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=120&h100&auto=format"
-										alt=""
-									/>
-								</div>
-								<div className={styles.thumbnail}>
-									<img
-										src="https://images.unsplash.com/photo-1557800636-894a64c1696f?q=80&w=120&h100&auto=format"
-										alt=""
-									/>
-								</div>
-							</div>
+							)}
 						</div>
 					</div>
 					<div className="col-12 col-lg-7 ">
@@ -237,10 +251,7 @@ const ProductDetail = () => {
 					items={products}
 					autoplay={true}
 					header={sectionHeader}
-					breakpoints={{
-						576: { slidesPerView: 2 },
-						996: { slidesPerView: 3 },
-					}}
+					breakpoints={CAROUSEL_BREAKPOINTS}
 					renderItem={renderProductCard}
 				/>
 			</div>
