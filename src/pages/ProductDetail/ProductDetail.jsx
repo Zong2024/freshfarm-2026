@@ -224,12 +224,12 @@ const ProductDetail = () => {
 						<div className="col-12 text-center mb-7 mb-lg-8">
 							<h3 className="fs-lg-2">小農介紹</h3>
 						</div>
-						<div class="col-12 col-lg-4 align-self-center">
+						<div className="col-12 col-lg-4 align-self-center">
 							<div className={styles.farmerImage}>
 								<img src={farmer} alt="" />
 							</div>
 						</div>
-						<div class="col-12 col-lg-7">
+						<div className="col-12 col-lg-7">
 							<div className="p-4">
 								<h6 className="fs-lg-4 mb-2 text-primary-400">繼承父親四十年麻豆大白柚</h6>
 								<h5 className="fs-lg-2 mb-3 mb-lg-6">兩代草生栽培珍惜土地</h5>
