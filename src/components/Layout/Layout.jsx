@@ -3,6 +3,7 @@ import Navbar from './Navbar/Navbar'
 import Footer from './Footer/Footer'
 
 import styles from './Layout.module.scss'
+import { clsx } from 'clsx'
 const Layout = () => {
 	const location = useLocation()
 	const isHomePage = location.pathname === '/'
@@ -10,7 +11,7 @@ const Layout = () => {
 	return (
 		<>
 			<Navbar isHomePage={isHomePage} />
-			<main className={!isHomePage && styles.paddingForNavbar}>
+			<main className={clsx(!isHomePage && styles.paddingForNavbar)}>
 				<Outlet />
 			</main>
 			<Footer />
