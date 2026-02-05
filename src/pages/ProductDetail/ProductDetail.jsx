@@ -5,11 +5,48 @@ import { clsx } from 'clsx'
 import styles from './ProductDetail.module.scss'
 import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelector'
 
+import { getProduct } from '@/services/product.api'
+import CarouselSection from '@/components/CarouselSection/CarouselSection'
 //img
 import tap from './assets/tap.png'
 import organic from './assets/taiwan_organic.jpg'
 import farmer from './assets/farmer.png'
-import { getProduct } from '@/services/productService'
+import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
+
+const products = [
+	{
+		id: 1,
+		name: '嚴選大樹老欉玉荷包',
+		origin: '古樂農場',
+		description:
+			'玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等',
+		price: 729,
+		discountPrice: 683,
+		weight: 600,
+		img: 'https://github.com/Zong2024/freshfarm/blob/782bcd3365a6e7ea7dbce395488ad9591870eec8/assets/images/product/product-image-%E8%8D%94%E6%9E%9D.jpg?raw=true',
+	},
+	{
+		id: 2,
+		name: '有機綠竹筍(特級)4台',
+		origin: '農芒',
+		description:
+			'夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美',
+		price: 790,
+		discountPrice: null,
+		weight: 500,
+		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E7%B6%A0%E7%AB%B9%E7%AD%8D.jpg?raw=true',
+	},
+	{
+		id: 3,
+		name: '拉拉山洪家水蜜桃',
+		origin: '無花果農場',
+		description: '主要產於高山，果肉細緻柔嫩，香氣十足，入口即化',
+		price: 760,
+		discountPrice: 710,
+		weight: 800,
+		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E6%B0%B4%E8%9C%9C%E6%A1%83.jpg?raw=true',
+	},
+]
 
 const ProductDetail = () => {
 	const [buyCount, setBuyCount] = useState(1)
@@ -18,12 +55,26 @@ const ProductDetail = () => {
 	const [product, setProduct] = useState({})
 
 	useEffect(() => {
-		const fetchProduct = async () => {
-			const data = await getProduct(id)
-			setProduct(data.product)
-		}
-		fetchProduct()
+		;(async () => {
+			const result = await getProduct(id)
+			setProduct(result.product)
+		})()
 	}, [id])
+
+	const sectionHeader = (
+		<div className="ps-4 ps-lg-6 mb-4">
+			<h3 className="my-2 fs-lg-2">商家其他商品</h3>
+		</div>
+	)
+	const renderProductCard = product => (
+		<SingleButtonCard
+			name={product.name}
+			description={product.description}
+			price={product.price}
+			weight={product.weight}
+			img={product.img}
+		/>
+	)
 
 	return (
 		<>
@@ -166,7 +217,7 @@ const ProductDetail = () => {
 						</div>
 						<div class="col-12 col-lg-7">
 							<div className="p-4">
-								<h6 className="fs-lg-4 mb-2">繼承父親四十年麻豆大白柚</h6>
+								<h6 className="fs-lg-4 mb-2 text-primary-400">繼承父親四十年麻豆大白柚</h6>
 								<h5 className="fs-lg-2 mb-3 mb-lg-6">兩代草生栽培珍惜土地</h5>
 								<p className="fs-lg-5 mb-3 mb-lg-6">
 									出自傑出農民世家之作！佳原的大白柚，在父親勇進時代，就被當成名人、官員指定的贈客禮品，也是懂柚子的老饕，絕對指名之作，匹敵老欉文旦。40年以上的老欉樹出產的大白柚表面油胞細緻，甘、甜、酸三味與水份都充沛，果肉厚實飽滿、晶瑩多汁，辭水之後口感更為柔和、甜度高。最讓人驚喜的是，每顆大白柚還有專屬秘密編號，每一盒中都能品嚐不同果樹的風味！
@@ -178,6 +229,20 @@ const ProductDetail = () => {
 						</div>
 					</section>
 				</div>
+			</div>
+
+			<div className="bg-white">
+				<CarouselSection
+					hideNavigationButton={true}
+					items={products}
+					autoplay={true}
+					header={sectionHeader}
+					breakpoints={{
+						576: { slidesPerView: 2 },
+						996: { slidesPerView: 3 },
+					}}
+					renderItem={renderProductCard}
+				/>
 			</div>
 		</>
 	)
