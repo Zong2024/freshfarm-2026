@@ -18,7 +18,7 @@ export const getProducts = async (page = 1) => {
 }
 export const getProduct = async id => {
 	try {
-		const response = await apiClient.get(`/products/${id}`)
+		const response = await apiClient.get(`/product/${id}`)
 		return {
 			success: true,
 			product: response.data.product,
