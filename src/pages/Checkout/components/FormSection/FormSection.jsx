@@ -1,7 +1,38 @@
-const FormSection = () => {
+import { currency } from '@/utils/currency'
+
+const FormSection = ({ cart }) => {
+	const shipping = cart.total > 1000 || cart.total === 0 ? 0 : 150
+	const finalTotal = cart.total + shipping
 	return (
 		<div className="row">
 			<div className="col-lg-7">
+				{/* 配送方式 */}
+				<div className="bg-gray-50 rounded-4 p-6 mb-6">
+					<h2 className="h4 mb-4 text-primary-400">配送方式</h2>
+					<div className="form-check mb-4">
+						<input
+							className="form-check-input"
+							type="radio"
+							name="ShippingMethod"
+							id="ShippingMethod1"
+							defaultChecked
+						/>
+						<label className="form-check-label" htmlFor="ShippingMethod1">
+							低溫宅配 (運費NT$150，消費滿NT$1,000免運費)
+						</label>
+					</div>
+					<div className="form-check">
+						<input
+							className="form-check-input"
+							type="radio"
+							name="ShippingMethod"
+							id="ShippingMethod2"
+						/>
+						<label className="form-check-label" htmlFor="ShippingMethod2">
+							到店取貨
+						</label>
+					</div>
+				</div>
 				<div className="bg-gray-50 rounded-4 p-6 mb-6">
 					<h2 className="h4 mb-4 text-primary-400">收件資料</h2>
 
@@ -81,7 +112,7 @@ const FormSection = () => {
 					<h2 className="h4 mb-4 text-primary-400">付款金額</h2>
 					<div className="d-flex justify-content-between pb-2">
 						<p>商品金額</p>
-						<p className="fw-bold">NT$ 0</p>
+						<p className="fw-bold">NT$ {currency(cart.finalTotal)}</p>
 					</div>
 					<div className="d-flex justify-content-between pb-2">
 						<p>折扣碼折抵</p>
@@ -89,16 +120,16 @@ const FormSection = () => {
 					</div>
 					<div className="d-flex justify-content-between">
 						<p>運費</p>
-						<p className="fw-bold">NT$ 0</p>
+						<p className="fw-bold">NT$ {currency(shipping)}</p>
 					</div>
 					<hr />
 					<div className="d-flex align-items-center justify-content-between mb-4">
 						<p>總金額</p>
-						<p className="h3 text-secondary-300">NT$ 0</p>
+						<p className="h3 text-secondary-300">NT$ {currency(finalTotal)}</p>
 					</div>
 					<div>
 						<button className="btn btn-primary-300 text-white w-100 fw-bold d-flex align-items-center justify-content-center">
-							前往付款<span class="material-icons fs-6 ms-2">arrow_forward</span>
+							前往付款<span className="material-icons fs-6 ms-2">arrow_forward</span>
 						</button>
 					</div>
 				</div>
