@@ -1,17 +1,19 @@
 import { clsx } from 'clsx'
 import styles from './Pagination.module.scss'
 import { Link } from 'react-router-dom'
-function Pagination({ pagination, chagePage }) {
-	const isCurrentPage = pagination.current_page
+function Pagination({ pagination, changePage }) {
+	const currentPage = pagination.current_page
 	const handleClick = (e, page) => {
 		e.preventDefault()
-		chagePage(page)
+		if (page === currentPage) return
+		if (page < 1 || page > pagination.total_pages) return
+		changePage(page)
 	}
 	return (
 		<div>
 			<nav aria-label="Page navigation example">
 				<ul className={clsx('pagination justify-content-center', styles.pagination)}>
-					<li className={`page-item me-3 ${!pagination.has_pre && 'disabled'}`}>
+					<li className={clsx('page-item me-3', { disabled: !pagination.has_pre })}>
 						<Link
 							className={clsx(
 								'page-link shadow-none border-0 d-flex justify-content-center',
@@ -27,13 +29,13 @@ function Pagination({ pagination, chagePage }) {
 					</li>
 					{Array.from({ length: pagination.total_pages }, (_, index) => (
 						<li
-							className={`page-item me-2 ${isCurrentPage === index + 1 && 'active'}`}
+							className={`page-item me-2 ${currentPage === index + 1 && 'active'}`}
 							aria-current="page"
 							key={`${index}_page`}
 						>
 							<Link
 								className={clsx(
-									'page-link shadow-none agination rounded-circle border-0 py-1 px-2 text-center',
+									'page-link shadow-none pagination rounded-circle border-0 py-1 px-2 text-center',
 									styles.paginationPage,
 									styles.pageLink
 								)}
@@ -47,7 +49,8 @@ function Pagination({ pagination, chagePage }) {
 					<li className="page-item">
 						<Link
 							className={clsx(
-								`page-link shadow-none border-0 d-flex justify-content-center ${!pagination.has_next && 'disabled'}`,
+								'page-link shadow-none border-0 d-flex justify-content-center',
+								{ disabled: !pagination.has_next },
 								styles.paginationPage,
 								styles.pageLink
 							)}

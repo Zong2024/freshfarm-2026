@@ -58,6 +58,7 @@ const ProductSection = ({ products }) => {
 							img={product.img}
 							size="large"
 							showOrigin={false}
+							isHome={true}
 						/>
 					</SwiperSlide>
 				))}

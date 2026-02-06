@@ -67,7 +67,7 @@ const ProductsSection = () => {
 					</div>
 				))}
 			</div>
-			<Pagination pagination={pagination} chagePage={getProductsApi} />
+			<Pagination pagination={pagination} changePage={getProductsApi} />
 		</div>
 	)
 }

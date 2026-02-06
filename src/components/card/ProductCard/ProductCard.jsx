@@ -12,6 +12,7 @@ const ProductCard = ({
 	action,
 	size = 'normal',
 	showOrigin = true,
+	isHome = false,
 }) => {
 	const titleSizeMap = {
 		large: 'fs-lg-4',
@@ -48,14 +49,18 @@ const ProductCard = ({
 				<h5 className={clsx(' mb-2', titleSizeMap[size] || titleSizeMap.normal)}>{name}</h5>
 				<Link
 					to="/"
-					className={clsx('fs-lg-5 mb-3 text-gray-300 stretched-link', styles.textTruncate)}
+					className={clsx(
+						'mb-3 text-gray-300 stretched-link',
+						isHome ? 'fs-lg-5' : 'fs-6',
+						styles.textTruncate
+					)}
 				>
 					{description}
 				</Link>
 				<div className="mb-3">
 					<span className="fs-5 fw-bold text-secondary-300">NT$ {price}</span>
 					{/*應該使用===但這段我api會修改可以先暫時不改*/}
-					{originPrice && <del className="text-gray-300 ms-2">{originPrice}</del>}
+					{originPrice && <del className="text-gray-300 ms-2">NT$ {originPrice}</del>}
 					<span className="mx-1 text-gray-300 ">/</span>
 					<span className="text-gray-300 ">{quantifier}</span>
 				</div>
