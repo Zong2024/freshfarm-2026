@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 import styles from './QuantitySelector.module.scss'
-const QuantitySelector = ({ value = 1, max = 15, onChange }) => {
+const QuantitySelector = ({ value = 1, max = 15, onChange, isLoading = false }) => {
 	const isMinusDisabled = value <= 1
 	const isPlusDisabled = value >= max
 
@@ -24,7 +24,7 @@ const QuantitySelector = ({ value = 1, max = 15, onChange }) => {
 			<button
 				type="button"
 				onClick={() => handleUpdate(value - 1)}
-				disabled={isMinusDisabled}
+				disabled={isMinusDisabled || isLoading}
 				className="btn border-0"
 			>
 				<span
@@ -46,7 +46,7 @@ const QuantitySelector = ({ value = 1, max = 15, onChange }) => {
 			<button
 				type="button"
 				onClick={() => handleUpdate(value + 1)}
-				disabled={isPlusDisabled}
+				disabled={isPlusDisabled || isLoading}
 				className="btn border-0"
 			>
 				<span

@@ -6,6 +6,7 @@ import { getCart, putCart, deleteCart } from '@/services/cart.api'
 
 const CartSection = () => {
 	const [cartItems, setCartItems] = useState([])
+	const [loadingProductIds, setLoadingProductIds] = useState([])
 
 	useEffect(() => {
 		const fetchCart = async () => {
@@ -18,15 +19,20 @@ const CartSection = () => {
 	}, [])
 
 	const handleQuantityChange = async (cartItemId, newQty) => {
-		const result = await putCart({
-			product_id: cartItemId,
-			qty: newQty,
-		})
+		setLoadingProductIds(prev => [...prev, cartItemId])
+		try {
+			const result = await putCart({
+				product_id: cartItemId,
+				qty: newQty,
+			})
 
-		if (result.success) {
-			setCartItems(prev =>
-				prev.map(item => (item.id === cartItemId ? { ...item, qty: newQty } : item))
-			)
+			if (result.success) {
+				setCartItems(prev =>
+					prev.map(item => (item.id === cartItemId ? { ...item, qty: newQty } : item))
+				)
+			}
+		} finally {
+			setLoadingProductIds(prev => prev.filter(id => id !== cartItemId))
 		}
 	}
 
@@ -64,6 +70,7 @@ const CartSection = () => {
 					<tbody>
 						{cartItems.map(cartItem => {
 							const { product, qty } = cartItem
+							const isLoading = loadingProductIds.includes(cartItem.id)
 							return (
 								<tr key={cartItem.id}>
 									<th scope="row" className="d-flex align-items-center">
@@ -80,6 +87,7 @@ const CartSection = () => {
 										<QuantitySelector
 											value={qty}
 											onChange={newValue => handleQuantityChange(cartItem.id, newValue)}
+											isLoading={isLoading}
 										/>
 									</td>
 
