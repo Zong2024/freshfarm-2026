@@ -2,7 +2,7 @@ import { apiClient } from './api'
 
 export const getProducts = async (page = 1) => {
 	try {
-		const response = await apiClient.get('/products', page)
+		const response = await apiClient.get(`/products?page=${page}`)
 		return {
 			success: true,
 			products: response.data.products,
