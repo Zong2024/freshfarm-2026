@@ -1,0 +1,21 @@
+//商品比較(電腦表格)
+.tableSecondar50 {
+    --bs-table-bg: #F7F1E0;
+}
+.tableShadow {
+    box-shadow: 0px 4px 80px 0px rgba(178, 178, 178, 0.2);
+}
+.compareBg {
+    background-image: url(../../../assets/images/compare/compare-bg.png);
+    background-position: bottom center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+//商品比較(手機card)
+.compareMobileImg{
+    min-width: 80px;
+    min-height: 80px;
+}
+.cardShadow {
+    box-shadow: 0px 4px 80px 0px rgba(178, 178, 178, 0.2);    
+}

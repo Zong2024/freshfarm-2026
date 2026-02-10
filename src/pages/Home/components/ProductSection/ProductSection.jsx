@@ -5,6 +5,12 @@ import SectionHeader from '../SectionHeader/SectionHeader'
 import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
 
 const ProductSection = ({ products }) => {
+	const transformProducts = products.map(({ price, discountPrice, weight, unit, ...other }) => ({
+		...other,
+		price: discountPrice !== null ? discountPrice : price,
+		originPrice: discountPrice !== null ? price : null,
+		quantifier: `${weight}${unit}`,
+	}))
 	return (
 		<section className="container py-8 py-lg-11">
 			<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
@@ -39,14 +45,20 @@ const ProductSection = ({ products }) => {
 					},
 				}}
 			>
-				{products.map(product => (
+				{transformProducts.map(product => (
 					<SwiperSlide>
 						<SingleButtonCard
+							//props有點太過長有三元判斷可以拉到上面先做判斷jsx就負責傳值
 							name={product.name}
+							origin={product.origin}
 							description={product.description}
 							price={product.price}
-							weight={product.weight}
+							originPrice={product.originPrice}
+							quantifier={product.quantifier}
 							img={product.img}
+							size="large"
+							showOrigin={false}
+							isHome={true}
 						/>
 					</SwiperSlide>
 				))}

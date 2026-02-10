@@ -1,30 +1,38 @@
 @import '@/assets/scss/helpers';
 
 .searchBox{
-  @include large{
-    width: 450px;
+  width: 100%;
+
+  &.home{
+    @include large{
+      width: 450px;
+    }
   }
+  
   .customSearchBar{
     display: flex;
     align-items: center;
     background-color: $white;
     border-radius: 8px;
-    padding: 20px 16px;
+    padding: 16px 16px;
     gap: 8px;
-    border: 1px solid transparent;
+    border: 1.6px solid $gray-200;
     transition: all 0.2s ease;
 
     &:focus-within{
-      border-color: $primary-400;
+      border: 1px solid $primary-400;
     }
     .searchInput{
       flex: 1;
       border: none;
       background: transparent;
       outline: none;
-      font-size: 20px;
-      line-height: 32px;
+      font-size: 16px;
+      line-height: 24px;
 
+      &:focus::placeholder{
+        color: $black;;
+      }
       &::placeholder{
         color: $gray-300;
       }
@@ -35,7 +43,6 @@
       justify-content: center;
       background: none;
       border: none;
-      padding: 4px;
 
       .searchBtnIcon {
         font-size: 24px;
@@ -43,5 +50,15 @@
       }
     }
   }
+  &.home {
+    .customSearchBar {
+      padding: 20px 16px;
+      border: 1px solid transparent;
 
+      .searchInput {
+        font-size: 20px;
+        line-height: 32px;
+      }
+    }
+  }
 }

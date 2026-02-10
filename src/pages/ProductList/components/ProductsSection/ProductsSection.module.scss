@@ -1,0 +1,12 @@
+@import '@/assets/scss/helpers';
+//搜尋欄
+.productSearchBar{
+    top: 16px;
+    right: 12px;
+}
+.formControl{
+    &:focus{
+        border-color: $primary;
+        color: $black;
+    }
+}
