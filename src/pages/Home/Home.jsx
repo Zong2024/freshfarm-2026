@@ -51,7 +51,6 @@ const Home = () => {
 				const res = await getProducts()
 				if (res.success && res.products) {
 					setProducts(res.products.slice(0, 5))
-					console.log(res.products.slice(0, 5))
 				} else {
 					console.error('API error', res.error)
 				}
