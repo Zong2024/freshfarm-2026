@@ -1,0 +1,21 @@
+@import '@/assets/scss/helpers';
+//分頁
+.pagination{
+    .paginationPage {
+        width: 32px;
+    }
+    .active .pageLink {
+        color: $white;
+    }
+    .pageLink{
+        color: $black;
+        &:hover {
+            background-color: $primary-100;
+            color: $primary;
+        }
+        &:active, &:focus {
+            background-color: $primary-300;
+            color: $white;
+        }
+    }
+}

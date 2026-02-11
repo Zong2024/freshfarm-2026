@@ -1,7 +1,7 @@
 import { createHashRouter } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
 import Home from '../pages/Home/Home'
-import ProductList from '../pages/ProductList'
+import ProductList from '../pages/ProductList/ProductList'
 import Checkout from '../pages/Checkout/Checkout'
 import ProductDetail from '@/pages/ProductDetail/ProductDetail'
 

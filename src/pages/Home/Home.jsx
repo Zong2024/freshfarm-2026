@@ -50,6 +50,7 @@ const products = [
 		price: 729,
 		discountPrice: 683,
 		weight: 600,
+		unit: 'g',
 		img: 'https://github.com/Zong2024/freshfarm/blob/782bcd3365a6e7ea7dbce395488ad9591870eec8/assets/images/product/product-image-%E8%8D%94%E6%9E%9D.jpg?raw=true',
 	},
 	{
@@ -61,6 +62,7 @@ const products = [
 		price: 790,
 		discountPrice: null,
 		weight: 500,
+		unit: 'g',
 		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E7%B6%A0%E7%AB%B9%E7%AD%8D.jpg?raw=true',
 	},
 	{
@@ -71,6 +73,7 @@ const products = [
 		price: 760,
 		discountPrice: 710,
 		weight: 800,
+		unit: 'g',
 		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E6%B0%B4%E8%9C%9C%E6%A1%83.jpg?raw=true',
 	},
 ]

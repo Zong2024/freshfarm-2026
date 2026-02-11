@@ -29,7 +29,7 @@ const HeroSwiper = ({ banners }) => {
 							<h4 className="fs-lg-1 text-white mb-3  mb-lg-4">{banner.title}</h4>
 						</div>
 						<h5 className="fs-lg-2 text-white mb-6 mb-lg-8">{banner.subtitle}</h5>
-						<SearchBar />
+						<SearchBar isHome={true} />
 					</div>
 					<div className={clsx(styles.wave)}></div>
 				</SwiperSlide>
