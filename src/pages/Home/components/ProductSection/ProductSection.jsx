@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import { Navigation, Autoplay } from 'swiper/modules'
 import SectionHeader from '../SectionHeader/SectionHeader'
 
 import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
@@ -33,7 +33,12 @@ const ProductSection = ({ products, isLoading }) => {
 				</div>
 			) : (
 				<Swiper
-					modules={[Navigation]}
+					modules={[Navigation, Autoplay]}
+					loop={true}
+					autoplay={{
+						delay: 3000,
+						disableOnInteraction: false,
+					}}
 					spaceBetween={24}
 					slidesPerView={1.2}
 					navigation={{
