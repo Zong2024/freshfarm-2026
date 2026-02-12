@@ -16,12 +16,12 @@ const FormSection = ({ cart }) => {
 		shouldUnregister: true,
 		defaultValues: {
 			shippingMethod: 'delivery',
-			name: '林奕萱',
-			tel: '0974021642',
-			email: 'wwer8123@gmail.com',
+			name: '',
+			tel: '',
+			email: '',
 			city: '台北市',
 			district: '大安區',
-			address: '新生南路二段1號',
+			address: '',
 			postalCode: '106',
 		},
 	})
