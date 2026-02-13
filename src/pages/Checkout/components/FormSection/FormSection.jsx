@@ -2,14 +2,18 @@ import { useState, useEffect } from 'react'
 import { currency } from '@/utils/currency'
 import { useForm, Controller, useWatch } from 'react-hook-form'
 import { twData } from '@/constants/twData'
+import { useCart } from '@/context/cartContext'
+import btnStyles from '@/components/button/Button.module.scss'
+import { clsx } from 'clsx'
 
-const FormSection = ({ cart }) => {
-	const isCartEmpty = cart.carts.length === 0
+const FormSection = () => {
+	const { cart, total, finalTotal } = useCart()
+	const isCartEmpty = cart.length === 0
 
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isValid },
+		formState: { errors },
 		control,
 		setValue,
 	} = useForm({
@@ -32,8 +36,7 @@ const FormSection = ({ cart }) => {
 		name: 'shippingMethod',
 	})
 
-	const shipping = shippingMethod === 'pickup' ? 0 : cart.total > 1000 || cart.total === 0 ? 0 : 150
-	const finalTotal = cart.total + shipping
+	const shipping = shippingMethod === 'pickup' ? 0 : total > 1000 || total === 0 ? 0 : 150
 
 	useEffect(() => {
 		if (shippingMethod === 'pickup') {
@@ -49,6 +52,8 @@ const FormSection = ({ cart }) => {
 	const onSubmit = data => {
 		console.log('表單資料：', data)
 	}
+
+	if (isCartEmpty) return null
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -95,7 +100,7 @@ const FormSection = ({ cart }) => {
 									id="name"
 									placeholder="姓名"
 									{...register('name', {
-										required: '請輸入姓名',
+										required: '請輸入收件人姓名',
 										minLength: { value: 2, message: '姓名至少 2 個字' },
 									})}
 								/>
@@ -113,11 +118,12 @@ const FormSection = ({ cart }) => {
 									id="cellNumber"
 									placeholder="0912345678"
 									{...register('tel', {
-										required: '請輸入收件人電話',
-										minLength: { value: 8, message: '電話至少 8 碼' },
+										required: '請輸入手機號碼',
+										minLength: { value: 10, message: '手機號碼為10碼' },
+										maxLength: { value: 10, message: '手機號碼為10碼' },
 										pattern: {
-											value: /^\d+$/,
-											message: '電話僅能輸入數字',
+											value: /^09\d{8}$/,
+											message: '請輸入正確的手機號碼',
 										},
 									})}
 								/>
@@ -136,10 +142,10 @@ const FormSection = ({ cart }) => {
 								id="mail"
 								placeholder="aaa@gmail.com"
 								{...register('email', {
-									required: '請輸入 Email',
+									required: '請輸入電子郵件',
 									pattern: {
 										value: /^\S+@\S+$/i,
-										message: 'Email 格式不正確',
+										message: '電子郵件格式不正確',
 									},
 								})}
 							/>
@@ -252,7 +258,7 @@ const FormSection = ({ cart }) => {
 										type="text"
 										className="form-control"
 										id="postalCode"
-										defaultValue="106"
+										placeholder="106"
 										{...register('postalCode', {
 											required: '請輸入郵遞區號',
 											pattern: {
@@ -273,7 +279,7 @@ const FormSection = ({ cart }) => {
 						<h2 className="h4 mb-4 text-primary-400">折扣碼</h2>
 						<div className="d-flex">
 							<input type="text" className="form-control me-4" placeholder="請輸入折扣代碼" />
-							<button className="btn btn-primary-300 text-white text-nowrap fw-bold px-6">
+							<button type="button" className="btn py-4 px-6 text-nowrap _cartButton_kf050_1">
 								使用
 							</button>
 						</div>
@@ -282,7 +288,7 @@ const FormSection = ({ cart }) => {
 						<h2 className="h4 mb-4 text-primary-400">付款金額</h2>
 						<div className="d-flex justify-content-between pb-2">
 							<p>商品金額</p>
-							<p className="fw-bold">NT$ {currency(cart.finalTotal)}</p>
+							<p className="fw-bold">NT$ {currency(finalTotal)}</p>
 						</div>
 						<div className="d-flex justify-content-between pb-2">
 							<p>折扣碼折抵</p>
@@ -295,13 +301,15 @@ const FormSection = ({ cart }) => {
 						<hr />
 						<div className="d-flex align-items-center justify-content-between mb-4">
 							<p>總金額</p>
-							<p className="h3 text-secondary-300">NT$ {currency(finalTotal)}</p>
+							<p className="h3 text-secondary-300">NT$ {currency(finalTotal + shipping)}</p>
 						</div>
 						<div>
 							<button
 								type="submit"
-								className="btn btn-primary-300 text-white w-100 fw-bold d-flex align-items-center justify-content-center"
-								disabled={!isValid || isCartEmpty}
+								className={clsx(
+									'btn w-100 fw-bold d-flex align-items-center justify-content-center',
+									btnStyles.cartButton
+								)}
 							>
 								前往付款<span className="material-icons fs-6 ms-2">arrow_forward</span>
 							</button>
