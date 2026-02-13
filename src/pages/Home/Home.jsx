@@ -1,14 +1,14 @@
 import 'swiper/css'
 import CategorySection from './components/CategorySection/CategorySection'
 import HeroSwiper from './components/HeroSwiper/HeroSwiper'
-import CarouselSection from '@/components/CarouselSection/CarouselSection'
-import SectionHeader from './components/SectionHeader/SectionHeader'
-import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
 import { HOME_IMAGES } from '../../constants/images'
 import StorySection from './components/StorySection/StorySection'
 import BrandFeaturesSection from './components/BrandFeaturesSection/BrandFeaturesSection'
 import { getProducts } from '@/services/product.api'
 import { useEffect, useState } from 'react'
+import SectionHeader from './components/SectionHeader/SectionHeader'
+import CarouselSection from '@/components/CarouselSection/CarouselSection'
+import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
 const banners = [
 	{
 		id: 1,

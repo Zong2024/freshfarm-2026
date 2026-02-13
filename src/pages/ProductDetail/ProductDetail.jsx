@@ -5,48 +5,13 @@ import { clsx } from 'clsx'
 import styles from './ProductDetail.module.scss'
 import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelector'
 
-import { getProduct } from '@/services/product.api'
+import { getProduct, getProducts } from '@/services/product.api'
 import CarouselSection from '@/components/CarouselSection/CarouselSection'
 //img
 import tap from './assets/tap.png'
 import organic from './assets/taiwan_organic.jpg'
 import farmer from './assets/farmer.png'
 import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
-
-const products = [
-	{
-		id: 1,
-		name: '嚴選大樹老欉玉荷包',
-		origin: '古樂農場',
-		description:
-			'玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等',
-		price: 729,
-		discountPrice: 683,
-		weight: 600,
-		img: 'https://github.com/Zong2024/freshfarm/blob/782bcd3365a6e7ea7dbce395488ad9591870eec8/assets/images/product/product-image-%E8%8D%94%E6%9E%9D.jpg?raw=true',
-	},
-	{
-		id: 2,
-		name: '有機綠竹筍(特級)4台',
-		origin: '農芒',
-		description:
-			'夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美',
-		price: 790,
-		discountPrice: null,
-		weight: 500,
-		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E7%B6%A0%E7%AB%B9%E7%AD%8D.jpg?raw=true',
-	},
-	{
-		id: 3,
-		name: '拉拉山洪家水蜜桃',
-		origin: '無花果農場',
-		description: '主要產於高山，果肉細緻柔嫩，香氣十足，入口即化',
-		price: 760,
-		discountPrice: 710,
-		weight: 800,
-		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E6%B0%B4%E8%9C%9C%E6%A1%83.jpg?raw=true',
-	},
-]
 
 const CAROUSEL_BREAKPOINTS = {
 	576: { slidesPerView: 2 },
@@ -59,17 +24,44 @@ const ProductDetail = () => {
 	const { id } = useParams()
 	const [product, setProduct] = useState({})
 	const [selectedImage, setSelectedImage] = useState('')
+	const [products, setProducts] = useState([])
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
-		;(async () => {
-			const result = await getProduct(id)
-			setProduct(result.product)
-			// 預設選中第一張圖 (主圖)
-			if (result.product?.imageUrl) {
-				setSelectedImage(result.product.imageUrl)
+		const fetchData = async () => {
+			setIsLoading(true)
+			try {
+				const result = await getProduct(id)
+				if (result.success && result.product) {
+					setProduct(result.product)
+					if (result.product.imageUrl) {
+						setSelectedImage(result.product.imageUrl)
+					}
+				}
+			} catch (error) {
+				console.error('取得產品失敗', error)
+			} finally {
+				setIsLoading(false)
 			}
-		})()
+		}
+		fetchData()
 	}, [id])
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			try {
+				const res = await getProducts()
+				if (res.success && res.products) {
+					setProducts(res.products.slice(0, 5))
+				} else {
+					console.error('API error', res.error)
+				}
+			} catch (error) {
+				console.error('讀取商品錯誤', error)
+			}
+		}
+		fetchProducts()
+	}, [])
 
 	// 整合所有圖片：主圖 + 附圖陣列
 	const galleryImages = useMemo(() => {
@@ -78,7 +70,6 @@ const ProductDetail = () => {
 		if (product.imagesUrl && Array.isArray(product.imagesUrl)) {
 			imgs.push(...product.imagesUrl)
 		}
-		// 過濾掉空值並去重 (選擇性)
 		return [...new Set(imgs.filter(Boolean))].slice(0, 4)
 	}, [product])
 
@@ -88,15 +79,20 @@ const ProductDetail = () => {
 		</div>
 	)
 
-	const renderProductCard = product => (
-		<SingleButtonCard
-			name={product.name}
-			description={product.description}
-			price={product.price}
-			weight={product.weight}
-			img={product.img}
-		/>
-	)
+	const renderProductCard = product => <SingleButtonCard {...product} />
+
+	if (isLoading) {
+		return (
+			<div
+				className="d-flex justify-content-center align-items-center"
+				style={{ minHeight: '400px' }}
+			>
+				<div className="spinner-border text-primary" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</div>
+			</div>
+		)
+	}
 
 	return (
 		<>
@@ -107,7 +103,6 @@ const ProductDetail = () => {
 							<div className={styles.mainImage}>
 								<img src={selectedImage || product.imageUrl} alt={product.title} />
 							</div>
-							{/* 只有當有多張圖片時才顯示縮圖列表，或者您希望只有一張也顯示也可以 */}
 							{galleryImages.length > 0 && (
 								<div className={styles.thumbnailList}>
 									{galleryImages.map((img, index) => (
@@ -144,10 +139,12 @@ const ProductDetail = () => {
 									</div>
 								</div>
 								<div className="d-flex">
-									<h3 className="fs-lg-2 me-2 text-secondary-300">NT${product.origin_price}</h3>
-									<span className="fs-lg-5 text-gray-300 text-decoration-line-through align-self-end">
-										NT${product.price}
-									</span>
+									<h3 className="fs-lg-2 me-2 text-secondary-300">NT${product.price}</h3>
+									{product.origin_price && product.origin_price !== product.price && (
+										<span className="fs-lg-5 text-gray-300 text-decoration-line-through align-self-end">
+											NT${product.origin_price}
+										</span>
+									)}
 								</div>
 							</div>
 
