@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
 import styles from './ProductCard.module.scss'
 const ProductCard = ({
-	name,
-	origin,
+	title,
 	description,
 	price,
-	originPrice,
-	img,
-	quantifier,
+	origin_price: originPrice,
+	imageUrl,
+	weight,
+	unit,
+	origin,
 	action,
 	size = 'normal',
 	showOrigin = true,
@@ -18,12 +19,13 @@ const ProductCard = ({
 		large: 'fs-lg-4',
 		normal: 'fs-lg-5',
 	}
+
 	return (
 		<div className={clsx('card h-100 w-100 overflow-hidden border-0', styles.cardShadow)}>
 			<div className="position-relative">
 				<img
 					className={clsx('card-img-top object-fit-cover', styles.imgRatio)}
-					src={img}
+					src={imageUrl}
 					alt=""
 					/* style={{ height: '257px' }} */
 				/>
@@ -46,7 +48,7 @@ const ProductCard = ({
 			</div>
 			<div className="card-body bg-white d-flex flex-column">
 				{showOrigin && origin && <h6 className="text-primary-400 mb-1">{origin}</h6>}
-				<h5 className={clsx(' mb-2', titleSizeMap[size] || titleSizeMap.normal)}>{name}</h5>
+				<h5 className={clsx(' mb-2', titleSizeMap[size] || titleSizeMap.normal)}>{title}</h5>
 				<Link
 					to="/"
 					className={clsx(
@@ -59,10 +61,11 @@ const ProductCard = ({
 				</Link>
 				<div className="mb-3">
 					<span className="fs-5 fw-bold text-secondary-300">NT$ {price}</span>
-					{/*應該使用===但這段我api會修改可以先暫時不改*/}
-					{originPrice && <del className="text-gray-300 ms-2">NT$ {originPrice}</del>}
+					{originPrice && originPrice !== price && (
+						<del className="text-gray-300 ms-2">NT$ {originPrice}</del>
+					)}
 					<span className="mx-1 text-gray-300 ">/</span>
-					<span className="text-gray-300 ">{quantifier}</span>
+					<span className="text-gray-300 ">{weight && unit && `${weight}${unit}`}</span>
 				</div>
 				<>{action}</>
 			</div>

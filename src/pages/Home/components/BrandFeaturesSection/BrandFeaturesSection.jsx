@@ -40,7 +40,7 @@ const BrandFeaturesSection = () => {
 				</div>
 				<div className={styles.cardContainer}>
 					{featureCardInfo.map(item => (
-						<FeatureCard img={item.img} title={item.title} content={item.content} />
+						<FeatureCard key={item.id} img={item.img} title={item.title} content={item.content} />
 					))}
 				</div>
 			</div>

@@ -4,8 +4,10 @@ import { Navigation, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 
 import { clsx } from 'clsx'
+import SkeletonCard from '../card/SkeletonCard/SkeletonCard'
 
 const CarouselSection = ({
+	isLoading,
 	hideNavigationButton = false,
 	items = [],
 	renderItem,
@@ -14,7 +16,6 @@ const CarouselSection = ({
 	spaceBetween = 24,
 	slidesPerView = 1.2,
 	className,
-	// 預設斷點設置，可從外部覆蓋
 	breakpoints = {
 		576: { slidesPerView: 1.2 },
 		996: { slidesPerView: 3 },
@@ -56,39 +57,49 @@ const CarouselSection = ({
 			</div>
 
 			{/* Swiper 本體 */}
-			<Swiper
-				modules={[Navigation, Autoplay]}
-				spaceBetween={spaceBetween}
-				slidesPerView={slidesPerView}
-				onBeforeInit={swiper => {
-					// 透過 onBeforeInit 將 ref 注入 swiper 參數
-					if (typeof swiper.params.navigation !== 'boolean') {
-						swiper.params.navigation.prevEl = prevRef.current
-						swiper.params.navigation.nextEl = nextRef.current
-					}
-				}}
-				navigation={true}
-				autoplay={
-					autoplay
-						? typeof autoplay === 'object'
-							? autoplay
-							: { delay: 3000, disableOnInteraction: false }
-						: false
-				}
-				breakpoints={breakpoints}
-			>
-				{items.map((item, index) => (
-					<SwiperSlide key={item.id || index} className="h-auto">
-						<div className="w-100">
-							{renderItem ? (
-								renderItem(item)
-							) : (
-								<img src={item} alt={`slide-${index}`} className="img-fluid" />
-							)}
+			{isLoading ? (
+				<div className="row flex-nowrap overflow-hidden">
+					{[...Array(4)].map((_, index) => (
+						<div key={index} className="col-10 col-md-4 col-lg-4" style={{ flex: '0 0 auto' }}>
+							<SkeletonCard />
 						</div>
-					</SwiperSlide>
-				))}
-			</Swiper>
+					))}
+				</div>
+			) : (
+				<Swiper
+					modules={[Navigation, Autoplay]}
+					loop={true}
+					spaceBetween={spaceBetween}
+					slidesPerView={slidesPerView}
+					onBeforeInit={swiper => {
+						if (typeof swiper.params.navigation !== 'boolean') {
+							swiper.params.navigation.prevEl = prevRef.current
+							swiper.params.navigation.nextEl = nextRef.current
+						}
+					}}
+					navigation={true}
+					autoplay={
+						autoplay
+							? typeof autoplay === 'object'
+								? autoplay
+								: { delay: 3000, disableOnInteraction: false }
+							: false
+					}
+					breakpoints={breakpoints}
+				>
+					{items.map((item, index) => (
+						<SwiperSlide key={item.id || index} className="h-auto">
+							<div className="w-100">
+								{renderItem ? (
+									renderItem(item)
+								) : (
+									<img src={item} alt={`slide-${index}`} className="img-fluid" />
+								)}
+							</div>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			)}
 		</section>
 	)
 }

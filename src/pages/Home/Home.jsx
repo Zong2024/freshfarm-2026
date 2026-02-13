@@ -7,7 +7,8 @@ import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
 import { HOME_IMAGES } from '../../constants/images'
 import StorySection from './components/StorySection/StorySection'
 import BrandFeaturesSection from './components/BrandFeaturesSection/BrandFeaturesSection'
-
+import { getProducts } from '@/services/product.api'
+import { useEffect, useState } from 'react'
 const banners = [
 	{
 		id: 1,
@@ -40,64 +41,57 @@ const banners = [
 		},
 	},
 ]
-const products = [
-	{
-		id: 1,
-		name: '嚴選大樹老欉玉荷包',
-		origin: '古樂農場',
-		description:
-			'玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等玉荷包、黑葉等品種在夏季上市，果肉Q彈甜中帶酸，風玉荷包、黑葉等',
-		price: 729,
-		discountPrice: 683,
-		weight: 600,
-		unit: 'g',
-		img: 'https://github.com/Zong2024/freshfarm/blob/782bcd3365a6e7ea7dbce395488ad9591870eec8/assets/images/product/product-image-%E8%8D%94%E6%9E%9D.jpg?raw=true',
-	},
-	{
-		id: 2,
-		name: '有機綠竹筍(特級)4台',
-		origin: '農芒',
-		description:
-			'夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美夏季是綠竹筍的產季口感清甜、脆嫩無論涼拌、煮湯都美',
-		price: 790,
-		discountPrice: null,
-		weight: 500,
-		unit: 'g',
-		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E7%B6%A0%E7%AB%B9%E7%AD%8D.jpg?raw=true',
-	},
-	{
-		id: 3,
-		name: '拉拉山洪家水蜜桃',
-		origin: '無花果農場',
-		description: '主要產於高山，果肉細緻柔嫩，香氣十足，入口即化',
-		price: 760,
-		discountPrice: 710,
-		weight: 800,
-		unit: 'g',
-		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E6%B0%B4%E8%9C%9C%E6%A1%83.jpg?raw=true',
-	},
-]
-const sectionHeader = (
-	<SectionHeader
-		badge="時令直送"
-		title="當季限定  強力推薦"
-		subtitle="支持在地，享受最新鮮的台灣味"
-	/>
-)
-const renderProductCard = product => (
-	<SingleButtonCard
-		name={product.name}
-		description={product.description}
-		price={product.price}
-		weight={product.weight}
-		img={product.img}
-	/>
-)
 const Home = () => {
+	const [products, setProducts] = useState([])
+	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			setIsLoading(true)
+			try {
+				const res = await getProducts()
+				if (res.success && res.products) {
+					setProducts(res.products.slice(0, 5))
+				} else {
+					console.error('API error', res.error)
+				}
+			} catch (error) {
+				console.error('讀取商品錯誤', error)
+			} finally {
+				setIsLoading(false)
+			}
+		}
+		fetchProducts()
+	}, [])
+
+	const productHeader = (
+		<SectionHeader
+			badge="時令直送"
+			title="當季限定  強力推薦"
+			subtitle="支持在地，享受最新鮮的台灣味"
+		/>
+	)
+	const renderProductCard = product => (
+		<SingleButtonCard
+			title={product.title}
+			description={product.description}
+			price={product.price}
+			weight={product.weight}
+			unit={product.unit}
+			imageUrl={product.imageUrl}
+		/>
+	)
+
 	return (
 		<main>
 			<HeroSwiper banners={banners} />
-			<CarouselSection items={products} header={sectionHeader} renderItem={renderProductCard} />
+			<CarouselSection
+				header={productHeader}
+				isLoading={isLoading}
+				items={products}
+				autoplay={true}
+				renderItem={renderProductCard}
+			/>
 			<CategorySection />
 			<StorySection />
 			<BrandFeaturesSection />
