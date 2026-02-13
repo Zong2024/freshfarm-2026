@@ -1,21 +1,13 @@
 import SearchBar from '@/components/input/SearchBar/SearchBar'
 import TwoButtonCard from '@/components/card/ProductCard/TwoButtonCard'
-import { postCart } from '@/services/cart.api'
 import Pagination from '../Pagination/Pagination'
+import { useCart } from '@/context/cartContext'
 import SkeletonCard from '@/components/card/SkeletonCard/SkeletonCard'
 
 const ProductsSection = ({ products, pagination, changePage, isLoading }) => {
+	const { addToCart } = useCart()
 	const handleAddCart = async productId => {
-		const result = await postCart({
-			product_id: productId,
-			qty: 1,
-		})
-
-		if (!result.success) {
-			alert(result.error)
-			return
-		}
-		alert('已加入購物車')
+		await addToCart(productId, 1)
 	}
 
 	return (
