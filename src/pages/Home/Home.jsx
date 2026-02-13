@@ -1,7 +1,9 @@
 import 'swiper/css'
 import CategorySection from './components/CategorySection/CategorySection'
 import HeroSwiper from './components/HeroSwiper/HeroSwiper'
-import ProductSection from './components/ProductSection/ProductSection'
+import CarouselSection from '@/components/CarouselSection/CarouselSection'
+import SectionHeader from './components/SectionHeader/SectionHeader'
+import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
 import { HOME_IMAGES } from '../../constants/images'
 import StorySection from './components/StorySection/StorySection'
 import BrandFeaturesSection from './components/BrandFeaturesSection/BrandFeaturesSection'
@@ -39,11 +41,10 @@ const banners = [
 		},
 	},
 ]
-
 const Home = () => {
 	const [products, setProducts] = useState([])
-
 	const [isLoading, setIsLoading] = useState(false)
+
 	useEffect(() => {
 		const fetchProducts = async () => {
 			setIsLoading(true)
@@ -62,10 +63,35 @@ const Home = () => {
 		}
 		fetchProducts()
 	}, [])
+
+	const productHeader = (
+		<SectionHeader
+			badge="時令直送"
+			title="當季限定  強力推薦"
+			subtitle="支持在地，享受最新鮮的台灣味"
+		/>
+	)
+	const renderProductCard = product => (
+		<SingleButtonCard
+			title={product.title}
+			description={product.description}
+			price={product.price}
+			weight={product.weight}
+			unit={product.unit}
+			imageUrl={product.imageUrl}
+		/>
+	)
+
 	return (
 		<main>
 			<HeroSwiper banners={banners} />
-			<ProductSection products={products} isLoading={isLoading} />
+			<CarouselSection
+				header={productHeader}
+				isLoading={isLoading}
+				items={products}
+				autoplay={true}
+				renderItem={renderProductCard}
+			/>
 			<CategorySection />
 			<StorySection />
 			<BrandFeaturesSection />
