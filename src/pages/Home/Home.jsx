@@ -1,13 +1,10 @@
 import 'swiper/css'
 import CategorySection from './components/CategorySection/CategorySection'
 import HeroSwiper from './components/HeroSwiper/HeroSwiper'
-import CarouselSection from '@/components/CarouselSection/CarouselSection'
-import SectionHeader from './components/SectionHeader/SectionHeader'
-import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
+import ProductSection from './components/ProductSection/ProductSection'
 import { HOME_IMAGES } from '../../constants/images'
 import StorySection from './components/StorySection/StorySection'
 import BrandFeaturesSection from './components/BrandFeaturesSection/BrandFeaturesSection'
-
 const banners = [
 	{
 		id: 1,
@@ -77,27 +74,11 @@ const products = [
 		img: 'https://github.com/Zong2024/freshfarm/blob/master/assets/images/product/product-image-%E6%B0%B4%E8%9C%9C%E6%A1%83.jpg?raw=true',
 	},
 ]
-const sectionHeader = (
-	<SectionHeader
-		badge="時令直送"
-		title="當季限定  強力推薦"
-		subtitle="支持在地，享受最新鮮的台灣味"
-	/>
-)
-const renderProductCard = product => (
-	<SingleButtonCard
-		name={product.name}
-		description={product.description}
-		price={product.price}
-		weight={product.weight}
-		img={product.img}
-	/>
-)
 const Home = () => {
 	return (
 		<main>
 			<HeroSwiper banners={banners} />
-			<CarouselSection items={products} header={sectionHeader} renderItem={renderProductCard} />
+			<ProductSection products={products} />
 			<CategorySection />
 			<StorySection />
 			<BrandFeaturesSection />

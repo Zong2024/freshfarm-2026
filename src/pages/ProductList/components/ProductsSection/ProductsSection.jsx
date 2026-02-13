@@ -3,12 +3,11 @@ import TwoButtonCard from '@/components/card/ProductCard/TwoButtonCard'
 import { useCallback, useEffect, useState } from 'react'
 import { getProducts } from '@/services/product.api'
 import Pagination from '../Pagination/Pagination'
-import { useCart } from '@/context/cartContext'
+import { postCart } from '@/services/cart.api'
 
 const ProductsSection = () => {
 	const [products, setProducts] = useState([])
 	const [pagination, setPagination] = useState({})
-	const { addToCart } = useCart()
 
 	const getProductsApi = useCallback(async (page = 1) => {
 		const result = await getProducts(page)
@@ -26,7 +25,16 @@ const ProductsSection = () => {
 		})()
 	}, [])
 	const handleAddCart = async productId => {
-		await addToCart(productId, 1)
+		const result = await postCart({
+			product_id: productId,
+			qty: 1,
+		})
+
+		if (!result.success) {
+			alert(result.error)
+			return
+		}
+		alert('已加入購物車')
 	}
 
 	const transformProducts = products.map(({ price, origin_price, weight, unit, ...other }) => ({
