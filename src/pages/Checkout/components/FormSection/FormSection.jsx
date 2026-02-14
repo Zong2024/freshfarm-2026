@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { currency } from '@/utils/currency'
 import { useForm, Controller, useWatch } from 'react-hook-form'
 import { twData } from '@/constants/twData'
+import { postalCodeData } from '@/constants/postalCodeData'
 import { useCart } from '@/context/cartContext'
 import btnStyles from '@/components/button/Button.module.scss'
 import { clsx } from 'clsx'
@@ -16,6 +17,7 @@ const FormSection = () => {
 		formState: { errors },
 		control,
 		setValue,
+		clearErrors,
 	} = useForm({
 		mode: 'onBlur',
 		shouldUnregister: true,
@@ -36,18 +38,26 @@ const FormSection = () => {
 		name: 'shippingMethod',
 	})
 
+	const city = useWatch({ control, name: 'city' })
+	const district = useWatch({ control, name: 'district' })
 	const shipping = shippingMethod === 'pickup' ? 0 : total > 1000 || total === 0 ? 0 : 150
 
 	useEffect(() => {
 		if (shippingMethod === 'pickup') {
+			// 清空表單
 			setValue('city', '')
 			setValue('district', '')
 			setValue('address', '')
 			setValue('postalCode', '')
+			clearErrors(['city', 'district', 'address', 'postalCode'])
+		} else if (shippingMethod === 'delivery' && city && district) {
+			// 宅配時，選縣市+區域自動帶郵遞區號
+			const code = postalCodeData[city]?.[district] || ''
+			setValue('postalCode', code)
 		}
-	}, [shippingMethod, setValue])
+	}, [shippingMethod, city, district, setValue, clearErrors])
 
-	const [districtOptions, setDistrictOptions] = useState(twData['台北市'])
+	const [districtOptions, setDistrictOptions] = useState([])
 
 	const onSubmit = data => {
 		console.log('表單資料：', data)
@@ -66,6 +76,7 @@ const FormSection = () => {
 							<input
 								className="form-check-input"
 								type="radio"
+								id="ShippingMethod1"
 								value="delivery"
 								{...register('shippingMethod')}
 							/>
@@ -77,6 +88,7 @@ const FormSection = () => {
 							<input
 								className="form-check-input"
 								type="radio"
+								id="ShippingMethod2"
 								value="pickup"
 								{...register('shippingMethod')}
 							/>
@@ -163,6 +175,7 @@ const FormSection = () => {
 											<Controller
 												name="city"
 												control={control}
+												rules={{ required: '請選擇縣市' }}
 												render={({ field }) => (
 													<div className="dropdown w-100">
 														<button
@@ -258,16 +271,9 @@ const FormSection = () => {
 										type="text"
 										className="form-control"
 										id="postalCode"
-										placeholder="106"
-										{...register('postalCode', {
-											required: '請輸入郵遞區號',
-											pattern: {
-												value: /^\d+$/,
-												message: '郵遞區號只能是數字',
-											},
-										})}
+										readOnly
+										{...register('postalCode')}
 									/>
-									{errors.postalCode && <p className="text-danger">{errors.postalCode.message}</p>}
 								</div>
 							</>
 						)}

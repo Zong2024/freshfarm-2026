@@ -38,9 +38,9 @@ const CartSection = () => {
 							</th>
 						</tr>
 					</thead>
-					{cart.length > 0 ? (
-						<tbody>
-							{cart.map(cartItem => (
+					<tbody>
+						{cart.length > 0 ? (
+							cart.map(cartItem => (
 								<tr key={cartItem.id}>
 									<th scope="row" className="d-flex align-items-center">
 										<img
@@ -73,15 +73,15 @@ const CartSection = () => {
 										</button>
 									</td>
 								</tr>
-							))}
-						</tbody>
-					) : (
-						<tr>
-							<td colSpan="5" className="text-gray-300 py-10">
-								購物車沒有任何商品
-							</td>
-						</tr>
-					)}
+							))
+						) : (
+							<tr>
+								<td colSpan="5" className="text-gray-300 py-10">
+									購物車沒有任何商品
+								</td>
+							</tr>
+						)}
+					</tbody>
 				</table>
 			</div>
 
