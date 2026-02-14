@@ -1,145 +1,103 @@
-import { clsx } from 'clsx'
-import styles from './CartSection.module.scss'
+import Table from '@/components/table/Table'
 import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelector'
-import { currency } from '@/utils/currency'
+import styles from './CartSection.module.scss'
 import { useCart } from '@/context/cartContext'
+import { currency } from '@/utils/currency'
+import { clsx } from 'clsx'
 
 const CartSection = () => {
 	const { cart, updateCartItem, removeCartItem } = useCart()
 
-	const handleQuantityChange = async (productId, newQty) => {
-		await updateCartItem(productId, newQty)
+	const columns = [
+		{ key: 'product', title: '商品', width: '480px' },
+		{ key: 'qty', title: '數量', width: '192px' },
+		{ key: 'price', title: '單價', width: '192px' },
+		{ key: 'total', title: '小計', width: '192px' },
+		{ key: 'remove', title: '移除', width: '80px' },
+	]
+
+	const handleQuantityChange = async (id, qty) => {
+		await updateCartItem(id, qty)
 	}
 
 	const handleDelete = async id => {
 		await removeCartItem(id)
 	}
-	return (
-		<div className="py-8 py-lg-9">
-			{/* 電腦樣式 */}
-			<div className={clsx('d-none d-lg-block', styles.bg)}>
-				<table className={clsx('table-borderless', styles.table)}>
-					<thead>
-						<tr>
-							<th scope="col" style={{ width: '480px' }}>
-								商品
-							</th>
-							<th scope="col" style={{ width: '192px' }}>
-								數量
-							</th>
-							<th scope="col" style={{ width: '192px' }}>
-								單價
-							</th>
-							<th scope="col" style={{ width: '192px' }}>
-								小計
-							</th>
-							<th scope="col" style={{ width: '80px' }}>
-								移除
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						{cart.length > 0 ? (
-							cart.map(cartItem => (
-								<tr key={cartItem.id}>
-									<th scope="row" className="d-flex align-items-center">
-										<img
-											src={cartItem.product.imageUrl}
-											alt={cartItem.product.title}
-											className="me-2 rounded-3 object-fit-cover"
-											style={{ width: '60px', height: '60px' }}
-										/>
-										<span>{cartItem.product.title}</span>
-									</th>
 
-									<td>
-										<QuantitySelector
-											value={cartItem.qty}
-											onChange={newValue => handleQuantityChange(cartItem.id, newValue)}
-										/>
-									</td>
-
-									<td>NT$ {currency(cartItem.product.price)}</td>
-
-									<td className="fw-bold">NT$ {currency(cartItem.total)}</td>
-
-									<td>
-										<button
-											type="button"
-											className={clsx('material-icons border-0', styles.deleteBtn)}
-											onClick={() => handleDelete(cartItem.id)}
-										>
-											delete
-										</button>
-									</td>
-								</tr>
-							))
-						) : (
-							<tr>
-								<td colSpan="5" className="text-gray-300 py-10">
-									購物車沒有任何商品
-								</td>
-							</tr>
-						)}
-					</tbody>
-				</table>
-			</div>
-
-			{/* 手機樣式 */}
-			<div className="d-lg-none">
-				{cart.length > 0 ? (
-					cart.map(cartItem => (
-						<div className={clsx('mb-6', styles.bg)} key={cartItem.id}>
-							<div className="d-flex align-items-top mb-3">
-								<img
-									src={cartItem.product.imageUrl}
-									alt={cartItem.product.title}
-									className="me-3 rounded-3 object-fit-cover"
-									style={{ width: '60px', height: '60px' }}
-								/>
-
-								<div className="flex-grow-1">
-									<p className="h6 text-primary-400 mb-2">{cartItem.product.title}</p>
-
-									<div className="d-flex align-items-center mb-2">
-										<small className="text-gray-400 pe-4">單價</small>
-										<span>NT$ {currency(cartItem.product.price)}</span>
-									</div>
-
-									<div className="d-flex align-items-center">
-										<small className="text-gray-400 pe-4">小計</small>
-										<span className="fw-bold">NT$ {currency(cartItem.total)}</span>
-									</div>
-								</div>
-
-								<div>
-									<button
-										type="button"
-										className={clsx(
-											'material-icons text-danger border-0 bg-transparent',
-											styles.delete
-										)}
-										onClick={() => handleDelete(cartItem.id)}
-									>
-										delete
-									</button>
-								</div>
+	const renderRow = (cartItem, isMobile = false) => {
+		if (!isMobile) {
+			return (
+				<tr key={cartItem.id}>
+					<th scope="row" className="d-flex align-items-center">
+						<img
+							src={cartItem.product.imageUrl}
+							alt={cartItem.product.title}
+							className="me-2 rounded-3 object-fit-cover"
+							style={{ width: '60px', height: '60px' }}
+						/>
+						<span>{cartItem.product.title}</span>
+					</th>
+					<td>
+						<QuantitySelector
+							value={cartItem.qty}
+							onChange={newQty => handleQuantityChange(cartItem.id, newQty)}
+						/>
+					</td>
+					<td>NT$ {currency(cartItem.product.price)}</td>
+					<td className="fw-bold">NT$ {currency(cartItem.total)}</td>
+					<td>
+						<button
+							type="button"
+							className={clsx('material-icons border-0', styles.deleteBtn)}
+							onClick={() => handleDelete(cartItem.id)}
+						>
+							delete
+						</button>
+					</td>
+				</tr>
+			)
+		} else {
+			// 手機版
+			return (
+				<div className={clsx('mb-6 bg-white p-3 rounded-3', styles.shadow)} key={cartItem.id}>
+					<div className="d-flex align-items-top mb-3">
+						<img
+							src={cartItem.product.imageUrl}
+							alt={cartItem.product.title}
+							className="me-3 rounded-3 object-fit-cover"
+							style={{ width: '60px', height: '60px' }}
+						/>
+						<div className="flex-grow-1">
+							<p className="h6 text-primary-400 mb-2">{cartItem.product.title}</p>
+							<div className="d-flex align-items-center mb-2">
+								<small className="text-gray-400 pe-4">單價</small>
+								<span>NT$ {currency(cartItem.product.price)}</span>
 							</div>
-
-							<QuantitySelector
-								value={cartItem.qty}
-								onChange={newValue => handleQuantityChange(cartItem.id, newValue)}
-							/>
+							<div className="d-flex align-items-center">
+								<small className="text-gray-400 pe-4">小計</small>
+								<span className="fw-bold">NT$ {currency(cartItem.total)}</span>
+							</div>
 						</div>
-					))
-				) : (
-					<div className={styles.bg}>
-						<div className="text-gray-300 py-10 text-center">購物車沒有任何商品</div>
+						<div>
+							<button
+								type="button"
+								className="material-icons text-danger border-0 bg-transparent"
+								onClick={() => handleDelete(cartItem.id)}
+							>
+								delete
+							</button>
+						</div>
 					</div>
-				)}
-			</div>
-		</div>
+					<QuantitySelector
+						value={cartItem.qty}
+						onChange={newQty => handleQuantityChange(cartItem.id, newQty)}
+					/>
+				</div>
+			)
+		}
+	}
+	return (
+		<Table columns={columns} data={cart} renderRow={renderRow} emptyMessage="購物車沒有任何商品" />
 	)
 }
-
 export default CartSection

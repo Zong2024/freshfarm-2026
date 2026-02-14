@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { currency } from '@/utils/currency'
 import { useForm, Controller, useWatch } from 'react-hook-form'
 import { twData } from '@/constants/twData'
-import { postalCodeData } from '@/constants/postalCodeData'
 import { useCart } from '@/context/cartContext'
 import btnStyles from '@/components/button/Button.module.scss'
 import { clsx } from 'clsx'
@@ -17,7 +16,6 @@ const FormSection = () => {
 		formState: { errors },
 		control,
 		setValue,
-		clearErrors,
 	} = useForm({
 		mode: 'onBlur',
 		shouldUnregister: true,
@@ -38,8 +36,6 @@ const FormSection = () => {
 		name: 'shippingMethod',
 	})
 
-	const city = useWatch({ control, name: 'city' })
-	const district = useWatch({ control, name: 'district' })
 	const shipping = shippingMethod === 'pickup' ? 0 : total > 1000 || total === 0 ? 0 : 150
 
 	useEffect(() => {
@@ -48,14 +44,10 @@ const FormSection = () => {
 			setValue('district', '')
 			setValue('address', '')
 			setValue('postalCode', '')
-			clearErrors(['city', 'district', 'address', 'postalCode'])
-		} else if (shippingMethod === 'delivery' && city && district) {
-			const code = postalCodeData[city]?.[district] || ''
-			setValue('postalCode', code)
 		}
-	}, [shippingMethod, city, district, setValue, clearErrors])
+	}, [shippingMethod, setValue])
 
-	const [districtOptions, setDistrictOptions] = useState([])
+	const [districtOptions, setDistrictOptions] = useState(twData['台北市'])
 
 	const onSubmit = data => {
 		console.log('表單資料：', data)
@@ -74,7 +66,6 @@ const FormSection = () => {
 							<input
 								className="form-check-input"
 								type="radio"
-								id="ShippingMethod1"
 								value="delivery"
 								{...register('shippingMethod')}
 							/>
@@ -86,7 +77,6 @@ const FormSection = () => {
 							<input
 								className="form-check-input"
 								type="radio"
-								id="ShippingMethod2"
 								value="pickup"
 								{...register('shippingMethod')}
 							/>
@@ -95,7 +85,7 @@ const FormSection = () => {
 							</label>
 						</div>
 					</div>
-					<div className="bg-gray-50 rounded-4 p-6 mb-6">
+					<div className="bg-gray-50 rounded-4 p-6">
 						<h2 className="h4 mb-4 text-primary-400">收件資料</h2>
 
 						{/* 收件人姓名 */}
@@ -173,7 +163,6 @@ const FormSection = () => {
 											<Controller
 												name="city"
 												control={control}
-												rules={{ required: '請選擇縣市' }}
 												render={({ field }) => (
 													<div className="dropdown w-100">
 														<button
@@ -261,7 +250,7 @@ const FormSection = () => {
 								</div>
 
 								{/* 郵遞區號 */}
-								<div className="mb-4">
+								<div>
 									<label htmlFor="postalCode" className="form-label">
 										郵遞區號
 									</label>
@@ -269,9 +258,16 @@ const FormSection = () => {
 										type="text"
 										className="form-control"
 										id="postalCode"
-										readOnly
-										{...register('postalCode')}
+										placeholder="106"
+										{...register('postalCode', {
+											required: '請輸入郵遞區號',
+											pattern: {
+												value: /^\d+$/,
+												message: '郵遞區號只能是數字',
+											},
+										})}
 									/>
+									{errors.postalCode && <p className="text-danger">{errors.postalCode.message}</p>}
 								</div>
 							</>
 						)}
