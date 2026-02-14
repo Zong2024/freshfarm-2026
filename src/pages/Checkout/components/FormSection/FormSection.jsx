@@ -44,14 +44,12 @@ const FormSection = () => {
 
 	useEffect(() => {
 		if (shippingMethod === 'pickup') {
-			// 清空表單
 			setValue('city', '')
 			setValue('district', '')
 			setValue('address', '')
 			setValue('postalCode', '')
 			clearErrors(['city', 'district', 'address', 'postalCode'])
 		} else if (shippingMethod === 'delivery' && city && district) {
-			// 宅配時，選縣市+區域自動帶郵遞區號
 			const code = postalCodeData[city]?.[district] || ''
 			setValue('postalCode', code)
 		}
