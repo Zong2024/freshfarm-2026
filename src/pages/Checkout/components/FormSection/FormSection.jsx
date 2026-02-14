@@ -85,7 +85,7 @@ const FormSection = () => {
 							</label>
 						</div>
 					</div>
-					<div className="bg-gray-50 rounded-4 p-6 mb-6">
+					<div className="bg-gray-50 rounded-4 p-6">
 						<h2 className="h4 mb-4 text-primary-400">收件資料</h2>
 
 						{/* 收件人姓名 */}
@@ -250,7 +250,7 @@ const FormSection = () => {
 								</div>
 
 								{/* 郵遞區號 */}
-								<div className="mb-4">
+								<div>
 									<label htmlFor="postalCode" className="form-label">
 										郵遞區號
 									</label>
