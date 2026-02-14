@@ -12,6 +12,7 @@ import tap from './assets/tap.png'
 import organic from './assets/taiwan_organic.jpg'
 import farmer from './assets/farmer.png'
 import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
+import { useCart } from '@/context/cartContext'
 
 const CAROUSEL_BREAKPOINTS = {
 	576: { slidesPerView: 2 },
@@ -26,6 +27,8 @@ const ProductDetail = () => {
 	const [selectedImage, setSelectedImage] = useState('')
 	const [products, setProducts] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
+
+	const { addToCart } = useCart()
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -72,6 +75,10 @@ const ProductDetail = () => {
 		}
 		return [...new Set(imgs.filter(Boolean))].slice(0, 4)
 	}, [product])
+
+	const handleAddCart = () => {
+		addToCart(product.id, buyCount)
+	}
 
 	const sectionHeader = (
 		<div className="ps-4 ps-lg-6 mb-4">
@@ -156,7 +163,11 @@ const ProductDetail = () => {
 										<span className="material-icons  align-middle fs-6 ms-2">add_circle</span>
 									</h6>
 								</button>
-								<button type="button" className={clsx('btn', styles.customButton2)}>
+								<button
+									type="button"
+									className={clsx('btn', styles.customButton2)}
+									onClick={handleAddCart}
+								>
 									<h6>
 										加入購物車
 										<span className="material-icons  align-middle fs-6 ms-2">shopping_cart</span>
