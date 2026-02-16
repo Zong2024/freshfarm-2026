@@ -1,7 +1,7 @@
 import SearchBar from '@/components/input/SearchBar/SearchBar'
 import TwoButtonCard from '@/components/card/ProductCard/TwoButtonCard'
 import Pagination from '../Pagination/Pagination'
-import { useCart } from '@/context/cartContext'
+import { useCart } from '@/contexts/CartContext'
 import SkeletonCard from '@/components/card/SkeletonCard/SkeletonCard'
 
 const ProductsSection = ({ products, pagination, changePage, isLoading }) => {
