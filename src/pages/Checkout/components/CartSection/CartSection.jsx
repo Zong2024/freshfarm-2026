@@ -1,50 +1,19 @@
-import checkoutImg from './assets/checkout-Image.jpg'
-import checkoutImg1 from './assets/checkout-Image-1.jpg'
-import checkoutImg2 from './assets/checkout-Image-2.jpg'
-import checkoutImg3 from './assets/checkout-Image-3.jpg'
 import { clsx } from 'clsx'
 import styles from './CartSection.module.scss'
-import { useState } from 'react'
 import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelector'
-
-const cartItems = [
-	{
-		id: 1,
-		title: '嚴選大樹老欉玉荷包禮盒3斤',
-		image: checkoutImg,
-		price: 588,
-		quantity: 1,
-	},
-	{
-		id: 2,
-		title: '玉井愛文芒果',
-		image: checkoutImg1,
-		price: 180,
-		quantity: 3,
-	},
-	{
-		id: 3,
-		title: '有機蜜蘋果',
-		image: checkoutImg2,
-		price: 150,
-		quantity: 5,
-	},
-	{
-		id: 4,
-		title: '屏東香米',
-		image: checkoutImg3,
-		price: 180,
-		quantity: 1,
-	},
-]
+import { currency } from '@/utils/currency'
+import { useCart } from '@/context/cartContext'
 
 const CartSection = () => {
-	const [items, setItems] = useState(cartItems)
+	const { cart, updateCartItem, removeCartItem } = useCart()
 
-	const handleQuantityChange = (id, newQuantity) => {
-		setItems(prev => prev.map(item => (item.id === id ? { ...item, quantity: newQuantity } : item)))
+	const handleQuantityChange = async (productId, newQty) => {
+		await updateCartItem(productId, newQty)
 	}
 
+	const handleDelete = async id => {
+		await removeCartItem(id)
+	}
 	return (
 		<div className="py-8 py-lg-9">
 			{/* 電腦樣式 */}
@@ -69,79 +38,105 @@ const CartSection = () => {
 							</th>
 						</tr>
 					</thead>
-					<tbody>
-						{items.map(item => (
-							<tr key={item.id}>
-								<th scope="row" className="d-flex align-items-center">
-									<img
-										src={item.image}
-										alt={item.title}
-										className="me-2 rounded-3"
-										style={{ width: '60px' }}
-									/>
-									<span>{item.title}</span>
-								</th>
+					{cart.length > 0 ? (
+						<tbody>
+							{cart.map(cartItem => (
+								<tr key={cartItem.id}>
+									<th scope="row" className="d-flex align-items-center">
+										<img
+											src={cartItem.product.imageUrl}
+											alt={cartItem.product.title}
+											className="me-2 rounded-3 object-fit-cover"
+											style={{ width: '60px', height: '60px' }}
+										/>
+										<span>{cartItem.product.title}</span>
+									</th>
 
-								<td>
-									<QuantitySelector
-										value={item.quantity}
-										max={15}
-										onChange={newValue => handleQuantityChange(item.id, newValue)}
-									/>
-								</td>
+									<td>
+										<QuantitySelector
+											value={cartItem.qty}
+											onChange={newValue => handleQuantityChange(cartItem.id, newValue)}
+										/>
+									</td>
 
-								<td>NT$ {item.price.toLocaleString()}</td>
+									<td>NT$ {currency(cartItem.product.price)}</td>
 
-								<td className="fw-bold">NT$ {(item.price * item.quantity).toLocaleString()}</td>
+									<td className="fw-bold">NT$ {currency(cartItem.total)}</td>
 
-								<td>
-									<div className={styles.delete}>
-										<span className="material-icons">delete</span>
-									</div>
-								</td>
-							</tr>
-						))}
-					</tbody>
+									<td>
+										<button
+											type="button"
+											className={clsx('material-icons border-0', styles.deleteBtn)}
+											onClick={() => handleDelete(cartItem.id)}
+										>
+											delete
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					) : (
+						<tr>
+							<td colSpan="5" className="text-gray-300 py-10">
+								購物車沒有任何商品
+							</td>
+						</tr>
+					)}
 				</table>
 			</div>
 
 			{/* 手機樣式 */}
 			<div className="d-lg-none">
-				{items.map(item => (
-					<div className={clsx('mb-6', styles.bg)} key={item.id}>
-						<div className="d-flex align-items-top mb-3">
-							<img
-								src={item.image}
-								alt={item.title}
-								className="me-3 rounded-3"
-								style={{ width: '80px' }}
-							/>
+				{cart.length > 0 ? (
+					cart.map(cartItem => (
+						<div className={clsx('mb-6', styles.bg)} key={cartItem.id}>
+							<div className="d-flex align-items-top mb-3">
+								<img
+									src={cartItem.product.imageUrl}
+									alt={cartItem.product.title}
+									className="me-3 rounded-3 object-fit-cover"
+									style={{ width: '60px', height: '60px' }}
+								/>
 
-							<div className="flex-grow-1">
-								<p className="h6 text-primary-400 mb-2">{item.title}</p>
+								<div className="flex-grow-1">
+									<p className="h6 text-primary-400 mb-2">{cartItem.product.title}</p>
 
-								<div className="d-flex align-items-center mb-2">
-									<small className="text-gray-400 pe-4">單價</small>
-									<span>NT$ {item.price.toLocaleString()}</span>
+									<div className="d-flex align-items-center mb-2">
+										<small className="text-gray-400 pe-4">單價</small>
+										<span>NT$ {currency(cartItem.product.price)}</span>
+									</div>
+
+									<div className="d-flex align-items-center">
+										<small className="text-gray-400 pe-4">小計</small>
+										<span className="fw-bold">NT$ {currency(cartItem.total)}</span>
+									</div>
 								</div>
 
-								<div className="d-flex align-items-center">
-									<small className="text-gray-400 pe-4">小計</small>
-									<span className="fw-bold">
-										NT$ {(item.price * item.quantity).toLocaleString()}
-									</span>
+								<div>
+									<button
+										type="button"
+										className={clsx(
+											'material-icons text-danger border-0 bg-transparent',
+											styles.delete
+										)}
+										onClick={() => handleDelete(cartItem.id)}
+									>
+										delete
+									</button>
 								</div>
 							</div>
 
-							<span className="material-icons text-danger">delete</span>
+							<QuantitySelector
+								value={cartItem.qty}
+								onChange={newValue => handleQuantityChange(cartItem.id, newValue)}
+							/>
 						</div>
-						<QuantitySelector
-							value={item.quantity}
-							max={15}
-							onChange={newValue => handleQuantityChange(item.id, newValue)}
-						/>
+					))
+				) : (
+					<div className={styles.bg}>
+						<div className="text-gray-300 py-10 text-center">購物車沒有任何商品</div>
 					</div>
-				))}
+				)}
 			</div>
 		</div>
 	)

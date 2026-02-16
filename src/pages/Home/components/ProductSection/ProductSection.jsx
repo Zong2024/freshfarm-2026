@@ -1,16 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import { Navigation, Autoplay } from 'swiper/modules'
 import SectionHeader from '../SectionHeader/SectionHeader'
 
 import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
+import SkeletonCard from '@/components/card/SkeletonCard/SkeletonCard'
 
-const ProductSection = ({ products }) => {
-	const transformProducts = products.map(({ price, discountPrice, weight, unit, ...other }) => ({
-		...other,
-		price: discountPrice !== null ? discountPrice : price,
-		originPrice: discountPrice !== null ? price : null,
-		quantifier: `${weight}${unit}`,
-	}))
+const ProductSection = ({ products, isLoading }) => {
 	return (
 		<section className="container py-8 py-lg-11">
 			<div className="d-lg-flex justify-content-between mb-lg-9 mb-7">
@@ -28,41 +23,44 @@ const ProductSection = ({ products }) => {
 					</button>
 				</div>
 			</div>
-			<Swiper
-				modules={[Navigation]}
-				spaceBetween={24}
-				slidesPerView={1.2}
-				navigation={{
-					prevEl: '.prevBtn',
-					nextEl: '.nextBtn',
-				}}
-				breakpoints={{
-					576: {
-						slidesPerView: 1.2,
-					},
-					996: {
-						slidesPerView: 3,
-					},
-				}}
-			>
-				{transformProducts.map(product => (
-					<SwiperSlide>
-						<SingleButtonCard
-							//props有點太過長有三元判斷可以拉到上面先做判斷jsx就負責傳值
-							name={product.name}
-							origin={product.origin}
-							description={product.description}
-							price={product.price}
-							originPrice={product.originPrice}
-							quantifier={product.quantifier}
-							img={product.img}
-							size="large"
-							showOrigin={false}
-							isHome={true}
-						/>
-					</SwiperSlide>
-				))}
-			</Swiper>
+			{isLoading ? (
+				<div className="row flex-nowrap overflow-hidden">
+					{[...Array(4)].map((_, index) => (
+						<div key={index} className="col-10 col-md-4 col-lg-4" style={{ flex: '0 0 auto' }}>
+							<SkeletonCard />
+						</div>
+					))}
+				</div>
+			) : (
+				<Swiper
+					modules={[Navigation, Autoplay]}
+					loop={true}
+					autoplay={{
+						delay: 3000,
+						disableOnInteraction: false,
+					}}
+					spaceBetween={24}
+					slidesPerView={1.2}
+					navigation={{
+						prevEl: '.prevBtn',
+						nextEl: '.nextBtn',
+					}}
+					breakpoints={{
+						576: {
+							slidesPerView: 2.2,
+						},
+						996: {
+							slidesPerView: 3,
+						},
+					}}
+				>
+					{products.map(product => (
+						<SwiperSlide key={product.id}>
+							<SingleButtonCard {...product} size="large" showOrigin={false} isHome={true} />
+						</SwiperSlide>
+					))}
+				</Swiper>
+			)}
 		</section>
 	)
 }
