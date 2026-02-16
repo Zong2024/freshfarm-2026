@@ -1,5 +1,8 @@
+import { useAuth } from '@/contexts/AuthContext'
+import Toast from '@/utils/toast'
 import clsx from 'clsx'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 	const {
@@ -8,8 +11,19 @@ const Login = () => {
 		formState: { errors },
 	} = useForm({ mode: 'onBlur' })
 
-	const onSubmit = data => {
+	const { login } = useAuth()
+	const navigate = useNavigate()
+
+	const onSubmit = async data => {
 		console.log('表單送出:', data)
+		const res = await login(data)
+		if (res.success) {
+			Toast.fire({
+				icon: 'success',
+				title: '登入成功',
+			})
+			navigate('/products')
+		}
 	}
 
 	return (
@@ -21,24 +35,22 @@ const Login = () => {
 							<h2 className="text-center mb-4">會員登入</h2>
 							<form onSubmit={handleSubmit(onSubmit)}>
 								<div className="mb-3">
-									<label htmlFor="email" className="form-label">
-										Email
+									<label htmlFor="username" className="form-label">
+										Username
 									</label>
 
 									<input
-										type="email"
-										className={clsx('form-control', { 'is-invalid': errors.email })}
-										id="email"
+										type="text"
+										className={clsx('form-control', { 'is-invalid': errors.username })}
+										id="username"
 										placeholder="name@example.com"
-										{...register('email', {
-											required: 'Email 為必填',
-											pattern: {
-												value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-												message: 'Email 格式錯誤',
-											},
+										{...register('username', {
+											required: 'username 為必填',
 										})}
 									/>
-									{errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
+									{errors.username && (
+										<div className="invalid-feedback">{errors.username.message}</div>
+									)}
 								</div>
 
 								<div className="mb-3">
