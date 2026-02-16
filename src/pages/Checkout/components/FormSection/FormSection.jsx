@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { currency } from '@/utils/currency'
 import { useForm, Controller, useWatch } from 'react-hook-form'
-import { twData } from '@/constants/twData'
 import { useCart } from '@/context/cartContext'
 import btnStyles from '@/components/button/Button.module.scss'
 import { clsx } from 'clsx'
+import { twData } from '@/constants/twData'
+import { postalCodeData } from '@/constants/postalCodeData'
 
 const FormSection = () => {
 	const { cart, total, finalTotal } = useCart()
@@ -31,6 +32,16 @@ const FormSection = () => {
 		},
 	})
 
+	const selectedCity = useWatch({
+		control,
+		name: 'city',
+	})
+
+	const selectedDistrict = useWatch({
+		control,
+		name: 'district',
+	})
+
 	const shippingMethod = useWatch({
 		control,
 		name: 'shippingMethod',
@@ -47,7 +58,14 @@ const FormSection = () => {
 		}
 	}, [shippingMethod, setValue])
 
-	const [districtOptions, setDistrictOptions] = useState(twData['台北市'])
+	useEffect(() => {
+		if (selectedCity && selectedDistrict) {
+			const code = postalCodeData[selectedCity]?.[selectedDistrict] || ''
+			setValue('postalCode', code)
+		}
+	}, [selectedCity, selectedDistrict, setValue])
+
+	const districts = selectedCity ? twData[selectedCity] : []
 
 	const onSubmit = data => {
 		console.log('表單資料：', data)
@@ -184,8 +202,8 @@ const FormSection = () => {
 																		className={`dropdown-item ${field.value === city ? 'active' : ''}`}
 																		onClick={() => {
 																			field.onChange(city)
-																			setDistrictOptions(twData[city])
 																			setValue('district', '')
+																			setValue('postalCode', '')
 																		}}
 																	>
 																		{city}
@@ -217,7 +235,7 @@ const FormSection = () => {
 														className="dropdown-menu w-100 overflow-auto"
 														style={{ maxHeight: '200px' }}
 													>
-														{districtOptions.map(d => (
+														{districts.map(d => (
 															<li key={d}>
 																<button
 																	type="button"
@@ -258,16 +276,9 @@ const FormSection = () => {
 										type="text"
 										className="form-control"
 										id="postalCode"
-										placeholder="106"
-										{...register('postalCode', {
-											required: '請輸入郵遞區號',
-											pattern: {
-												value: /^\d+$/,
-												message: '郵遞區號只能是數字',
-											},
-										})}
+										readOnly
+										{...register('postalCode')}
 									/>
-									{errors.postalCode && <p className="text-danger">{errors.postalCode.message}</p>}
 								</div>
 							</>
 						)}
