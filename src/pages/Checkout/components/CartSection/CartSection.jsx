@@ -2,7 +2,7 @@ import { clsx } from 'clsx'
 import styles from './CartSection.module.scss'
 import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelector'
 import { currency } from '@/utils/currency'
-import { useCart } from '@/context/cartContext'
+import { useCart } from '@/contexts/CartContext'
 
 const CartSection = () => {
 	const { cart, updateCartItem, removeCartItem } = useCart()

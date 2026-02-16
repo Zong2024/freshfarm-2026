@@ -1,7 +1,7 @@
 import StepperSection from './components/StepperSection/StepperSection'
 import CartSection from './components/CartSection/CartSection'
 import FormSection from './components/FormSection/FormSection'
-import { useCart } from '@/context/cartContext'
+import { useCart } from '@/contexts/CartContext'
 
 const Checkout = () => {
 	const { cart, total, finalTotal } = useCart()
