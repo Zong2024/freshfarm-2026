@@ -4,7 +4,16 @@ import { clsx } from 'clsx'
 import styles from './HeroSwiper.module.scss'
 
 import SearchBar from '@/components/input/SearchBar/SearchBar'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 const HeroSwiper = ({ banners }) => {
+	const [keyword, setKeyword] = useState('')
+	const navigate = useNavigate()
+
+	const handleSearch = () => {
+		if (!keyword.trim()) return
+		navigate(`/products?keyword=${encodeURIComponent(keyword)}`)
+	}
 	return (
 		<Swiper
 			modules={[Autoplay, Pagination]}
@@ -29,7 +38,12 @@ const HeroSwiper = ({ banners }) => {
 							<h4 className="fs-lg-1 text-white mb-3  mb-lg-4">{banner.title}</h4>
 						</div>
 						<h5 className="fs-lg-2 text-white mb-6 mb-lg-8">{banner.subtitle}</h5>
-						<SearchBar isHome={true} />
+						<SearchBar
+							isHome={true}
+							keyword={keyword}
+							setKeyword={setKeyword}
+							onSearch={handleSearch}
+						/>
 					</div>
 					<div className={clsx(styles.wave)}></div>
 				</SwiperSlide>
