@@ -31,3 +31,18 @@ export const getProduct = async id => {
 		}
 	}
 }
+export const getAllProducts = async () => {
+	try {
+		const response = await apiClient.get(`/products/all`)
+		return {
+			success: true,
+			products: response.data.products,
+		}
+	} catch (error) {
+		return {
+			success: false,
+			error: error.customMessage,
+			code: error.statusCode,
+		}
+	}
+}
