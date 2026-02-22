@@ -80,7 +80,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 									) : (
 										<li className="nav-item py-5 py-lg-0 dropdown">
 											{!isAuth ? (
-												<NavLink className="nav-link text-lg-center  p-0" to={navigate('/login')}>
+												<NavLink className="nav-link text-lg-center  p-0" to="/login">
 													<span className="fs-lg-4 fs-5 fw-bold">登入/註冊</span>
 													<p className="text-gray-300">Sign in</p>
 												</NavLink>
@@ -162,7 +162,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 														aria-hidden="true"
 														onClick={handleLogout}
 													>
-														<span className="material-icons align-bottom me-2">logout</span>
+														<NavLink className="material-icons align-bottom me-2">logout</NavLink>
 														登出
 													</button>
 												</li>
