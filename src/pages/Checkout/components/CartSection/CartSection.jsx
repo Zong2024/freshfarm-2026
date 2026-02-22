@@ -1,7 +1,7 @@
 import Table from '@/components/table/Table'
 import QuantitySelector from '@/components/input/QuantitySelector/QuantitySelector'
 import styles from './CartSection.module.scss'
-import { useCart } from '@/context/cartContext'
+import { useCart } from '@/contexts/CartContext'
 import { currency } from '@/utils/currency'
 import { clsx } from 'clsx'
 

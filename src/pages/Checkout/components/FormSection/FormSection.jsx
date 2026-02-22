@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { currency } from '@/utils/currency'
 import { useForm, Controller, useWatch } from 'react-hook-form'
-import { useCart } from '@/context/cartContext'
+import { useCart } from '@/contexts/CartContext'
 import btnStyles from '@/components/button/Button.module.scss'
 import { clsx } from 'clsx'
 import { twData } from '@/constants/twData'
