@@ -1,20 +1,8 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
-import Swal from 'sweetalert2'
 import { getCart, postCart, putCart, deleteCart, deleteCarts } from '../services/cart.api'
+import Toast from '../utils/toast'
 
 const CartContext = createContext()
-
-const Toast = Swal.mixin({
-	toast: true,
-	position: 'top-end',
-	showConfirmButton: false,
-	timer: 1500,
-	timerProgressBar: true,
-	didOpen: toast => {
-		toast.onmouseenter = Swal.stopTimer
-		toast.onmouseleave = Swal.resumeTimer
-	},
-})
 
 export const CartProvider = ({ children }) => {
 	const [cart, setCart] = useState([])

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const API_PATH = import.meta.env.VITE_API_PATH
+const TOKEN_KEY = 'freshfarm_token'
 
 export const apiClient = axios.create({
 	baseURL: `${BASE_URL}/api/${API_PATH}`,
@@ -14,8 +15,11 @@ export const apiClient = axios.create({
 // --- 請求攔截器 (Request Interceptor) ---
 apiClient.interceptors.request.use(
 	config => {
-		// const token = localStorage.getItem('token');
-		// if (token) config.headers.Authorization = `Bearer ${token}`;
+		const token = document.cookie.replace(
+			new RegExp(`(?:(?:^|.*;\\s*)${TOKEN_KEY}\\s*\\=\\s*([^;]*).*$)|^.*$`),
+			'$1'
+		)
+		if (token) config.headers.Authorization = token
 		return config
 	},
 	error => {
@@ -34,6 +38,8 @@ apiClient.interceptors.response.use(
 
 		if (statusCode === 401) {
 			console.warn('身份驗證失敗，可能需要重新登入')
+			document.cookie = `${TOKEN_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+			// window.location.href = '#/login'
 		} else if (statusCode === 403) {
 			console.warn('權限不足')
 		} else if (statusCode === 404) {
@@ -44,7 +50,6 @@ apiClient.interceptors.response.use(
 		error.customMessage = errorMessage
 		error.statusCode = statusCode
 
-		// 印出清楚的錯誤 Log，開發時很好用
 		console.error(`[API Error] ${statusCode ? `(${statusCode})` : ''} ${errorMessage}`)
 
 		return Promise.reject(error)

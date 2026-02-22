@@ -1,16 +1,20 @@
 import StepperSection from './components/StepperSection/StepperSection'
 import CartSection from './components/CartSection/CartSection'
 import FormSection from './components/FormSection/FormSection'
-import { useCart } from '@/context/cartContext'
+import { useCart } from '@/contexts/CartContext'
 
 const Checkout = () => {
 	const { cart, total, finalTotal } = useCart()
 
 	return (
-		<div className="container py-5">
+		<div className="container">
 			<StepperSection />
-			<CartSection cart={{ carts: cart, total, finalTotal }} />
-			<FormSection cart={{ carts: cart, total, finalTotal }} />
+			<div className="py-lg-9 py-8">
+				<CartSection cart={{ carts: cart, total, finalTotal }} />
+			</div>
+			<div className="py-lg-9 py-8">
+				<FormSection cart={{ carts: cart, total, finalTotal }} />
+			</div>
 		</div>
 	)
 }
