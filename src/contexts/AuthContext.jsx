@@ -35,12 +35,13 @@ export const AuthProvider = ({ children }) => {
 		const res = await Login(data)
 
 		if (res.success) {
-			setUser(data.username)
 			const { token, expired } = res.data
 			setToken(token, expired)
 			setIsAuth(true)
 			// 設定 axios 預設 header，避免重新整理前 API 呼叫失敗
 			axios.defaults.headers.common['Authorization'] = token
+			localStorage.setItem('freshfarm_user', JSON.stringify(data.username))
+			setUser(data.username)
 			return { success: true }
 		}
 		return res
@@ -49,6 +50,7 @@ export const AuthProvider = ({ children }) => {
 	const logout = useCallback(() => {
 		removeToken()
 		setIsAuth(false)
+		localStorage.removeItem('freshfarm_user')
 		delete axios.defaults.headers.common['Authorization']
 	}, [])
 
@@ -62,10 +64,11 @@ export const AuthProvider = ({ children }) => {
 				axios.defaults.headers.common['Authorization'] = token
 				const res = await checkAuth(token)
 				if (res.success) {
-					// setUser
-					console.log(res.success)
-
 					setIsAuth(true)
+					const savedUser = localStorage.getItem('freshfarm_user')
+					if (savedUser) {
+						setUser(JSON.parse(savedUser))
+					}
 				} else {
 					// Token 失效，清除
 					removeToken()
