@@ -73,7 +73,6 @@ const FormSection = () => {
 	const districts = selectedCity ? twData[selectedCity] : []
 
 	const onSubmit = async data => {
-		console.log('表單資料：', data)
 		const { address, city, district, email, name, tel, shippingMethod, postalCode } = data
 		const user = {
 			name,

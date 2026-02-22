@@ -12,8 +12,6 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 		navigate('/')
 	}
 
-	console.log(isAuth)
-
 	return (
 		<div className={clsx(styles.navBg)}>
 			<div
