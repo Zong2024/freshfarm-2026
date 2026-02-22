@@ -6,10 +6,15 @@ import btnStyles from '@/components/button/Button.module.scss'
 import { clsx } from 'clsx'
 import { twData } from '@/constants/twData'
 import { postalCodeData } from '@/constants/postalCodeData'
+import { createOrder } from '@/services/order.api'
+import { useNavigate } from 'react-router-dom'
+import Toast from '@/utils/toast'
 
 const FormSection = () => {
 	const { cart, total, finalTotal } = useCart()
 	const isCartEmpty = cart.length === 0
+	const { fetchCart } = useCart()
+	const navigate = useNavigate()
 
 	const {
 		register,
@@ -67,8 +72,31 @@ const FormSection = () => {
 
 	const districts = selectedCity ? twData[selectedCity] : []
 
-	const onSubmit = data => {
+	const onSubmit = async data => {
 		console.log('表單資料：', data)
+		const { address, city, district, email, name, tel, shippingMethod, postalCode } = data
+		const user = {
+			name,
+			email,
+			tel,
+			address:
+				shippingMethod === 'pickup' ? '到店取貨' : `${postalCode}${city}${district}${address}`,
+		}
+		const message = ''
+		const result = await createOrder({ user, message })
+		if (result.success) {
+			Toast.fire({
+				icon: 'success',
+				title: '訂單建立成功',
+			})
+			fetchCart()
+			navigate(`/payment/${result.orderId}`)
+		} else {
+			Toast.fire({
+				icon: 'error',
+				title: '訂單建立失敗',
+			})
+		}
 	}
 
 	if (isCartEmpty) return null
