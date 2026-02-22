@@ -12,7 +12,7 @@ import tap from './assets/tap.png'
 import organic from './assets/taiwan_organic.jpg'
 import farmer from './assets/farmer.png'
 import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
-import { useCart } from '@/context/cartContext'
+import { useCart } from '@/contexts/CartContext'
 import ProductGallery from './components/ProductGallery/ProductGallery'
 
 const CAROUSEL_BREAKPOINTS = {
