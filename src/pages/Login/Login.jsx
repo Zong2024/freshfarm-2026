@@ -15,7 +15,6 @@ const Login = () => {
 	const navigate = useNavigate()
 
 	const onSubmit = async data => {
-		console.log('表單送出:', data)
 		const res = await login(data)
 		if (res.success) {
 			Toast.fire({

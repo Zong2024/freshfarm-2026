@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
 import styles from './ProductCard.module.scss'
 const ProductCard = ({
+	id,
 	title,
 	description,
 	price,
@@ -50,7 +51,7 @@ const ProductCard = ({
 				{showOrigin && origin && <h6 className="text-primary-400 mb-1">{origin}</h6>}
 				<h5 className={clsx(' mb-2', titleSizeMap[size] || titleSizeMap.normal)}>{title}</h5>
 				<Link
-					to="/"
+					to={`/productDetail/${id}`}
 					className={clsx(
 						'mb-3 text-gray-300 stretched-link',
 						isHome ? 'fs-lg-5' : 'fs-6',

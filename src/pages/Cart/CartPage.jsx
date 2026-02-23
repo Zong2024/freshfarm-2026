@@ -1,38 +1,40 @@
-import StepperSection from './components/StepperSection/StepperSection'
-import FormSection from './components/FormSection/FormSection'
+import StepperSection from '../Checkout/components/StepperSection/StepperSection'
+import CartSection from '../Checkout/components/CartSection/CartSection'
 import { useCart } from '@/contexts/CartContext'
 import { useAuth } from '@/contexts/AuthContext'
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Toast from '@/utils/toast'
-import CartSection from './components/CartSection/CartSection'
 
-const Checkout = () => {
+const CartPage = () => {
 	const { cart, total, finalTotal } = useCart()
-	const { isAuth, isLoading } = useAuth()
+	const { isAuth } = useAuth()
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		if (!isAuth && !isLoading) {
+	const handleCheckout = () => {
+		if (!isAuth) {
 			Toast.fire({
 				icon: 'warning',
 				title: '請先登入會員',
 			})
 			navigate('/login', { state: { from: '/checkout' } })
+			return
 		}
-	}, [isAuth, isLoading, navigate])
+		navigate('/checkout')
+	}
 
 	return (
 		<div className="container">
-			<StepperSection step={2} />
+			<StepperSection step={1} />
 			<div className="py-lg-9 py-8">
 				<CartSection cart={{ carts: cart, total, finalTotal }} />
-			</div>
-			<div className="py-lg-9 py-8">
-				<FormSection cart={{ carts: cart, total, finalTotal }} />
+				<div className="d-flex justify-content-end mt-4">
+					<button className="btn btn-primary btn-lg" onClick={handleCheckout}>
+						前往結帳
+					</button>
+				</div>
 			</div>
 		</div>
 	)
 }
 
-export default Checkout
+export default CartPage
