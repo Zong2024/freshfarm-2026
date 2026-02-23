@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
 import styles from './ProductCard.module.scss'
+import { useFavorite } from '@/contexts/FavoriteContext'
 const ProductCard = ({
 	id,
 	title,
@@ -20,6 +21,8 @@ const ProductCard = ({
 		large: 'fs-lg-4',
 		normal: 'fs-lg-5',
 	}
+	const { favorites, toggleFavorite } = useFavorite()
+	const isFavorite = favorites.includes(id)
 
 	return (
 		<div className={clsx('card h-100 w-100 overflow-hidden border-0', styles.cardShadow)}>
@@ -42,9 +45,15 @@ const ProductCard = ({
 				</div>
 				<button
 					type="button"
-					className="btn border-0 rounded-circle position-absolute bottom-0 end-0 m-4 p-3 bg-white z-2"
+					onClick={() => toggleFavorite(id)}
+					className={clsx(
+						'btn border-0 rounded-circle position-absolute bottom-0 end-0 m-4 p-3 z-2',
+						isFavorite ? 'bg-secondary-100 text-secondary-300' : 'bg-white text-gray-400'
+					)}
 				>
-					<span className="fs-2 text-gray-400 material-icons align-middle">favorite_border</span>
+					<span className="fs-2 material-icons align-middle">
+						{isFavorite ? 'favorite' : 'favorite_border'}
+					</span>
 				</button>
 			</div>
 			<div className="card-body bg-white d-flex flex-column">
