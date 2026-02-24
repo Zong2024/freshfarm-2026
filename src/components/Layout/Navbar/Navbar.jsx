@@ -3,10 +3,23 @@ import styles from './Navbar.module.scss'
 import logo from '@/assets/images/logo.png'
 import { clsx } from 'clsx'
 import { useAuth } from '@/contexts/AuthContext'
+import { useEffect, useState } from 'react'
 const Navbar = ({ isHomePage = { isHomePage } }) => {
 	const { isAuth, logout, isLoading: isAuthLoading, user } = useAuth()
 	const navigate = useNavigate()
+	const [isSticky, setIsSticky] = useState(false)
 
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsSticky(window.scrollY > 0)
+		}
+
+		window.addEventListener('scroll', handleScroll)
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [])
 	const handleLogout = () => {
 		logout()
 		navigate('/')
@@ -19,8 +32,10 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 			<div
 				id="nav"
 				className={clsx(
-					'py-lg-4 py-2 px-lg-7 px-3 bg-white rounded-0 rounded-lg-4',
+					'py-lg-4 py-2 px-lg-7 px-3 bg-white',
 					styles.navbarContainer,
+					styles.navbarRounded,
+					isSticky && styles.stickyFull,
 					!isHomePage && styles.navbarShadow
 				)}
 			>
