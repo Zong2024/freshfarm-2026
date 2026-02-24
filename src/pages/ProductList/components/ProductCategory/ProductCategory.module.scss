@@ -1,6 +1,6 @@
 @import '@/assets/scss/helpers';
 //分類欄
-:global(#accordionExample){
+:global(#accordionExample),:global(#accordionMobile){
   .accordionButton {
     &::after {
         display: none;
