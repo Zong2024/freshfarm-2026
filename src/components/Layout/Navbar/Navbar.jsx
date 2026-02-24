@@ -25,8 +25,6 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 		navigate('/')
 	}
 
-	console.log(isAuth)
-
 	return (
 		<div className={clsx(styles.navBg)}>
 			<div
@@ -85,7 +83,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 										</NavLink>
 									</li>
 									<li className="nav-item py-5 py-lg-0 border-bottom border-black border-opacity-25 border-lg-0 pe-lg-8">
-										<NavLink className="nav-link text-lg-center p-0" to="/checkout">
+										<NavLink className="nav-link text-lg-center p-0" to="/cart">
 											<span className="fs-lg-4 fs-5 fw-bold">購物車</span>
 											<p className="text-gray-300">Cart</p>
 										</NavLink>

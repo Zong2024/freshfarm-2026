@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { clsx } from 'clsx'
@@ -12,6 +12,8 @@ import tap from './assets/tap.png'
 import organic from './assets/taiwan_organic.jpg'
 import farmer from './assets/farmer.png'
 import SingleButtonCard from '@/components/card/ProductCard/SingleButtonCard'
+import { useCart } from '@/contexts/CartContext'
+import ProductGallery from './components/ProductGallery/ProductGallery'
 
 const CAROUSEL_BREAKPOINTS = {
 	576: { slidesPerView: 2 },
@@ -23,9 +25,10 @@ const ProductDetail = () => {
 
 	const { id } = useParams()
 	const [product, setProduct] = useState({})
-	const [selectedImage, setSelectedImage] = useState('')
 	const [products, setProducts] = useState([])
-	const [isLoading, setIsLoading] = useState(false)
+	const [isLoading, setIsLoading] = useState(true)
+
+	const { addToCart } = useCart()
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -34,9 +37,6 @@ const ProductDetail = () => {
 				const result = await getProduct(id)
 				if (result.success && result.product) {
 					setProduct(result.product)
-					if (result.product.imageUrl) {
-						setSelectedImage(result.product.imageUrl)
-					}
 				}
 			} catch (error) {
 				console.error('取得產品失敗', error)
@@ -63,15 +63,9 @@ const ProductDetail = () => {
 		fetchProducts()
 	}, [])
 
-	// 整合所有圖片：主圖 + 附圖陣列
-	const galleryImages = useMemo(() => {
-		const imgs = []
-		if (product.imageUrl) imgs.push(product.imageUrl)
-		if (product.imagesUrl && Array.isArray(product.imagesUrl)) {
-			imgs.push(...product.imagesUrl)
-		}
-		return [...new Set(imgs.filter(Boolean))].slice(0, 4)
-	}, [product])
+	const handleAddCart = () => {
+		addToCart(product.id, buyCount)
+	}
 
 	const sectionHeader = (
 		<div className="ps-4 ps-lg-6 mb-4">
@@ -99,31 +93,11 @@ const ProductDetail = () => {
 			<div className="container">
 				<section className="row py-8 py-lg-9">
 					<div className="col-12 col-lg-5 mb-4 mb-lg-0">
-						<div className={styles.productGallery}>
-							<div className={styles.mainImage}>
-								<img src={selectedImage || product.imageUrl} alt={product.title} />
-							</div>
-							{galleryImages.length > 0 && (
-								<div className={styles.thumbnailList}>
-									{galleryImages.map((img, index) => (
-										<div
-											key={index}
-											className={clsx(styles.thumbnail, {
-												[styles.active]: selectedImage === img,
-											})}
-											onClick={() => setSelectedImage(img)}
-											role="button"
-											tabIndex={0}
-											onKeyDown={e => {
-												if (e.key === 'Enter' || e.key === ' ') setSelectedImage(img)
-											}}
-										>
-											<img src={img} alt={`${product.title}-${index + 1}`} />
-										</div>
-									))}
-								</div>
-							)}
-						</div>
+						<ProductGallery
+							imageUrl={product.imageUrl}
+							imagesUrl={product.imagesUrl}
+							title={product.title}
+						/>
 					</div>
 					<div className="col-12 col-lg-7 ">
 						<div className={styles.productInfo}>
@@ -156,7 +130,11 @@ const ProductDetail = () => {
 										<span className="material-icons  align-middle fs-6 ms-2">add_circle</span>
 									</h6>
 								</button>
-								<button type="button" className={clsx('btn', styles.customButton2)}>
+								<button
+									type="button"
+									className={clsx('btn', styles.customButton2)}
+									onClick={handleAddCart}
+								>
 									<h6>
 										加入購物車
 										<span className="material-icons  align-middle fs-6 ms-2">shopping_cart</span>

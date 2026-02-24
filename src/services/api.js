@@ -39,7 +39,7 @@ apiClient.interceptors.response.use(
 		if (statusCode === 401) {
 			console.warn('身份驗證失敗，可能需要重新登入')
 			document.cookie = `${TOKEN_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
-			// window.location.href = '#/login'
+			window.location.href = '#/login'
 		} else if (statusCode === 403) {
 			console.warn('權限不足')
 		} else if (statusCode === 404) {
