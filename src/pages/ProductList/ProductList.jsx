@@ -94,7 +94,7 @@ const ProductList = () => {
 				</div>
 			</section>
 
-			<Compare nonCompare={false} showCompareArea={true} />
+			<Compare />
 		</main>
 	)
 }
