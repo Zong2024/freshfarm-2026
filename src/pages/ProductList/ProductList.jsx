@@ -16,6 +16,7 @@ const ProductList = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const productsPerPage = 9
 	const [keyword, setKeyword] = useState('') // 產品頁內部搜尋
+	const [searchConfirmed, setSearchConfirmed] = useState(false) // 是否真正按搜尋或首頁跳轉
 
 	const getProductsApi = useCallback(async (page = 1) => {
 		setIsLoading(true)
@@ -33,23 +34,8 @@ const ProductList = () => {
 			setIsLoading(false)
 		}
 	}, [])
-	//首次進入頁面判斷是否來自首頁搜尋
-	useEffect(() => {
-		if (urlKeyword) {
-			setKeyword(urlKeyword)
-			handleSearch(urlKeyword)
-		} else {
-			getProductsApi(currentPage)
-		}
-	}, [])
 
-	useEffect(() => {
-		if (!keyword) {
-			getProductsApi(currentPage)
-		}
-	}, [currentPage, keyword, getProductsApi])
-
-	const handleSearch = async (searchValue = keyword) => {
+	const handleSearch = async searchValue => {
 		if (!searchValue.trim()) return
 		setIsLoading(true)
 		try {
@@ -60,6 +46,7 @@ const ProductList = () => {
 				const filter = all.filter(item => item.title.includes(searchValue))
 				setFilteredProducts(filter)
 				setCurrentPage(1)
+				setSearchConfirmed(true) // 搜尋確認完成
 			}
 		} catch (error) {
 			console.error(error)
@@ -67,12 +54,32 @@ const ProductList = () => {
 			setIsLoading(false)
 		}
 	}
+	//首次進入頁面判斷是否來自首頁搜尋
+	useEffect(() => {
+		const initKeyword = urlKeyword.trim()
+		if (initKeyword) {
+			setKeyword(initKeyword)
+			handleSearch(initKeyword)
+		} else {
+			getProductsApi(currentPage)
+		}
+	}, [urlKeyword])
+
+	// 清空搜尋框時，顯示原本商品，重置搜尋狀態
+	useEffect(() => {
+		if (!keyword.trim()) {
+			setFilteredProducts([]) // 清空舊搜尋結果
+			setSearchConfirmed(false)
+			getProductsApi(currentPage)
+		}
+	}, [currentPage, keyword, getProductsApi])
+
 	//目前要顯示的商品
-	const displayProducts = keyword
+	const displayProducts = searchConfirmed
 		? filteredProducts.slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage)
 		: products
 	const totalPages =
-		keyword && filteredProducts.length > 0
+		searchConfirmed && filteredProducts.length
 			? Math.ceil(filteredProducts.length / productsPerPage)
 			: pagination.total_pages || 1
 	return (
