@@ -8,6 +8,11 @@ function Pagination({ pagination, changePage }) {
 		if (page === currentPage) return
 		if (page < 1 || page > pagination.total_pages) return
 		changePage(page)
+
+		//分頁跳時，捲動到最上方
+		window.scrollTo({
+			top: 0,
+		})
 	}
 	return (
 		<div>
