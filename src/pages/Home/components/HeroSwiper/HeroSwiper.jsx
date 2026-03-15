@@ -18,7 +18,11 @@ const HeroSwiper = ({ banners }) => {
 					<div className={clsx(styles.slideWrapper)}>
 						<picture className={clsx(styles.blackScreen)}>
 							<source media="(min-width:992px)" srcSet={banner.images.desktop} />
-							<img src={banner.images.mobile} alt="" className={clsx(styles.heroImg)} />
+							<img
+								src={banner.images.mobile}
+								alt={`banner圖片${banner.id}`}
+								className={clsx(styles.heroImg)}
+							/>
 						</picture>
 					</div>
 					<div

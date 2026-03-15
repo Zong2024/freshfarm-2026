@@ -4,7 +4,7 @@ const FeatureCard = ({ img, title, content }) => {
 	return (
 		<div className={styles.featureCard}>
 			<div className={styles.featureCardImg}>
-				<img src={img} alt="" />
+				<img src={img} alt={`${title}-圖片`} />
 			</div>
 			<div className="text-center">
 				<h5 className="title text-primary-400 mb-4">{title}</h5>

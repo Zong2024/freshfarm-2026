@@ -201,7 +201,7 @@ const ProductDetail = () => {
 						</div>
 						<div className="col-12 col-lg-4 align-self-center">
 							<div className={styles.farmerImage}>
-								<img src={farmer} alt="" />
+								<img src={farmer} alt="小農圖片" />
 							</div>
 						</div>
 						<div className="col-12 col-lg-7">

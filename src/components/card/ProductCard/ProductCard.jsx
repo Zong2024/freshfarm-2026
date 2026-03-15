@@ -27,7 +27,7 @@ const ProductCard = ({
 				<img
 					className={clsx('card-img-top object-fit-cover', styles.imgRatio)}
 					src={imageUrl}
-					alt=""
+					alt={`${title}-圖片`}
 					/* style={{ height: '257px' }} */
 				/>
 				<div className="position-absolute top-0 start-0">
