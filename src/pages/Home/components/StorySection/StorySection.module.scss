@@ -4,7 +4,7 @@
   background-image: url(./assets/storyBg.jpg);
   position: relative;
   &::before{
-    @include large{
+    @include media-breakpoint-up(lg){
       content: "";
       position: absolute;
       top:0;
@@ -17,7 +17,7 @@
     }
   }
   &::after{
-      @include large{
+      @include media-breakpoint-up(lg){
       content: "";
       position: absolute;
       bottom:0;
@@ -34,7 +34,7 @@
   flex-direction: column;
   gap: 16px;
   margin-top: 36px;
-    @include large{
+    @include media-breakpoint-up(lg){
     flex-direction: row;
     align-items: self-start;
     gap: clamp(20px, 10.3%, 134px);
@@ -44,14 +44,14 @@
     }
 
     .introImg{
-      @include large{
+      @include media-breakpoint-up(lg){
         flex: 0 1 416px;
         min-width: 0;
       }
     }
     .textContent{
       padding: 16px;
-        @include large{
+        @include media-breakpoint-up(lg){
         flex: 0 1 746px;
         min-width: 0;
         padding-top: 0;

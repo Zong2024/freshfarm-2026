@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
-	@include large {
+	@include media-breakpoint-up(lg) {
 		gap: 24px;
 	}
 	.textContent {
@@ -14,7 +14,7 @@
 		margin-top: 16px;
 		margin-bottom: 16px;
 		color: $gray-400;
-		@include large {
+		@include media-breakpoint-up(lg) {
 			font-size: 20px;
 		}
 	}
@@ -26,7 +26,7 @@
 			height: 32px;
 			width: 32px;
 			object-fit: cover;
-			@include large {
+			@include media-breakpoint-up(lg) {
 				height: 48px;
 				width: 48px;
 			}
@@ -38,7 +38,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
-	@include large {
+	@include media-breakpoint-up(lg) {
 		flex-direction: row;
 	}
 	.customButton1 {
@@ -66,7 +66,7 @@
 	position: relative;
 	background-image: url('@/assets/images/storyBg.jpg');
 	&::before {
-		@include large {
+		@include media-breakpoint-up(lg) {
 			content: '';
 			position: absolute;
 			top: 0;
@@ -79,7 +79,7 @@
 		}
 	}
 	&::after {
-		@include large {
+		@include media-breakpoint-up(lg) {
 			content: '';
 			position: absolute;
 			bottom: 0;
@@ -95,7 +95,7 @@
 	height: 200px;
 	width: 351px;
 	overflow: hidden;
-	@include large {
+	@include media-breakpoint-up(lg) {
 		height: 280px;
 		width: 416px;
 	}

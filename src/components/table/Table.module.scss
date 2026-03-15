@@ -7,7 +7,7 @@
 	padding: 12px;
 	box-shadow: 0px 4px 80px rgba(178, 178, 178, 0.2);
 
-	@include large {
+	@include media-breakpoint-up(lg) {
 		padding: 20px;
 	}
 }

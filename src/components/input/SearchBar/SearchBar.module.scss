@@ -4,7 +4,7 @@
   width: 100%;
 
   &.home{
-    @include large{
+    @include media-breakpoint-up(lg){
       width: 450px;
     }
   }
