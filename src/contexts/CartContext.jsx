@@ -33,6 +33,12 @@ export const CartProvider = ({ children }) => {
 	const addToCart = async (product_id, qty = 1) => {
 		setLoading(true)
 		try {
+			const existingItem = cart.find(item => item.product.id === product_id)
+
+			// 如果購物車已經有此商品
+			if (existingItem) {
+				return await updateCartItem(existingItem.id, product_id, existingItem.qty + qty)
+			}
 			const res = await postCart({ product_id, qty })
 			if (res.success) {
 				await fetchCart()
@@ -59,10 +65,10 @@ export const CartProvider = ({ children }) => {
 		}
 	}
 
-	const updateCartItem = async (product_id, qty) => {
+	const updateCartItem = async (cart_id, product_id, qty) => {
 		setLoading(true)
 		try {
-			const res = await putCart({ product_id, qty })
+			const res = await putCart(cart_id, { product_id, qty })
 			if (res.success) {
 				await fetchCart()
 				Toast.fire({

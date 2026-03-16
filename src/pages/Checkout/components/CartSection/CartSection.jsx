@@ -4,10 +4,11 @@ import styles from './CartSection.module.scss'
 import { useCart } from '@/contexts/CartContext'
 import { currency } from '@/utils/currency'
 import { clsx } from 'clsx'
+import { useEffect, useRef, useState } from 'react'
 
 const CartSection = () => {
 	const { cart, updateCartItem, removeCartItem } = useCart()
-
+	const [qtyInput, setQtyInput] = useState({})
 	const columns = [
 		{ key: 'product', title: '商品', width: '480px' },
 		{ key: 'qty', title: '數量', width: '192px' },
@@ -16,9 +17,22 @@ const CartSection = () => {
 		{ key: 'remove', title: '移除', width: '80px' },
 	]
 
-	const handleQuantityChange = async (id, qty) => {
-		await updateCartItem(id, qty)
+	const debounceRef = useRef({})
+	const handleQuantityChange = (cartItem, qty) => {
+		setQtyInput(prev => ({ ...prev, [cartItem.id]: qty }))
+		if (debounceRef.current[cartItem.id]) {
+			clearTimeout(debounceRef.current[cartItem.id])
+		}
+		debounceRef.current[cartItem.id] = setTimeout(() => {
+			updateCartItem(cartItem.id, cartItem.product.id, qty)
+		}, 500)
 	}
+	// 卸載時清掉所有 timeout
+	useEffect(() => {
+		return () => {
+			Object.values(debounceRef.current).forEach(timer => clearTimeout(timer))
+		}
+	}, [])
 
 	const handleDelete = async id => {
 		await removeCartItem(id)
@@ -39,8 +53,8 @@ const CartSection = () => {
 					</th>
 					<td>
 						<QuantitySelector
-							value={cartItem.qty}
-							onChange={newQty => handleQuantityChange(cartItem.id, newQty)}
+							value={qtyInput[cartItem.id] ?? cartItem.qty}
+							onChange={newQty => handleQuantityChange(cartItem, newQty)}
 						/>
 					</td>
 					<td>NT$ {currency(cartItem.product.price)}</td>
@@ -89,8 +103,8 @@ const CartSection = () => {
 						</div>
 					</div>
 					<QuantitySelector
-						value={cartItem.qty}
-						onChange={newQty => handleQuantityChange(cartItem.id, newQty)}
+						value={qtyInput[cartItem.id] ?? cartItem.qty}
+						onChange={newQty => handleQuantityChange(cartItem, newQty)}
 					/>
 				</div>
 			)
