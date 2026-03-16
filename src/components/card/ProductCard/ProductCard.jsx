@@ -35,7 +35,7 @@ const ProductCard = ({
 						<img
 							className="me-1"
 							src="https://github.com/Zong2024/freshfarm/blob/master/assets/icons/leaf-icon.png?raw=true"
-							alt=""
+							alt="安心認證圖示"
 						/>
 						安心認證
 					</span>
