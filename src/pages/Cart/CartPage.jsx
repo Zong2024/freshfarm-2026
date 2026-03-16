@@ -9,6 +9,7 @@ const CartPage = () => {
 	const { cart, total, finalTotal } = useCart()
 	const { isAuth } = useAuth()
 	const navigate = useNavigate()
+	const isCartEmpty = cart.length === 0
 
 	const handleCheckout = () => {
 		if (!isAuth) {
@@ -28,7 +29,11 @@ const CartPage = () => {
 			<div className="py-lg-9 py-8">
 				<CartSection cart={{ carts: cart, total, finalTotal }} />
 				<div className="d-flex justify-content-end mt-4">
-					<button className="btn btn-primary btn-lg" onClick={handleCheckout}>
+					<button
+						className="btn btn-primary btn-lg"
+						onClick={handleCheckout}
+						disabled={isCartEmpty}
+					>
 						前往結帳
 					</button>
 				</div>
