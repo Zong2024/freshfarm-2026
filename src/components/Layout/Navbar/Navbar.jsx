@@ -3,12 +3,35 @@ import styles from './Navbar.module.scss'
 import logo from '@/assets/images/logo.png'
 import { clsx } from 'clsx'
 import { useAuth } from '@/contexts/AuthContext'
-import { useEffect, useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 const Navbar = ({ isHomePage = { isHomePage } }) => {
 	const { isAuth, logout, isLoading: isAuthLoading, user } = useAuth()
 	const navigate = useNavigate()
 	const [isSticky, setIsSticky] = useState(false)
+	const [isOpen, setIsOpen] = useState(false)
+	const dropdownRef = useRef(null)
 
+	useEffect(() => {
+		const handleClickOutside = e => {
+			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+				setIsOpen(false)
+			}
+		}
+		document.addEventListener('click', handleClickOutside)
+		return () => document.removeEventListener('click', handleClickOutside)
+	}, [])
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsSticky(window.scrollY > 0)
+		}
+
+		window.addEventListener('scroll', handleScroll)
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [])
 	useEffect(() => {
 		const handleScroll = () => {
 			setIsSticky(window.scrollY > 0)
@@ -99,11 +122,12 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 												</NavLink>
 											) : (
 												<button
-													className="nav-link dropdown-toggle p-0 w-100 d-flex"
+													className="nav-link p-0 w-100 d-flex"
 													type="button"
-													data-bs-toggle="dropdown"
-													data-bs-display="static"
-													aria-expanded="false"
+													onClick={e => {
+														e.stopPropagation()
+														setIsOpen(prev => !prev)
+													}}
 												>
 													<div className="text-start text-lg-center">
 														<span className="fs-lg-4 fs-5 fw-bold">{user}</span>
@@ -116,10 +140,12 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 											)}
 
 											<ul
+												ref={dropdownRef}
 												className={clsx(
 													'dropdown-menu border-0 mb-lg-2 rounded-3 p-4',
 													styles.dropdownShadow,
-													styles.customDropdown
+													styles.customDropdown,
+													isOpen && 'show'
 												)}
 												data-bs-display="static"
 											>
@@ -130,7 +156,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 													<NavLink
 														className="dropdown-item  me-2 mb-3 mb-lg-2"
 														to="/user"
-														aria-hidden="true"
+														onClick={() => setIsOpen(false)}
 													>
 														<span className="material-icons align-bottom me-2">account_circle</span>
 														我的帳戶
@@ -140,7 +166,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 													<NavLink
 														className="dropdown-item  me-2 mb-3 mb-lg-2"
 														to="/orders"
-														aria-hidden="true"
+														onClick={() => setIsOpen(false)}
 													>
 														<span className="material-icons align-bottom me-2">description</span>
 														訂單管理
@@ -150,7 +176,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 													<NavLink
 														className="dropdown-item  me-2 mb-3 mb-lg-2"
 														to="/wishlist"
-														aria-hidden="true"
+														onClick={() => setIsOpen(false)}
 													>
 														<span className="material-icons align-bottom me-2">
 															favorite_border
@@ -162,7 +188,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 													<NavLink
 														className="dropdown-item me-2 mb-3 mb-lg-2"
 														to="/edit"
-														aria-hidden="true"
+														onClick={() => setIsOpen(false)}
 													>
 														<span className="material-icons align-bottom me-2">settings</span>
 														個人資料設定
@@ -172,8 +198,10 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 													<button
 														type="button"
 														className="dropdown-item me-2 mb-3 mb-lg-2"
-														aria-hidden="true"
-														onClick={handleLogout}
+														onClick={() => {
+															setIsOpen(false)
+															handleLogout()
+														}}
 													>
 														<NavLink className="material-icons align-bottom me-2">logout</NavLink>
 														登出
