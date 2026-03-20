@@ -43,7 +43,16 @@ const Footer = () => {
 						服務時間：週一至周五 <time>09:00</time> - <time>12:30</time>｜<time>13:30</time> -
 						<time>17:30</time>
 					</p>
-					<p className="fs-7 fs-lg-6">連絡電話：0000-000-000</p>
+					<p className="fs-7 fs-lg-6">
+						連絡電話：
+						<a
+							href="tel:0000000000"
+							className="text-decoration-none text-reset"
+							aria-label="撥打電話 0000-000-000"
+						>
+							0000-000-000
+						</a>
+					</p>
 				</div>
 
 				<p className="fs-7 fs-lg-6 text-gray-200">

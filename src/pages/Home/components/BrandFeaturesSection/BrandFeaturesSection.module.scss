@@ -19,7 +19,7 @@
     background-image: url(../../../../assets/images/mobile-wave.png);
     background-repeat: repeat-x;
     transform: scaleY(-1);
-      @include large{
+      @include media-breakpoint-up(lg){
         height: 60px;
         background-image: url(../../../../assets/images/wave.png);
       }
@@ -33,7 +33,7 @@
     height: 20px;
     background-image: url(../../../../assets/images/mobile-wave.png);
     background-repeat: repeat-x;
-      @include large{
+      @include media-breakpoint-up(lg){
         height: 60px;
         background-image: url(../../../../assets/images/wave.png);
     }
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  @include large{
+  @include media-breakpoint-up(lg){
     flex-direction: row;
   }
 }

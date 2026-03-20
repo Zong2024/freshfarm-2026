@@ -43,7 +43,10 @@ export const postCart = async data => {
 	}
 }
 
-export const putCart = async data => {
+export const putCart = async (cart_id, data) => {
+	if (!cart_id || typeof cart_id !== 'string') {
+		return { success: false, error: '無效的購物車 ID' }
+	}
 	if (!data?.product_id || typeof data.product_id !== 'string') {
 		return { success: false, error: '無效的產品 ID' }
 	}
@@ -52,13 +55,13 @@ export const putCart = async data => {
 	}
 
 	try {
-		const response = await apiClient.put(`/cart/${data.product_id}`, { data })
-		const { qty, product_id } = response.data.data
-		console.log(response)
+		const response = await apiClient.put(`/cart/${cart_id}`, { data })
+		const { qty } = response.data.data
+		//console.log(response)
 
 		return {
 			success: true,
-			cartId: product_id,
+			cartId: cart_id,
 			qty: Number(qty),
 		}
 	} catch (error) {

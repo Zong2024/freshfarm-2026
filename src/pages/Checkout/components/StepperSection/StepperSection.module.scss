@@ -7,7 +7,7 @@
 	justify-content: center;
 	margin-top: 32px;
 	margin-bottom: 32px;
-	@include large {
+	@include media-breakpoint-up(lg) {
 		margin-top: 0;
 		margin-bottom: 48px;
 	}
@@ -19,7 +19,7 @@
 	align-items: center;
 	text-align: center;
 	padding: 0px 4px;
-	@include large {
+	@include media-breakpoint-up(lg) {
 		padding: 0px 12px;
 	}
 }
@@ -40,7 +40,7 @@
 		color: $white;
 	}
 
-	@include large {
+	@include media-breakpoint-up(lg) {
 		width: 40px;
 		height: 40px;
 	}
@@ -51,7 +51,7 @@
 	color: $primary-400;
 	font-size: 12px;
 	font-weight: 700;
-	@include large {
+	@include media-breakpoint-up(lg) {
 		margin-top: 12px;
 		font-size: 16px;
 	}
@@ -62,7 +62,7 @@
 	background-color: $primary-400;
 	width: 49px;
 	margin: 0 8px;
-	@include large {
+	@include media-breakpoint-up(lg) {
 		width: 72px;
 	}
 }
