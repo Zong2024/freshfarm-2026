@@ -110,6 +110,7 @@ const FormSection = () => {
 						<div className="form-check mb-4">
 							<input
 								className="form-check-input"
+								id="ShippingMethod1"
 								type="radio"
 								value="delivery"
 								{...register('shippingMethod')}
@@ -121,6 +122,7 @@ const FormSection = () => {
 						<div className="form-check">
 							<input
 								className="form-check-input"
+								id="ShippingMethod2"
 								type="radio"
 								value="pickup"
 								{...register('shippingMethod')}
@@ -158,7 +160,7 @@ const FormSection = () => {
 									手機號碼
 								</label>
 								<input
-									type="text"
+									type="tel"
 									className="form-control"
 									id="cellNumber"
 									placeholder="0912345678"

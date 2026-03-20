@@ -1,6 +1,6 @@
 @import '@/assets/scss/_config.scss';
 .paddingForNavbar{
- @include large {
+ @include media-breakpoint-up(lg) {
   padding-top: 208px;
  }
 }

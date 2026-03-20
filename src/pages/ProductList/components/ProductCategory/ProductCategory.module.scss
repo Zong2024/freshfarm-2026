@@ -14,7 +14,7 @@
         .arrowDown {
           transform: rotate(180deg);
         }
-        @include large {
+        @include media-breakpoint-up(lg) {
           font-size: $h5-font-size;
           color: $primary;           
         }
@@ -27,7 +27,7 @@
   &:active, &:focus {
     font-weight: $font-weight-bold;
   }      
-  @include large {
+  @include media-breakpoint-up(lg) {
     color: $primary-300;
     &:active, &:focus {
         color: $primary;

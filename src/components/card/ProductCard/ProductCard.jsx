@@ -30,7 +30,7 @@ const ProductCard = ({
 				<img
 					className={clsx('card-img-top object-fit-cover', styles.imgRatio)}
 					src={imageUrl}
-					alt=""
+					alt={`${title}-圖片`}
 					/* style={{ height: '257px' }} */
 				/>
 				<div className="position-absolute top-0 start-0">
@@ -38,7 +38,7 @@ const ProductCard = ({
 						<img
 							className="me-1"
 							src="https://github.com/Zong2024/freshfarm/blob/master/assets/icons/leaf-icon.png?raw=true"
-							alt=""
+							alt="安心認證圖示"
 						/>
 						安心認證
 					</span>

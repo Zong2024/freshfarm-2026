@@ -22,7 +22,7 @@ const CategorySection = () => {
 									<source srcSet={product.images.desktop} media="(min-width: 992px)" />
 									<img
 										src={product.images.mobile}
-										alt=""
+										alt={`${product.title}示意圖`}
 										className={clsx('card-img-top', styles.productImg)}
 									/>
 								</picture>
@@ -35,7 +35,7 @@ const CategorySection = () => {
 								>
 									<img
 										src={product.icon}
-										alt=""
+										alt={`${product.title}-icon`}
 										className={clsx(
 											'position-absolute top-0 end-0 d-none d-lg-block',
 											styles.productIcon
@@ -48,7 +48,7 @@ const CategorySection = () => {
 										</div>
 										<img
 											src={product.icon}
-											alt=""
+											alt={`${product.title}-icon`}
 											className={clsx('d-lg-none', styles.productIcon)}
 										/>
 									</div>

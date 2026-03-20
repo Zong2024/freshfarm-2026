@@ -22,7 +22,7 @@
   height: 560px;
   object-fit: cover;
   display: block;
-  @include large{
+  @include media-breakpoint-up(lg){
     height: 960px;
   }
   }
@@ -43,7 +43,7 @@
   z-index: 2;
   width: 100%;
   height: 20px;
-  @include large{
+  @include media-breakpoint-up(lg){
     background-image: url('./assets/wave.png');
     height: 60px;
     background-repeat: repeat-x;
