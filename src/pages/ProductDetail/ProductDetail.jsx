@@ -88,6 +88,18 @@ const ProductDetail = () => {
 		)
 	}
 
+	if (isLoading) {
+		return (
+			<div
+				className="d-flex justify-content-center align-items-center"
+				style={{ minHeight: '400px' }}
+			>
+				<div className="spinner-border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</div>
+			</div>
+		)
+	}
 	return (
 		<>
 			<div className="container">
@@ -99,6 +111,7 @@ const ProductDetail = () => {
 							title={product.title}
 						/>
 					</div>
+
 					<div className="col-12 col-lg-7 ">
 						<div className={styles.productInfo}>
 							<div>
