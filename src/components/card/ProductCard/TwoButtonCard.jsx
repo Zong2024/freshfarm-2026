@@ -8,7 +8,7 @@ const TwoButtonCard = ({ isLoading, onAddCart, ...productInfo }) => {
 			{...productInfo}
 			action={
 				<div className={styles.buttonContainer}>
-					<CompareButton />
+					<CompareButton product={productInfo} />
 					<CartButton onClick={onAddCart} isLoading={isLoading} />
 				</div>
 			}
