@@ -3,84 +3,84 @@ import { clsx } from 'clsx'
 import styles from './ProductCard.module.scss'
 import { useFavorite } from '@/contexts/FavoriteContext'
 const ProductCard = ({
-	id,
-	title,
-	description,
-	price,
-	origin_price: originPrice,
-	imageUrl,
-	weight,
-	unit,
-	origin,
-	action,
-	size = 'normal',
-	showOrigin = true,
-	isHome = false,
+  id,
+  title,
+  description,
+  price,
+  origin_price: originPrice,
+  imageUrl,
+  weight,
+  unit,
+  origin,
+  action,
+  size = 'normal',
+  showOrigin = true,
+  isHome = false,
 }) => {
-	const titleSizeMap = {
-		large: 'fs-lg-4',
-		normal: 'fs-lg-5',
-	}
-	const { favorites, toggleFavorite } = useFavorite()
-	const isFavorite = favorites.includes(id)
+  const titleSizeMap = {
+    large: 'fs-lg-4',
+    normal: 'fs-lg-5',
+  }
+  const { favorites, toggleFavorite } = useFavorite()
+  const isFavorite = favorites.includes(id)
 
-	return (
-		<div className={clsx('card h-100 w-100 overflow-hidden border-0', styles.cardShadow)}>
-			<div className="position-relative">
-				<img
-					className={clsx('card-img-top object-fit-cover', styles.imgRatio)}
-					src={imageUrl}
-					alt={`${title}-圖片`}
-					/* style={{ height: '257px' }} */
-				/>
-				<div className="position-absolute top-0 start-0">
-					<span className="fs-6 badge rounded-pill text-primary-400 bg-primary-100 pt-1 px-2 m-4  d-flex justify-content-center align-items-center">
-						<img
-							className="me-1"
-							src="https://github.com/Zong2024/freshfarm/blob/master/assets/icons/leaf-icon.png?raw=true"
-							alt="安心認證圖示"
-						/>
-						安心認證
-					</span>
-				</div>
-				<button
-					type="button"
-					onClick={() => toggleFavorite(id)}
-					className={clsx(
-						'btn border-0 rounded-circle position-absolute bottom-0 end-0 m-4 p-3 z-2',
-						isFavorite ? 'bg-secondary-100 text-secondary-300' : 'bg-white text-gray-400'
-					)}
-				>
-					<span className="fs-2 material-icons align-middle">
-						{isFavorite ? 'favorite' : 'favorite_border'}
-					</span>
-				</button>
-			</div>
-			<div className="card-body bg-white d-flex flex-column">
-				{showOrigin && origin && <h6 className="text-primary-400 mb-1">{origin}</h6>}
-				<h5 className={clsx(' mb-2', titleSizeMap[size] || titleSizeMap.normal)}>{title}</h5>
-				<Link
-					to={`/productDetail/${id}`}
-					className={clsx(
-						'mb-3 text-gray-300 stretched-link',
-						isHome ? 'fs-lg-5' : 'fs-6',
-						styles.textTruncate
-					)}
-				>
-					{description}
-				</Link>
-				<div className="mb-3">
-					<span className="fs-5 fw-bold text-secondary-300">NT$ {price}</span>
-					{originPrice && originPrice !== price && (
-						<del className="text-gray-300 ms-2">NT$ {originPrice}</del>
-					)}
-					<span className="mx-1 text-gray-300 ">/</span>
-					<span className="text-gray-300 ">{weight && unit && `${weight}${unit}`}</span>
-				</div>
-				<>{action}</>
-			</div>
-		</div>
-	)
+  return (
+    <div className={clsx('card h-100 w-100 overflow-hidden border-0', styles.cardShadow)}>
+      <div className="position-relative">
+        <img
+          className={clsx('card-img-top object-fit-cover', styles.imgRatio)}
+          src={imageUrl}
+          alt={`${title}-圖片`}
+          /* style={{ height: '257px' }} */
+        />
+        <div className="position-absolute top-0 start-0">
+          <span className="fs-6 badge rounded-pill text-primary-400 bg-primary-100 pt-1 px-2 m-4  d-flex justify-content-center align-items-center">
+            <img
+              className="me-1"
+              src="https://github.com/Zong2024/freshfarm/blob/master/assets/icons/leaf-icon.png?raw=true"
+              alt="安心認證圖示"
+            />
+            安心認證
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={() => toggleFavorite(id)}
+          className={clsx(
+            'btn border-0 rounded-circle position-absolute bottom-0 end-0 m-4 p-3 z-2',
+            isFavorite ? 'bg-secondary-100 text-secondary-300' : 'bg-white text-gray-400'
+          )}
+        >
+          <span className="fs-2 material-icons align-middle">
+            {isFavorite ? 'favorite' : 'favorite_border'}
+          </span>
+        </button>
+      </div>
+      <div className="card-body bg-white d-flex flex-column">
+        {showOrigin && origin && <h6 className="text-primary-400 mb-1">{origin}</h6>}
+        <h5 className={clsx(' mb-2', titleSizeMap[size] || titleSizeMap.normal)}>{title}</h5>
+        <Link
+          to={`/productDetail/${id}`}
+          className={clsx(
+            'mb-3 text-gray-300 stretched-link',
+            isHome ? 'fs-lg-5' : 'fs-6',
+            styles.textTruncate
+          )}
+        >
+          {description}
+        </Link>
+        <div className="mb-3">
+          <span className="fs-5 fw-bold text-secondary-300">NT$ {price}</span>
+          {originPrice && originPrice !== price && (
+            <del className="text-gray-300 ms-2">NT$ {originPrice}</del>
+          )}
+          <span className="mx-1 text-gray-300 ">/</span>
+          <span className="text-gray-300 ">{weight && unit && `${weight}${unit}`}</span>
+        </div>
+        <>{action}</>
+      </div>
+    </div>
+  )
 }
 
 export default ProductCard

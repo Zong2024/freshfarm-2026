@@ -9,13 +9,13 @@ import { FavoriteProvider } from './contexts/FavoriteContext'
 import { CompareProvider } from './contexts/CompareContext'
 
 createRoot(document.getElementById('root')).render(
-	<AuthProvider>
-		<CartProvider>
-			<FavoriteProvider>
-				<CompareProvider>
-					<RouterProvider router={router} />
-				</CompareProvider>
-			</FavoriteProvider>
-		</CartProvider>
-	</AuthProvider>
+  <AuthProvider>
+    <CartProvider>
+      <FavoriteProvider>
+        <CompareProvider>
+          <RouterProvider router={router} />
+        </CompareProvider>
+      </FavoriteProvider>
+    </CartProvider>
+  </AuthProvider>
 )

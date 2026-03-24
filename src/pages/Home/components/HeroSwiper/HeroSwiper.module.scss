@@ -5,27 +5,27 @@
   width: 100%;
   overflow: hidden;
 }
-.blackScreen{
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
-      z-index: 1;
-    }
+.blackScreen {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
 }
-.heroImg{
+.heroImg {
   width: 100%;
   height: 560px;
   object-fit: cover;
   display: block;
-  @include media-breakpoint-up(lg){
+  @include media-breakpoint-up(lg) {
     height: 960px;
   }
-  }
+}
 
 .heroContent {
   position: absolute;
@@ -36,14 +36,14 @@
   min-height: 195px;
 }
 
-.wave{
+.wave {
   background-image: url('./assets/mobile-wave.png');
   position: absolute;
   bottom: 0%;
   z-index: 2;
   width: 100%;
   height: 20px;
-  @include media-breakpoint-up(lg){
+  @include media-breakpoint-up(lg) {
     background-image: url('./assets/wave.png');
     height: 60px;
     background-repeat: repeat-x;

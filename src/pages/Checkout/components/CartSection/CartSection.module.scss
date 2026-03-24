@@ -2,19 +2,19 @@
 
 //垃圾桶
 .deleteBtn {
-	background-color: $gray-100;
-	border-radius: 8px;
-	color: $danger;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 auto;
+  background-color: $gray-100;
+  border-radius: 8px;
+  color: $danger;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 // 陰影
 .shadow {
-	box-shadow: 0px 4px 80px rgba(178, 178, 178, 0.2);
-}	
+  box-shadow: 0px 4px 80px rgba(178, 178, 178, 0.2);
+}

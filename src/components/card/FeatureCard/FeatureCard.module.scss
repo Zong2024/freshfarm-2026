@@ -1,5 +1,5 @@
 @import '@/assets/scss/helpers';
-.featureCard{
+.featureCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,7 @@
   background-color: $white;
   border-radius: 24px;
 
-  .featureCardImg{
+  .featureCardImg {
     width: 150px;
     height: 150px;
   }

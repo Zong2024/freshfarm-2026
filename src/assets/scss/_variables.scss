@@ -2,8 +2,8 @@
 //
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
-@use "sass:color";
-@use "sass:string";
+@use 'sass:color';
+@use 'sass:string';
 
 // Color system
 
@@ -577,7 +577,6 @@ $container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1320px,
-
 ) !default;
 // scss-docs-end container-max-widths
 
@@ -937,7 +936,9 @@ $btn-active-box-shadow: inset 0 3px 5px rgba($black, 0.125) !default;
 $btn-link-color: var(--#{$prefix}link-color) !default;
 $btn-link-hover-color: var(--#{$prefix}link-hover-color) !default;
 $btn-link-disabled-color: $gray-600 !default;
-$btn-link-focus-shadow-rgb: to-rgb(color.mix(color-contrast($link-color), $link-color, 15%)) !default;
+$btn-link-focus-shadow-rgb: to-rgb(
+  color.mix(color-contrast($link-color), $link-color, 15%)
+) !default;
 
 // Allows for customizing button radius independently from global border radius
 //$btn-border-radius:           var(--#{$prefix}border-radius) !default;
@@ -1905,7 +1906,5 @@ $kbd-bg: var(--#{$prefix}body-color) !default;
 $nested-kbd-font-weight: null !default; // Deprecated in v5.2.0, removing in v6
 
 $pre-color: null !default;
-
-
 
 @import 'variables-dark'; // TODO: can be removed safely in v6, only here to avoid breaking changes in v5.3

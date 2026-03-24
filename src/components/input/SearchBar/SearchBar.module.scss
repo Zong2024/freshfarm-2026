@@ -1,15 +1,15 @@
 @import '@/assets/scss/helpers';
 
-.searchBox{
+.searchBox {
   width: 100%;
 
-  &.home{
-    @include media-breakpoint-up(lg){
+  &.home {
+    @include media-breakpoint-up(lg) {
       width: 450px;
     }
   }
-  
-  .customSearchBar{
+
+  .customSearchBar {
     display: flex;
     align-items: center;
     background-color: $white;
@@ -19,10 +19,10 @@
     border: 1.6px solid $gray-200;
     transition: all 0.2s ease;
 
-    &:focus-within{
+    &:focus-within {
       border: 1px solid $primary-400;
     }
-    .searchInput{
+    .searchInput {
       flex: 1;
       border: none;
       background: transparent;
@@ -30,14 +30,14 @@
       font-size: 16px;
       line-height: 24px;
 
-      &:focus::placeholder{
-        color: $black;;
+      &:focus::placeholder {
+        color: $black;
       }
-      &::placeholder{
+      &::placeholder {
         color: $gray-300;
       }
     }
-    .searchBtn{
+    .searchBtn {
       display: flex;
       align-items: center;
       justify-content: center;
