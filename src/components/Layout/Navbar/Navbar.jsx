@@ -47,7 +47,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 		logout()
 		navigate('/')
 	}
-	const newUsername = user.split('@')[0]
+	const newUsername = user?.split('@')[0]
 	return (
 		<div className={clsx(styles.navBg)}>
 			<div
