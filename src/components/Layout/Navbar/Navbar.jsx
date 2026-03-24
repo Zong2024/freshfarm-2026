@@ -47,7 +47,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 		logout()
 		navigate('/')
 	}
-
+	const newUsername = user.split('@')[0]
 	return (
 		<div className={clsx(styles.navBg)}>
 			<div
@@ -130,7 +130,7 @@ const Navbar = ({ isHomePage = { isHomePage } }) => {
 													}}
 												>
 													<div className="text-start text-lg-center">
-														<span className="fs-lg-4 fs-5 fw-bold">{user}</span>
+														<span className="fs-lg-4 fs-5 fw-bold">{newUsername}</span>
 														<p className="text-gray-300 ">Account</p>
 													</div>
 													<div className="align-self-center d-lg-none ms-auto">
