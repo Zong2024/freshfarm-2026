@@ -1,13 +1,13 @@
 @import '@/assets/scss/helpers';
 
-.bg{
+.bg {
   background-image: url(./assets/storyBg.jpg);
   position: relative;
-  &::before{
-    @include media-breakpoint-up(lg){
-      content: "";
+  &::before {
+    @include media-breakpoint-up(lg) {
+      content: '';
       position: absolute;
-      top:0;
+      top: 0;
       left: 0;
       width: 100%;
       height: 60px;
@@ -16,11 +16,11 @@
       background-image: url('@/assets/images/wave.png');
     }
   }
-  &::after{
-      @include media-breakpoint-up(lg){
-      content: "";
+  &::after {
+    @include media-breakpoint-up(lg) {
+      content: '';
       position: absolute;
-      bottom:0;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 60px;
@@ -29,32 +29,32 @@
     }
   }
 }
-.introContainer{
+.introContainer {
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-top: 36px;
-    @include media-breakpoint-up(lg){
+  @include media-breakpoint-up(lg) {
     flex-direction: row;
     align-items: self-start;
     gap: clamp(20px, 10.3%, 134px);
     margin-top: 60px;
     padding-top: 16px;
     padding-bottom: 16px;
-    }
+  }
 
-    .introImg{
-      @include media-breakpoint-up(lg){
-        flex: 0 1 416px;
-        min-width: 0;
-      }
+  .introImg {
+    @include media-breakpoint-up(lg) {
+      flex: 0 1 416px;
+      min-width: 0;
     }
-    .textContent{
-      padding: 16px;
-        @include media-breakpoint-up(lg){
-        flex: 0 1 746px;
-        min-width: 0;
-        padding-top: 0;
-        }
+  }
+  .textContent {
+    padding: 16px;
+    @include media-breakpoint-up(lg) {
+      flex: 0 1 746px;
+      min-width: 0;
+      padding-top: 0;
     }
+  }
 }

@@ -1,23 +1,23 @@
 @import '@/assets/scss/helpers';
 
 .footer {
-    .logo {
-        width: 136px;
-    }
+  .logo {
+    width: 136px;
+  }
 }
 
 .footerNav {
-    .navLink {
-        color:$white;
-        &:hover {
-            color: $primary-300;
-        }
+  .navLink {
+    color: $white;
+    &:hover {
+      color: $primary-300;
     }
-    @include media-breakpoint-up(lg){
-        .navItem:not(:last-child) {
-            .navLink {
-                border-right: 1px solid $gray-400;
-            }
-        }
+  }
+  @include media-breakpoint-up(lg) {
+    .navItem:not(:last-child) {
+      .navLink {
+        border-right: 1px solid $gray-400;
+      }
     }
+  }
 }

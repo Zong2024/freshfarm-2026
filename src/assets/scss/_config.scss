@@ -1,28 +1,30 @@
-@use "sass:map";
+@use 'sass:map';
 
-@import'./helpers';
+@import './helpers';
 
 @import 'bootstrap/scss/maps';
 @import 'bootstrap/scss/utilities';
 
-
 $utilities: map.merge(
   $utilities,
   (
-    "font-size":
-      map.merge(
-        map.get($utilities, "font-size"),
-        ( responsive: true )
+    'font-size': map.merge(
+        map.get($utilities, 'font-size'),
+        (
+          responsive: true,
+        )
       ),
-    "border-radius":
-      map.merge(
-        map.get($utilities, "rounded"),
-        ( responsive: true )
+    'border-radius': map.merge(
+        map.get($utilities, 'rounded'),
+        (
+          responsive: true,
+        )
       ),
-    "border":
-      map.merge(
-        map.get($utilities, "border"),
-      ( responsive: true )
-    ),
+    'border': map.merge(
+        map.get($utilities, 'border'),
+        (
+          responsive: true,
+        )
+      ),
   )
 );

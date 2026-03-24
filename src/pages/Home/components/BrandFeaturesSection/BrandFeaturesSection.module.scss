@@ -1,15 +1,14 @@
 @import '@/assets/scss/helpers';
 
-.bg{
-
+.bg {
   background:
-      linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
-      url('./assets/featureBg.jpg');
+    linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+    url('./assets/featureBg.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   position: relative;
-  &::before{
+  &::before {
     content: '';
     position: absolute;
     top: 0;
@@ -19,12 +18,12 @@
     background-image: url(../../../../assets/images/mobile-wave.png);
     background-repeat: repeat-x;
     transform: scaleY(-1);
-      @include media-breakpoint-up(lg){
-        height: 60px;
-        background-image: url(../../../../assets/images/wave.png);
-      }
+    @include media-breakpoint-up(lg) {
+      height: 60px;
+      background-image: url(../../../../assets/images/wave.png);
+    }
   }
-    &::after{
+  &::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -33,17 +32,17 @@
     height: 20px;
     background-image: url(../../../../assets/images/mobile-wave.png);
     background-repeat: repeat-x;
-      @include media-breakpoint-up(lg){
-        height: 60px;
-        background-image: url(../../../../assets/images/wave.png);
+    @include media-breakpoint-up(lg) {
+      height: 60px;
+      background-image: url(../../../../assets/images/wave.png);
     }
   }
 }
-.cardContainer{
+.cardContainer {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  @include media-breakpoint-up(lg){
+  @include media-breakpoint-up(lg) {
     flex-direction: row;
   }
 }

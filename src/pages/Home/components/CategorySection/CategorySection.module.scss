@@ -1,56 +1,55 @@
 @import '@/assets/scss/helpers';
 
-.categorySection{
+.categorySection {
   position: relative;
   width: 100%;
   background-color: transparent;
-  &::before{
+  &::before {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgba(#EFF7D8,0.6);
+    background-color: rgba(#eff7d8, 0.6);
     z-index: -1;
-      @include media-breakpoint-up(lg){
-        width: calc(100% - 120px);
-        border-radius: 200px 0 0 200px;
-      }
+    @include media-breakpoint-up(lg) {
+      width: calc(100% - 120px);
+      border-radius: 200px 0 0 200px;
+    }
   }
 }
-.productCard{
+.productCard {
   height: auto;
   display: flex;
   flex-direction: column;
   background-color: transparent;
   gap: 12px;
-  @include media-breakpoint-up(lg){
+  @include media-breakpoint-up(lg) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 110px;
     height: 400px;
-
   }
-  &:nth-child(odd){
-    @include media-breakpoint-up(lg){
+  &:nth-child(odd) {
+    @include media-breakpoint-up(lg) {
       flex-direction: row-reverse;
     }
   }
 
-  .productImg{
+  .productImg {
     width: 100%;
     height: 280px;
     object-fit: cover;
     display: block;
     border-radius: 1rem;
 
-      @include media-breakpoint-up(lg){
-        width: 636px;
-        height: 100%;
-        border-radius: 60px 16px 60px 16px;
-      }
+    @include media-breakpoint-up(lg) {
+      width: 636px;
+      height: 100%;
+      border-radius: 60px 16px 60px 16px;
+    }
   }
   &:nth-child(odd) {
     @include media-breakpoint-up(lg) {
@@ -59,23 +58,23 @@
 
     .productImg {
       @include media-breakpoint-up(lg) {
-         border-radius: 16px 60px 16px 60px;
+        border-radius: 16px 60px 16px 60px;
       }
     }
   }
 
-  .productContent{
+  .productContent {
     height: 100%;
     flex-grow: 1;
-    @include media-breakpoint-up(lg){
+    @include media-breakpoint-up(lg) {
       width: 526px;
       flex-shrink: 0;
     }
   }
-  .productIcon{
+  .productIcon {
     height: 60px;
     width: 60px;
-    @include media-breakpoint-up(lg){
+    @include media-breakpoint-up(lg) {
       margin-top: 64px;
       height: 120px;
       width: 120px;

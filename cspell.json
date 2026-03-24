@@ -1,5 +1,5 @@
 {
-	"version": "0.2",
-	"language": "en",
-	"ignorePaths": ["**/node_modules/**", "**/dist/**", "src/assets/scss/_variables.scss"]
+  "version": "0.2",
+  "language": "en",
+  "ignorePaths": ["**/node_modules/**", "**/dist/**", "src/assets/scss/_variables.scss"]
 }

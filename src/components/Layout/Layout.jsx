@@ -6,19 +6,19 @@ import ScrollToTop from '../ScrollToTop/ScrollToTop'
 import styles from './Layout.module.scss'
 import { clsx } from 'clsx'
 const Layout = () => {
-	const location = useLocation()
-	const isHomePage = location.pathname === '/'
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
-	return (
-		<>
-			<ScrollToTop />
-			<Navbar isHomePage={isHomePage} />
-			<main className={clsx(!isHomePage && styles.paddingForNavbar)}>
-				<Outlet />
-			</main>
-			<Footer />
-		</>
-	)
+  return (
+    <>
+      <ScrollToTop />
+      <Navbar isHomePage={isHomePage} />
+      <main className={clsx(!isHomePage && styles.paddingForNavbar)}>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  )
 }
 
 export default Layout

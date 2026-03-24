@@ -1,31 +1,30 @@
-.textTruncate{
+.textTruncate {
   height: 60px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  line-height: 30px
+  line-height: 30px;
 }
-.buttonContainer{
+.buttonContainer {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-    :first-child{
-      flex: 0 0 114px
-    }
-    :last-child{
-      flex: 1
-    }
+  :first-child {
+    flex: 0 0 114px;
+  }
+  :last-child {
+    flex: 1;
+  }
 }
 
-
-.cardShadow{
-  box-shadow: 0px 4px 80px 0px rgba(178, 178, 178, 0.20);
-//border: none;
-// transition: z-index 0.3s, transform 0.3s;
- }
- .imgRatio {
+.cardShadow {
+  box-shadow: 0px 4px 80px 0px rgba(178, 178, 178, 0.2);
+  //border: none;
+  // transition: z-index 0.3s, transform 0.3s;
+}
+.imgRatio {
   aspect-ratio: 1.4/1;
- }
+}

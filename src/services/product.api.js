@@ -1,48 +1,48 @@
 import { apiClient } from './api'
 
 export const getProducts = async (page = 1) => {
-	try {
-		const response = await apiClient.get(`/products?page=${page}`)
-		return {
-			success: true,
-			products: response.data.products,
-			pagination: response.data.pagination,
-		}
-	} catch (error) {
-		return {
-			success: false,
-			error: error.customMessage,
-			code: error.statusCode,
-		}
-	}
+  try {
+    const response = await apiClient.get(`/products?page=${page}`)
+    return {
+      success: true,
+      products: response.data.products,
+      pagination: response.data.pagination,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error.customMessage,
+      code: error.statusCode,
+    }
+  }
 }
 export const getProduct = async id => {
-	try {
-		const response = await apiClient.get(`/product/${id}`)
-		return {
-			success: true,
-			product: response.data.product,
-		}
-	} catch (error) {
-		return {
-			success: false,
-			error: error.customMessage,
-			code: error.statusCode,
-		}
-	}
+  try {
+    const response = await apiClient.get(`/product/${id}`)
+    return {
+      success: true,
+      product: response.data.product,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error.customMessage,
+      code: error.statusCode,
+    }
+  }
 }
 export const getAllProducts = async () => {
-	try {
-		const response = await apiClient.get(`/products/all`)
-		return {
-			success: true,
-			products: response.data.products,
-		}
-	} catch (error) {
-		return {
-			success: false,
-			error: error.customMessage,
-			code: error.statusCode,
-		}
-	}
+  try {
+    const response = await apiClient.get(`/products/all`)
+    return {
+      success: true,
+      products: response.data.products,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error.customMessage,
+      code: error.statusCode,
+    }
+  }
 }
